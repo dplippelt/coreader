@@ -1,0 +1,23 @@
+h1
+{
+	text-align: center;
+	margin-bottom: 1rem;
+}
+
+h2
+{
+	text-align: center;
+	margin-bottom: 2rem;
+}
+
+p
+{
+	margin-bottom: 0.5rem;
+}
+
+.chapter
+{
+	text-align: justify;
+	max-width: 500px;
+	margin: auto;
+}
