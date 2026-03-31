@@ -22,8 +22,16 @@
 .invNavRight
 {
 	position: fixed;
-	left: 65%;
+	right: 0%;
 	width: 35vw;
 	height: 100vh;
 	user-select: none;
+}
+
+@media (max-width: 600px)
+{
+	.invNavLeft, .invNavRight
+	{
+		width: 10%;
+	}
 }

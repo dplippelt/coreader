@@ -2,7 +2,8 @@
 .chapter
 {
 	text-align: justify;
-	max-width: 30vw;
+	max-width: 60ch;
+	width: calc(100% - 4rem);
 	margin: auto;
 }
 
