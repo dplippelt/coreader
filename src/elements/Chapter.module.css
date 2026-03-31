@@ -1,0 +1,17 @@
+
+.chapter
+{
+	text-align: justify;
+	max-width: 30vw;
+	margin: auto;
+}
+
+.title
+{
+	position: fixed;
+	text-align: center;
+	font-size: 50px;
+	top: 40%;
+	left: 50%;
+	transform: translateX(-50%);
+}

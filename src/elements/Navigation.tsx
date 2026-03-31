@@ -1,18 +1,44 @@
-import './Navigation.css'
+import styles from './Navigation.module.css'
+import type { ChapterControls } from '../App';
 
-type NavigationPrpos =
+type NavigationProps =
 {
 	currChap: number,
-	handleNextChapter: (currChap: number) => void,
-	handlePrevChapter: (currChap: number) => void,
+	controls: ChapterControls,
 }
 
-export default function Navigation( { currChap, handleNextChapter, handlePrevChapter } : NavigationPrpos )
+type ButtonsProps =
+{
+	currChap: number,
+	controls: ChapterControls,
+}
+
+function getButtonText( currChap: number )
+{
+	return currChap === 1 ? "Title Screen" : "Prev Chapter";
+}
+
+function Buttons( { currChap, controls } : ButtonsProps )
 {
 	return (
-		<div className='menu'>
-			<button onClick={() => handlePrevChapter(currChap)}>Prev Chapter</button>
-			<button onClick={() => handleNextChapter(currChap)}>Next Chapter</button>
+		<>
+			<button onClick={() => controls.prev(currChap)}>{getButtonText(currChap)}</button>
+			<button onClick={() => controls.select()}>Chapter Select</button>
+			<button onClick={() => controls.next(currChap)}>Next Chapter</button>
+		</>
+	)
+}
+
+export default function Navigation( { currChap, controls } : NavigationProps )
+{
+	if ( currChap === 0 )
+		return <div className={styles.titleMenu} onClick={controls.title}></div>
+
+	return (
+		<div className={styles.buttonMenu}>
+			<Buttons currChap={currChap} controls={controls}/>
+			<div className={styles.invNavLeft} onClick={() => controls.prev(currChap)}></div>
+			<div className={styles.invNavRight} onClick={() => controls.next(currChap)}></div>
 		</div>
 	);
 }

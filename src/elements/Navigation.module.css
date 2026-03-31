@@ -1,0 +1,29 @@
+
+.titleMenu
+{
+	width: 100vw;
+	height: 100vh;
+}
+
+.buttonMenu
+{
+	text-align: center;
+}
+
+.invNavLeft
+{
+	position: fixed;
+	left: 0%;
+	width: 35vw;
+	height: 100vh;
+	user-select: none;
+}
+
+.invNavRight
+{
+	position: fixed;
+	left: 65%;
+	width: 35vw;
+	height: 100vh;
+	user-select: none;
+}

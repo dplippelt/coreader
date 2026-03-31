@@ -4,3 +4,28 @@
     margin: 0;
     padding: 0;
 }
+
+h1
+{
+	text-align: center;
+	margin-bottom: 1rem;
+}
+
+h2
+{
+	text-align: center;
+	margin-bottom: 2rem;
+}
+
+p
+{
+	margin-bottom: 0.5rem;
+}
+
+button
+{
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	margin-right: 4.7rem;
+	margin-left: 4.7rem;
+}

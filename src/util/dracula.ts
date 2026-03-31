@@ -6594,7 +6594,7 @@ When I asked him what he meant, he only shook his head and answered:--
 
 CHAPTER XIII
 
-DR. SEWARD’S DIARY--_continued_.
+DR. SEWARD’S DIARY--_continued_
 
 
 The funeral was arranged for the next succeeding day, so that Lucy and
@@ -7896,7 +7896,7 @@ elbows on the table, covering his face with his hands as he spoke:--
 
 CHAPTER XV
 
-DR. SEWARD’S DIARY--_continued_.
+DR. SEWARD’S DIARY--_continued_
 
 
 For a while sheer anger mastered me; it was as if he had during her life
@@ -15853,18 +15853,18 @@ subscribe to our email newsletter to hear about new eBooks.
 
 `
 
-function getTitle( chapter_data: RegExpExecArray ): string
+function getTitle( start_chap_idx: number ): string
 {
-	const temp = rawBook.substring(chapter_data.index + 1, chapter_data.index + 200);
+	const temp = rawBook.substring(start_chap_idx, start_chap_idx + 200);
 	const start_idx = temp.search(/\n(?!\n)/) + 1;
 	const end_idx = temp.indexOf("\n", start_idx);
 
 	return temp.substring(start_idx, end_idx);
 }
 
-function getContent( chapter_data: RegExpExecArray, end_chap_idx: number ): string
+function getContent( start_chap_idx: number, end_chap_idx: number ): string
 {
-	const temp = rawBook.substring(chapter_data.index + 1, end_chap_idx);
+	const temp = rawBook.substring(start_chap_idx, end_chap_idx);
 	const matches = [...temp.matchAll(/\n(?!\n)/g)];
 	const start_idx = matches[1].index + 1;
 
@@ -15883,12 +15883,15 @@ export default function getDracula(): Array<Chapter>
 	const chapters = [...rawBook.matchAll(/\nCHAPTER [IVXLC]+\n/g)];
 	const book: Array<Chapter> = [];
 
+	book.push({ num: 0, title: "Dracula", content: "" });
+
 	for ( let i = 0; i < chapters.length; i++ )
 	{
 		const chap_num = i + 1;
-		const chap_title = getTitle(chapters[i]);
+		const start_chap_idx = chapters[i].index + 1;
 		const end_chap_idx = i + 1 < chapters.length ? chapters[i + 1].index : rawBook.indexOf("THE END") + 7;
-		const chap_content = getContent(chapters[i], end_chap_idx);
+		const chap_title = getTitle(start_chap_idx);
+		const chap_content = getContent(start_chap_idx, end_chap_idx);
 
 		book.push({ num: chap_num, title: chap_title, content: chap_content });
 	}
