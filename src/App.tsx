@@ -6,44 +6,41 @@ import ChapterSelect from './elements/ChapterSelect.tsx'
 
 export type ChapterControls =
 {
-	next: (currChap: number) => void,
-	prev: (currChap: number) => void,
+	next: () => void,
+	prev: () => void,
 	select: () => void,
-	title: () => void,
+	goto: ( chapNum: number ) => void,
 }
 
 export default function App()
 {
 	const book = useMemo(() => dracula(), []);
-	let [currChap, setCurrChap] = useState<number>(0);
-	let [chapSelect, setChapSelect] = useState<boolean>(false);
+	const [currChap, setCurrChap] = useState<number>(0);
+	const [chapSelect, setChapSelect] = useState<boolean>(false);
 
-	function handleNextChapter( currChap: number )
+	function handleNextChapter()
 	{
 		window.scrollTo(0, 0);
 		if ( currChap < book.length - 1 )
 			setCurrChap(currChap + 1);
 	}
 
-	function handlePrevChapter( currChap: number )
+	function handlePrevChapter()
 	{
 		window.scrollTo(0, 0);
 		if ( currChap !== 0 )
 			setCurrChap(currChap - 1);
 	}
 
-	function handleTitleScreen()
-	{
-		setCurrChap(1);
-	}
-
 	function goToChapterSelect()
 	{
+		window.scrollTo(0, 0);
 		setChapSelect(true);
 	}
 
 	function goToChapter( chapNum: number )
 	{
+		window.scrollTo(0, 0);
 		setCurrChap(chapNum);
 		setChapSelect(false);
 	}
@@ -53,16 +50,16 @@ export default function App()
 		next: handleNextChapter,
 		prev: handlePrevChapter,
 		select: goToChapterSelect,
-		title: handleTitleScreen,
+		goto: goToChapter,
 	}
 
 	if ( chapSelect )
-		return <ChapterSelect book={book} currChap={currChap} goToChapter={goToChapter}/>
+		return <ChapterSelect book={book} currChap={currChap} controls={controls}/>
 
 	return (
 		<>
 			<Navigation currChap={currChap} controls={controls}/>
-			<Chapter chapter={book[currChap]} handleTitleScreen={handleTitleScreen}/>
+			<Chapter chapter={book[currChap]} controls={controls}/>
 			<Navigation currChap={currChap} controls={controls}/>
 		</>
 	);

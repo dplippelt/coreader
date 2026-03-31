@@ -1,19 +1,20 @@
 import Markdown from 'react-markdown'
 import type { Chapter } from '../util/dracula.ts'
+import type { ChapterControls } from '../App.tsx'
 import styles from './Chapter.module.css'
 
 type ChapterProps =
 {
 	chapter: Chapter,
-	handleTitleScreen: () => void,
+	controls: ChapterControls,
 }
 
-export default function Chapter( { chapter, handleTitleScreen } : ChapterProps )
+export default function Chapter( { chapter, controls } : ChapterProps )
 {
 	const paragraphs: string[] = chapter.content.split(/\n\n+/);
 
 	if ( chapter.num === 0 )
-		return <div className={styles.title} onClick={handleTitleScreen}>{chapter.title}</div>;
+		return <div className={styles.title} onClick={controls.next}>{chapter.title}</div>;
 
 	return (
 		<div className={styles.chapter}>

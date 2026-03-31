@@ -22,9 +22,9 @@ function Buttons( { currChap, controls } : ButtonsProps )
 {
 	return (
 		<>
-			<button onClick={() => controls.prev(currChap)}>{getButtonText(currChap)}</button>
+			<button onClick={() => controls.prev()}>{getButtonText(currChap)}</button>
 			<button onClick={() => controls.select()}>Chapter Select</button>
-			<button onClick={() => controls.next(currChap)}>Next Chapter</button>
+			<button onClick={() => controls.next()}>Next Chapter</button>
 		</>
 	)
 }
@@ -32,13 +32,13 @@ function Buttons( { currChap, controls } : ButtonsProps )
 export default function Navigation( { currChap, controls } : NavigationProps )
 {
 	if ( currChap === 0 )
-		return <div className={styles.titleMenu} onClick={controls.title}></div>
+		return <div className={styles.titleMenu} onClick={controls.next}></div>
 
 	return (
 		<div className={styles.buttonMenu}>
 			<Buttons currChap={currChap} controls={controls}/>
-			<div className={styles.invNavLeft} onClick={() => controls.prev(currChap)}></div>
-			<div className={styles.invNavRight} onClick={() => controls.next(currChap)}></div>
+			<div className={styles.invNavLeft} onClick={() => controls.prev()}></div>
+			<div className={styles.invNavRight} onClick={() => controls.next()}></div>
 		</div>
 	);
 }
