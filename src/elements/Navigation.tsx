@@ -29,6 +29,7 @@ function Buttons( { states, controls } : ButtonsProps )
 	return (
 		<>
 			<button onClick={() => controls.prev()}>{getButtonText(states.currChap)}</button>
+			<button onClick={() => controls.startMenu()}>Start Menu</button>
 			<button onClick={() => controls.chapSelect()}>Chapter Select</button>
 			<button onClick={() => controls.next()}>Next Chapter</button>
 		</>

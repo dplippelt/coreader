@@ -11,6 +11,7 @@ export type Controls =
 	prev: () => void,
 	chapSelect: () => void,
 	bookSelect: () => void,
+	startMenu: () => void,
 	goToChap: ( chapNum: number ) => void,
 	goToBook: ( book: string ) => void,
 	goToPrevScreen: () => void,
@@ -100,6 +101,13 @@ export default function App()
 		setScreen(Screens.reader);
 	}
 
+	function goToStart()
+	{
+		window.scrollTo(0, 0);
+		setPrevScreens([...prevScreens, screen]);
+		setScreen(Screens.startMenu);
+	}
+
 	function goToPrevScreen()
 	{
 		if ( prevScreens.length === 0 )
@@ -117,6 +125,7 @@ export default function App()
 		prev: handlePrevChapter,
 		chapSelect: goToChapterSelect,
 		bookSelect: goToBookSelect,
+		startMenu: goToStart,
 		goToChap: goToChapter,
 		goToBook: goToBook,
 		goToPrevScreen: goToPrevScreen,
