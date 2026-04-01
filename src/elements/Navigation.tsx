@@ -14,6 +14,12 @@ type ButtonsProps =
 	controls: ChapterControls,
 }
 
+type InvNavProps =
+{
+	controls: ChapterControls,
+	navWidth: number,
+}
+
 function getButtonText( currChap: number )
 {
 	return currChap === 1 ? "Title Screen" : "Prev Chapter";
@@ -30,7 +36,17 @@ function Buttons( { currChap, controls } : ButtonsProps )
 	)
 }
 
-export default function Navigation( { currChap, controls, navWidth } : NavigationProps )
+function InvNav( { navWidth, controls } : InvNavProps )
+{
+	return (
+		<>
+			<div style={{width: navWidth}} className={styles.invNavLeft} onClick={() => controls.prev()}></div>
+			<div style={{width: navWidth}} className={styles.invNavRight} onClick={() => controls.next()}></div>
+		</>
+	)
+}
+
+export default function Navigation( { currChap, navWidth, controls } : NavigationProps )
 {
 	if ( currChap === 0 )
 		return <div className={styles.titleMenu} onClick={controls.next}></div>
@@ -38,8 +54,7 @@ export default function Navigation( { currChap, controls, navWidth } : Navigatio
 	return (
 		<div className={styles.buttonMenu}>
 			<Buttons currChap={currChap} controls={controls}/>
-			<div style={{width: navWidth}} className={styles.invNavLeft} onClick={() => controls.prev()}></div>
-			<div style={{width: navWidth}} className={styles.invNavRight} onClick={() => controls.next()}></div>
+			<InvNav navWidth={navWidth} controls={controls}/>
 		</div>
 	);
 }

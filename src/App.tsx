@@ -83,9 +83,9 @@ export default function App()
 
 	return (
 		<>
-			<Navigation currChap={currChap} controls={controls} navWidth={navWidth}/>
+			<Navigation currChap={currChap} navWidth={navWidth} controls={controls}/>
 			<Chapter chapter={book[currChap]} controls={controls}/>
-			<Navigation currChap={currChap} controls={controls} navWidth={navWidth}/>
+			<Navigation currChap={currChap} navWidth={navWidth} controls={controls}/>
 		</>
 	);
 }
