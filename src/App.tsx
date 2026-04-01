@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
-import dracula from './util/dracula.ts'
-import Chapter from './elements/Chapter.tsx'
-import Navigation from './elements/Navigation.tsx'
-import ChapterSelect from './elements/ChapterSelect.tsx'
+import type { Chapter as Chap } from './util/dracula.ts'
+import { BOOK, getBook } from './util/utils.ts'
+import Page from './elements/Page.tsx'
 
 export type ChapterControls =
 {
@@ -12,12 +11,24 @@ export type ChapterControls =
 	goto: ( chapNum: number ) => void,
 }
 
+export type AppStates =
+{
+	bookID: string,
+	currChap: number,
+	chapSelect: boolean,
+	startMenu: boolean,
+	navWidth: number,
+}
+
 export default function App()
 {
-	const book = useMemo(() => dracula(), []);
+	const [bookID, setBookID] = useState<string>(BOOK.dracula);
 	const [currChap, setCurrChap] = useState<number>(0);
 	const [chapSelect, setChapSelect] = useState<boolean>(false);
+	const [startMenu, setStartMenu] = useState<boolean>(true);
 	const [navWidth, setNavWidth] = useState<number>(0);
+
+	const book: Chap[] = useMemo(() => getBook(bookID), [bookID]);
 
 	useEffect(() =>
 	{
@@ -25,14 +36,10 @@ export default function App()
 		{
 			const chapter = document.querySelector('.chapter-ref');
 			if ( !chapter )
-			{
-				console.log(`returning early`);
 				return;
-			}
 
 			const { left } = chapter.getBoundingClientRect();
 			setNavWidth(left - 20);
-			console.log(`updated nav width to: ${left}`);
 		}
 
 		updateNavWidth();
@@ -61,6 +68,7 @@ export default function App()
 	{
 		window.scrollTo(0, 0);
 		setChapSelect(true);
+		setStartMenu(false);
 	}
 
 	function goToChapter( chapNum: number )
@@ -68,6 +76,7 @@ export default function App()
 		window.scrollTo(0, 0);
 		setCurrChap(chapNum);
 		setChapSelect(false);
+		setStartMenu(false);
 	}
 
 	const controls: ChapterControls =
@@ -78,15 +87,15 @@ export default function App()
 		goto: goToChapter,
 	}
 
-	if ( chapSelect )
-		return <ChapterSelect book={book} currChap={currChap} controls={controls}/>
+	const states: AppStates =
+	{
+		bookID: bookID,
+		currChap: currChap,
+		chapSelect: chapSelect,
+		startMenu: startMenu,
+		navWidth: navWidth,
+	}
 
-	return (
-		<>
-			<Navigation currChap={currChap} navWidth={navWidth} controls={controls}/>
-			<Chapter chapter={book[currChap]} controls={controls}/>
-			<Navigation currChap={currChap} navWidth={navWidth} controls={controls}/>
-		</>
-	);
+	return <Page book={book} states={states} controls={controls}/>
 }
 
