@@ -31,7 +31,7 @@ export default function App()
 	const [screen, setScreen] = useState<Screen>(Screens.startMenu);
 	const [prevScreens, setPrevScreens] = useState<Screen[]>([]);
 	const [currBook, setCurrBook] = useState<string | null>(null);
-	const [currChap, setCurrChap] = useState<number>(0);
+	const [currChap, setCurrChap] = useState<number>(-1);
 	const [navWidth, setNavWidth] = useState<number>(0);
 
 	const book: Chap[] = useMemo(() => getBook(currBook), [currBook]);
