@@ -5,6 +5,7 @@ type NavigationProps =
 {
 	currChap: number,
 	controls: ChapterControls,
+	navWidth: number,
 }
 
 type ButtonsProps =
@@ -29,7 +30,7 @@ function Buttons( { currChap, controls } : ButtonsProps )
 	)
 }
 
-export default function Navigation( { currChap, controls } : NavigationProps )
+export default function Navigation( { currChap, controls, navWidth } : NavigationProps )
 {
 	if ( currChap === 0 )
 		return <div className={styles.titleMenu} onClick={controls.next}></div>
@@ -37,8 +38,8 @@ export default function Navigation( { currChap, controls } : NavigationProps )
 	return (
 		<div className={styles.buttonMenu}>
 			<Buttons currChap={currChap} controls={controls}/>
-			<div className={styles.invNavLeft} onClick={() => controls.prev()}></div>
-			<div className={styles.invNavRight} onClick={() => controls.next()}></div>
+			<div style={{width: navWidth}} className={styles.invNavLeft} onClick={() => controls.prev()}></div>
+			<div style={{width: navWidth}} className={styles.invNavRight} onClick={() => controls.next()}></div>
 		</div>
 	);
 }

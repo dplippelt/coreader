@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import dracula from './util/dracula.ts'
 import Chapter from './elements/Chapter.tsx'
 import Navigation from './elements/Navigation.tsx'
@@ -17,6 +17,31 @@ export default function App()
 	const book = useMemo(() => dracula(), []);
 	const [currChap, setCurrChap] = useState<number>(0);
 	const [chapSelect, setChapSelect] = useState<boolean>(false);
+	const [navWidth, setNavWidth] = useState<number>(0);
+
+	useEffect(() =>
+	{
+		function updateNavWidth()
+		{
+			const chapter = document.querySelector('.chapter-ref');
+			if ( !chapter )
+			{
+				console.log(`returning early`);
+				return;
+			}
+
+			const { left } = chapter.getBoundingClientRect();
+			setNavWidth(left - 20);
+			console.log(`updated nav width to: ${left}`);
+		}
+
+		updateNavWidth();
+
+		window.addEventListener('resize', updateNavWidth);
+
+		return () => window.removeEventListener('resize', updateNavWidth);
+	}, [currChap]);
+
 
 	function handleNextChapter()
 	{
@@ -58,9 +83,9 @@ export default function App()
 
 	return (
 		<>
-			<Navigation currChap={currChap} controls={controls}/>
+			<Navigation currChap={currChap} controls={controls} navWidth={navWidth}/>
 			<Chapter chapter={book[currChap]} controls={controls}/>
-			<Navigation currChap={currChap} controls={controls}/>
+			<Navigation currChap={currChap} controls={controls} navWidth={navWidth}/>
 		</>
 	);
 }

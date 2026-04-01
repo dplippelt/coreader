@@ -17,7 +17,7 @@ export default function Chapter( { chapter, controls } : ChapterProps )
 		return <div className={styles.title} onClick={controls.next}>{chapter.title}</div>;
 
 	return (
-		<div className={styles.chapter}>
+		<div className={`${styles.chapter} chapter-ref`}>
 			<h1>CHAPTER {chapter.num}</h1>
 			<h2><Markdown unwrapDisallowed disallowedElements={['p']}>{chapter.title}</Markdown></h2>
 			{paragraphs.map((para, i) => (
