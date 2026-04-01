@@ -23,6 +23,7 @@ export default function ChapterSelect( { book, controls } : ChapterSelectProps )
 			<div className={styles.buttonMenu}>
 				<button onClick={() => controls.goToPrevScreen()}>Back</button>
 			</div>
+			<div className={styles.menuHeader}>Chapters</div>
 			{book.map((chapter, chapNum) => (
 				<div className={styles.chapter} key={chapNum} onClick={() => controls.goToChap(chapNum)}>
 					<Markdown unwrapDisallowed disallowedElements={['p']}>{getText(chapter.num, chapter.title)}</Markdown>
