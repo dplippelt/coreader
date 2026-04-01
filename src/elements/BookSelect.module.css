@@ -1,0 +1,25 @@
+.buttonMenu
+{
+	text-align: center;
+}
+
+.menuHeader
+{
+	max-width: 90vw;
+	width: fit-content;
+	margin: auto;
+	margin-top: 3rem;
+	margin-bottom: 2rem;
+	font-size: 2rem;
+}
+
+.book
+{
+	max-width: 30vw;
+	width: fit-content;
+	cursor: pointer;
+	margin: auto;
+	margin-bottom: 0.3rem;
+	text-decoration: underline;
+	color: #0000EE;
+}

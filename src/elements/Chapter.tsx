@@ -1,12 +1,12 @@
 import Markdown from 'react-markdown'
-import type { Chapter } from '../util/dracula.ts'
-import type { ChapterControls } from '../App.tsx'
+import type { Chapter } from '../books/dracula.ts'
+import type { Controls } from '../App.tsx'
 import styles from './Chapter.module.css'
 
 type ChapterProps =
 {
 	chapter: Chapter,
-	controls: ChapterControls,
+	controls: Controls,
 }
 
 export default function Chapter( { chapter, controls } : ChapterProps )

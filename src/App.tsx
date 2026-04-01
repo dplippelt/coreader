@@ -1,34 +1,39 @@
 import { useEffect, useMemo, useState } from 'react'
-import type { Chapter as Chap } from './util/dracula.ts'
-import { BOOK, getBook } from './util/utils.ts'
+import type { Chapter as Chap } from './books/dracula.ts'
+import { getBook, Screens } from './util/utils.ts'
 import Page from './elements/Page.tsx'
 
-export type ChapterControls =
+export type Screen = typeof Screens[keyof typeof Screens];
+
+export type Controls =
 {
 	next: () => void,
 	prev: () => void,
-	select: () => void,
-	goto: ( chapNum: number ) => void,
+	chapSelect: () => void,
+	bookSelect: () => void,
+	goToChap: ( chapNum: number ) => void,
+	goToBook: ( book: string ) => void,
+	goToPrevScreen: () => void,
 }
 
 export type AppStates =
 {
-	bookID: string,
+	bookID: string | null,
 	currChap: number,
-	chapSelect: boolean,
-	startMenu: boolean,
+	screen: Screen,
+	prevScreens: Screen[],
 	navWidth: number,
 }
 
 export default function App()
 {
-	const [bookID, setBookID] = useState<string>(BOOK.dracula);
+	const [screen, setScreen] = useState<Screen>(Screens.startMenu);
+	const [prevScreens, setPrevScreens] = useState<Screen[]>([]);
+	const [currBook, setCurrBook] = useState<string | null>(null);
 	const [currChap, setCurrChap] = useState<number>(0);
-	const [chapSelect, setChapSelect] = useState<boolean>(false);
-	const [startMenu, setStartMenu] = useState<boolean>(true);
 	const [navWidth, setNavWidth] = useState<number>(0);
 
-	const book: Chap[] = useMemo(() => getBook(bookID), [bookID]);
+	const book: Chap[] = useMemo(() => getBook(currBook), [currBook]);
 
 	useEffect(() =>
 	{
@@ -67,32 +72,62 @@ export default function App()
 	function goToChapterSelect()
 	{
 		window.scrollTo(0, 0);
-		setChapSelect(true);
-		setStartMenu(false);
+		setPrevScreens([...prevScreens, screen]);
+		setScreen(Screens.chapSelectMenu);
 	}
 
 	function goToChapter( chapNum: number )
 	{
 		window.scrollTo(0, 0);
 		setCurrChap(chapNum);
-		setChapSelect(false);
-		setStartMenu(false);
+		setPrevScreens([...prevScreens, screen]);
+		setScreen(Screens.reader);
 	}
 
-	const controls: ChapterControls =
+	function goToBookSelect()
+	{
+		window.scrollTo(0, 0);
+		setPrevScreens([...prevScreens, screen]);
+		setScreen(Screens.bookSelectMenu);
+	}
+
+	function goToBook( book: string )
+	{
+		window.scrollTo(0,0);
+		setCurrChap(0);
+		setCurrBook(book);
+		setPrevScreens([...prevScreens, screen]);
+		setScreen(Screens.reader);
+	}
+
+	function goToPrevScreen()
+	{
+		if ( prevScreens.length === 0 )
+			return;
+
+		window.scrollTo(0, 0);
+		const prev = prevScreens.pop()!;
+		setScreen(prev);
+		setPrevScreens(prevScreens.slice(0, prevScreens.length - 1));
+	}
+
+	const controls: Controls =
 	{
 		next: handleNextChapter,
 		prev: handlePrevChapter,
-		select: goToChapterSelect,
-		goto: goToChapter,
+		chapSelect: goToChapterSelect,
+		bookSelect: goToBookSelect,
+		goToChap: goToChapter,
+		goToBook: goToBook,
+		goToPrevScreen: goToPrevScreen,
 	}
 
 	const states: AppStates =
 	{
-		bookID: bookID,
+		bookID: currBook,
 		currChap: currChap,
-		chapSelect: chapSelect,
-		startMenu: startMenu,
+		screen: screen,
+		prevScreens: prevScreens,
 		navWidth: navWidth,
 	}
 

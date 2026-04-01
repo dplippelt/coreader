@@ -1,22 +1,22 @@
 import styles from './Navigation.module.css'
-import type { ChapterControls, AppStates } from '../App';
+import type { Controls, AppStates } from '../App';
 
 type NavigationProps =
 {
 	states: AppStates,
-	controls: ChapterControls,
+	controls: Controls,
 }
 
 type ButtonsProps =
 {
 	states: AppStates,
-	controls: ChapterControls,
+	controls: Controls,
 }
 
 type InvNavProps =
 {
 	states: AppStates,
-	controls: ChapterControls,
+	controls: Controls,
 }
 
 function getButtonText( currChap: number )
@@ -29,7 +29,7 @@ function Buttons( { states, controls } : ButtonsProps )
 	return (
 		<>
 			<button onClick={() => controls.prev()}>{getButtonText(states.currChap)}</button>
-			<button onClick={() => controls.select()}>Chapter Select</button>
+			<button onClick={() => controls.chapSelect()}>Chapter Select</button>
 			<button onClick={() => controls.next()}>Next Chapter</button>
 		</>
 	)

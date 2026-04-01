@@ -1,13 +1,12 @@
 import Markdown from "react-markdown";
-import type { Chapter } from "../util/dracula"
-import type { ChapterControls, AppStates } from "../App";
+import type { Chapter } from "../books/dracula"
+import type { Controls } from "../App";
 import styles from './ChapterSelect.module.css'
 
 type ChapterSelectProps =
 {
 	book: Chapter[],
-	states: AppStates,
-	controls: ChapterControls,
+	controls: Controls,
 }
 
 function getText( chapNum: number, chapTitle: string): string
@@ -17,15 +16,15 @@ function getText( chapNum: number, chapTitle: string): string
 	return `${chapNum}. ${chapTitle}`;
 }
 
-export default function ChapterSelect( { book, states, controls } : ChapterSelectProps )
+export default function ChapterSelect( { book, controls } : ChapterSelectProps )
 {
 	return (
 		<>
 			<div className={styles.buttonMenu}>
-				<button onClick={() => controls.goto(states.currChap)}>Back</button>
+				<button onClick={() => controls.goToPrevScreen()}>Back</button>
 			</div>
 			{book.map((chapter, chapNum) => (
-				<div className={styles.chapter} key={chapNum} onClick={() => controls.goto(chapNum)}>
+				<div className={styles.chapter} key={chapNum} onClick={() => controls.goToChap(chapNum)}>
 					<Markdown unwrapDisallowed disallowedElements={['p']}>{getText(chapter.num, chapter.title)}</Markdown>
 				</div>
 			))}
