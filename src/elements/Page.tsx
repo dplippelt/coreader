@@ -23,7 +23,7 @@ export default function Page( { book, states, controls} : PageProps )
 		case Screens.bookSelectMenu:
 			return <BookSelect controls={controls}/>;
 		case Screens.chapSelectMenu:
-			{ return states.bookID ? <ChapterSelect book={book} controls={controls}/> : <BookSelect controls={controls}/> };
+			{ return states.currBook ? <ChapterSelect book={book} controls={controls}/> : <BookSelect controls={controls}/> };
 		case Screens.reader:
 			return (
 				<>

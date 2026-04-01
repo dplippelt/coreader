@@ -19,7 +19,7 @@ export type Controls =
 
 export type AppStates =
 {
-	bookID: string | null,
+	currBook: string | null,
 	currChap: number,
 	screen: Screen,
 	prevScreens: Screen[],
@@ -92,11 +92,11 @@ export default function App()
 		setScreen(Screens.bookSelectMenu);
 	}
 
-	function goToBook( book: string )
+	function goToBook( bookID: string )
 	{
 		window.scrollTo(0,0);
 		setCurrChap(0);
-		setCurrBook(book);
+		setCurrBook(bookID);
 		setPrevScreens([...prevScreens, screen]);
 		setScreen(Screens.reader);
 	}
@@ -134,7 +134,7 @@ export default function App()
 
 	const states: AppStates =
 	{
-		bookID: currBook,
+		currBook: currBook,
 		currChap: currChap,
 		screen: screen,
 		prevScreens: prevScreens,
