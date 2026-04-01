@@ -114,9 +114,10 @@ export default function App()
 			return;
 
 		window.scrollTo(0, 0);
-		const prev = prevScreens.pop()!;
+		const copy = prevScreens.slice();
+		const prev = copy.pop()!;
 		setScreen(prev);
-		setPrevScreens(prevScreens.slice(0, prevScreens.length - 1));
+		setPrevScreens(copy);
 	}
 
 	const controls: Controls =
