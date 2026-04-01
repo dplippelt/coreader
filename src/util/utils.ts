@@ -1,12 +1,12 @@
-import dracula from './dracula.ts'
-import type { Chapter } from './dracula.ts'
+import dracula from '../books/dracula.ts'
+import type { Chapter } from '../books/dracula.ts'
 
 export const BOOK =
 {
-	dracula: 'dracula',
+	dracula: 'Dracula',
 }
 
-export function getBook( bookID: string ) : Chapter[]
+export function getBook( bookID: string | null ) : Chapter[]
 {
 	switch (bookID)
 	{
@@ -16,3 +16,11 @@ export function getBook( bookID: string ) : Chapter[]
 			return [];
 	}
 }
+
+export const Screens =
+{
+	startMenu: 0,
+	bookSelectMenu: 1,
+	chapSelectMenu: 2,
+	reader: 3,
+} as const;
