@@ -118,11 +118,6 @@ function Qs( { questions, controls } : QsProps )
 
 export default function Questions( { questions, states, controls } : QuestionsProps )
 {
-	const settings = useSettings();
-
-	if ( !settings.questionsEnabled )
-		controls.next();
-
 	return (
 		<>
 			<Buttons controls={controls}/>
