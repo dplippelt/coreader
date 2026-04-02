@@ -2,6 +2,7 @@ import styles from './Questions.module.css'
 import type { Controls, AppStates } from '../App'
 import type { Question } from '../books/dracula'
 import { useSettings } from './SettingsContext'
+import { useState } from 'react'
 
 type ButtonProps =
 {
@@ -17,6 +18,12 @@ type QuestionsProps =
 {
 	questions: Question[],
 	states: AppStates,
+	controls: Controls,
+}
+
+type QsProps =
+{
+	questions: Question[],
 	controls: Controls,
 }
 
@@ -57,7 +64,7 @@ function ResponseField( { question, idx } : { question: Question, idx: number } 
 			);
 		case "text":
 			return (
-				<div className={styles.textResponse}>
+				<div>
 					<label className={styles.response}>Answer: </label>
 					<input type="text" name={`q${idx}`} defaultValue={""}/>
 				</div>
@@ -67,9 +74,27 @@ function ResponseField( { question, idx } : { question: Question, idx: number } 
 	}
 }
 
-function Qs( { questions, states, controls } : QuestionsProps )
+function Qs( { questions, controls } : QsProps )
 {
+	const [correct, setCorrect] = useState<boolean>(false);
+	const [feedback, setFeedback] = useState<boolean>(false);
 	const settings = useSettings();
+
+	function checkAnswers( questions: Question[] )
+	{
+		const form = document.querySelector('form');
+		const data = new FormData(form!);
+
+		console.log(Object.fromEntries(data));
+
+		setFeedback(true);
+		for ( let i = 0; i < questions.length; i++ )
+		{
+			if ( data.get(`q${i}`) !== questions[i].answer )
+				return;
+		}
+		setCorrect(true);
+	}
 
 	return (
 		<form>
@@ -82,11 +107,11 @@ function Qs( { questions, states, controls } : QuestionsProps )
 				</div>
 			))}
 			<div className={styles.buttonMenu}>
-				<button type="button" onClick={() => states.correct ? controls.next() : controls.checkAnswers(questions)}>
-					{states.correct ? "Next Chapter" : "Check Answers"}
+				<button type="button" onClick={() => correct ? controls.next() : checkAnswers(questions)}>
+					{correct ? "Next Chapter" : "Check Answers"}
 				</button>
 			</div>
-			{states.feedback && <div className={styles.feedback}>{states.correct ? "Correct!" : "Incorrect!"}</div>}
+			{feedback && <div className={styles.feedback}>{correct ? "Correct!" : "Incorrect!"}</div>}
 		</form>
 	);
 }
@@ -102,7 +127,7 @@ export default function Questions( { questions, states, controls } : QuestionsPr
 		<>
 			<Buttons controls={controls}/>
 			<Header states={states}/>
-			<Qs questions={questions} states={states} controls={controls}/>
+			<Qs questions={questions} controls={controls}/>
 		</>
 	)
 }

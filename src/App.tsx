@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { Chapter as Chap } from './books/dracula.ts'
-import type { Question } from './books/dracula.ts'
 import { getBook, Screens } from './util/utils.ts'
 import Page from './elements/Page.tsx'
+import { useSettings } from './elements/SettingsContext.tsx';
 
 export type Screen = typeof Screens[keyof typeof Screens];
 
@@ -18,7 +18,6 @@ export type Controls =
 	goToBook: ( book: string ) => void,
 	questions: () => void,
 	goToPrevScreen: () => void,
-	checkAnswers: ( questions: Question[] ) => void,
 }
 
 export type AppStates =
@@ -28,19 +27,16 @@ export type AppStates =
 	screen: Screen,
 	prevScreens: Screen[],
 	navWidth: number,
-	correct: boolean,
-	feedback: boolean,
 }
 
 export default function App()
 {
+	const settings = useSettings();
 	const [screen, setScreen] = useState<Screen>(Screens.startMenu);
 	const [prevScreens, setPrevScreens] = useState<Screen[]>([]);
 	const [currBook, setCurrBook] = useState<string | null>(null);
 	const [currChap, setCurrChap] = useState<number>(-1);
 	const [navWidth, setNavWidth] = useState<number>(0);
-	const [correct, setCorrect] = useState<boolean>(false);
-	const [feedback, setFeedback] = useState<boolean>(false);
 
 	const book: Chap[] = useMemo(() => getBook(currBook), [currBook]);
 
@@ -68,11 +64,7 @@ export default function App()
 	{
 		window.scrollTo(0, 0);
 		if ( currChap < book.length - 1 )
-		{
-			setCorrect(false);
-			setFeedback(false);
 			setCurrChap(currChap + 1);
-		}
 		setScreen(Screens.reader);
 	}
 
@@ -143,28 +135,11 @@ export default function App()
 
 		window.scrollTo(0, 0);
 		const copy = prevScreens.slice();
-		const prev = copy.pop()!;
+		let prev = copy.pop()!;
+		if ( prev === Screens.questions && !settings.questionsEnabled )
+			prev = copy.pop()!;
 		setScreen(prev);
 		setPrevScreens(copy);
-	}
-
-	function checkAnswers( questions: Question[] )
-	{
-		const form = document.querySelector('form');
-		const data = new FormData(form!);
-
-		console.log(Object.fromEntries(data));
-
-		setFeedback(true);
-
-		for ( let i = 0; i < questions.length; i++ )
-		{
-			if ( data.get(`q${i}`) !== questions[i].answer )
-				return;
-		}
-
-
-		setCorrect(true);
 	}
 
 	const controls: Controls =
@@ -179,7 +154,6 @@ export default function App()
 		goToChap: goToChapter,
 		questions: goToQuestions,
 		goToPrevScreen: goToPrevScreen,
-		checkAnswers: checkAnswers,
 	}
 
 	const states: AppStates =
@@ -189,8 +163,6 @@ export default function App()
 		screen: screen,
 		prevScreens: prevScreens,
 		navWidth: navWidth,
-		correct: correct,
-		feedback: feedback,
 	}
 
 	return <Page book={book} states={states} controls={controls}/>
