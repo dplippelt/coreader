@@ -8,6 +8,7 @@ import ChapterSelect from "./ChapterSelect"
 import BookSelect from "./BookSelect"
 import Settings from "./Settings"
 import Questions from "./Questions"
+import { useSettings } from "./SettingsContext"
 
 type PageProps =
 {
@@ -18,6 +19,8 @@ type PageProps =
 
 export default function Page( { book, states, controls} : PageProps )
 {
+	const settings = useSettings();
+
 	switch (states.screen)
 	{
 		case Screens.startMenu:
@@ -29,7 +32,12 @@ export default function Page( { book, states, controls} : PageProps )
 		case Screens.settingsMenu:
 			return <Settings controls={controls}/>;
 		case Screens.questions:
-			return <Questions questions={book[states.currChap].questions} states={states} controls={controls}/>
+			if ( !settings.questionsEnabled )
+			{
+				controls.next();
+				return;
+			}
+			return <Questions key={states.currChap} questions={book[states.currChap].questions} states={states} controls={controls}/>
 		case Screens.reader:
 			return (
 				<>
