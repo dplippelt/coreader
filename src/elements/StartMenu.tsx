@@ -24,7 +24,7 @@ function Buttons( { states, controls } : ButtonProps )
 		<>
 			<button className={styles.startMenuButton} onClick={controls.bookSelect}>Book Selection</button>
 			<button className={styles.startMenuButton} onClick={controls.chapSelect}>Chapter Selection</button>
-			<button className={styles.startMenuButton}>Settings</button>
+			<button className={styles.startMenuButton} onClick={controls.settingsMenu}>Settings</button>
 			{ states.currChap !== -1 ? <button className={styles.startMenuButton} onClick={controls.goToPrevScreen}>Continue Reading</button> : <></> }
 		</>
 	)

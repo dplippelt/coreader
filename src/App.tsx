@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import type { Chapter as Chap } from './books/dracula.ts'
 import { getBook, Screens } from './util/utils.ts'
 import Page from './elements/Page.tsx'
+import { useSettings } from './elements/SettingsContext.tsx'
 
 export type Screen = typeof Screens[keyof typeof Screens];
 
@@ -9,9 +10,10 @@ export type Controls =
 {
 	next: () => void,
 	prev: () => void,
+	startMenu: () => void,
 	chapSelect: () => void,
 	bookSelect: () => void,
-	startMenu: () => void,
+	settingsMenu: () => void,
 	goToChap: ( chapNum: number ) => void,
 	goToBook: ( book: string ) => void,
 	goToPrevScreen: () => void,
@@ -70,19 +72,11 @@ export default function App()
 			setCurrChap(currChap - 1);
 	}
 
-	function goToChapterSelect()
+	function goToStart()
 	{
 		window.scrollTo(0, 0);
 		setPrevScreens([...prevScreens, screen]);
-		setScreen(Screens.chapSelectMenu);
-	}
-
-	function goToChapter( chapNum: number )
-	{
-		window.scrollTo(0, 0);
-		setCurrChap(chapNum);
-		setPrevScreens([...prevScreens, screen]);
-		setScreen(Screens.reader);
+		setScreen(Screens.startMenu);
 	}
 
 	function goToBookSelect()
@@ -90,6 +84,20 @@ export default function App()
 		window.scrollTo(0, 0);
 		setPrevScreens([...prevScreens, screen]);
 		setScreen(Screens.bookSelectMenu);
+	}
+
+	function goToChapterSelect()
+	{
+		window.scrollTo(0, 0);
+		setPrevScreens([...prevScreens, screen]);
+		setScreen(Screens.chapSelectMenu);
+	}
+
+	function goToSettings()
+	{
+		window.scrollTo(0, 0);
+		setPrevScreens([...prevScreens, screen]);
+		setScreen(Screens.settingsMenu);
 	}
 
 	function goToBook( bookID: string )
@@ -101,11 +109,12 @@ export default function App()
 		setScreen(Screens.reader);
 	}
 
-	function goToStart()
+	function goToChapter( chapNum: number )
 	{
 		window.scrollTo(0, 0);
+		setCurrChap(chapNum);
 		setPrevScreens([...prevScreens, screen]);
-		setScreen(Screens.startMenu);
+		setScreen(Screens.reader);
 	}
 
 	function goToPrevScreen()
@@ -124,11 +133,12 @@ export default function App()
 	{
 		next: handleNextChapter,
 		prev: handlePrevChapter,
+		startMenu: goToStart,
 		chapSelect: goToChapterSelect,
 		bookSelect: goToBookSelect,
-		startMenu: goToStart,
-		goToChap: goToChapter,
+		settingsMenu: goToSettings,
 		goToBook: goToBook,
+		goToChap: goToChapter,
 		goToPrevScreen: goToPrevScreen,
 	}
 

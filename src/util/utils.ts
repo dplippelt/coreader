@@ -22,5 +22,6 @@ export const Screens =
 	startMenu: 0,
 	bookSelectMenu: 1,
 	chapSelectMenu: 2,
-	reader: 3,
+	settingsMenu: 3,
+	reader: 4,
 } as const;

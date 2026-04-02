@@ -13,14 +13,18 @@
 	font-size: 2rem;
 }
 
-.chapter
+.settings
 {
-	display: block;
-	max-width: 30vw;
+	display: grid;
+	max-width: 40vw;
 	width: fit-content;
-	cursor: pointer;
-	margin-left: 35vw;
-	margin-bottom: 0.3rem;
-	text-decoration: underline;
-	color: #0000EE;
+	margin: auto;
+	grid-template-columns: 2fr 1fr;
+	row-gap: 1.5rem;
+	align-items: center;
+}
+
+.fontSize
+{
+	display: flex;
 }

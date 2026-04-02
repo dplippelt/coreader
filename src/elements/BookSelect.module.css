@@ -15,6 +15,7 @@
 
 .book
 {
+	display: block;
 	max-width: 30vw;
 	width: fit-content;
 	cursor: pointer;
