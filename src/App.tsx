@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from 'react'
 import type { Chapter as Chap } from './books/dracula.ts'
 import { getBook, Screens } from './util/utils.ts'
 import Page from './elements/Page.tsx'
-import { useSettings } from './elements/SettingsContext.tsx'
 
 export type Screen = typeof Screens[keyof typeof Screens];
 
