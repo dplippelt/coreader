@@ -37,12 +37,6 @@
 	margin-left: 0.5rem;
 }
 
-.textReponse
-{
-	display: flex;
-	flex-direction: row;
-}
-
 .feedback
 {
 	max-width: 90vw;
