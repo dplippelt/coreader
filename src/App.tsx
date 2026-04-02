@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { Chapter as Chap } from './books/dracula.ts'
+import type { Question } from './books/dracula.ts'
 import { getBook, Screens } from './util/utils.ts'
 import Page from './elements/Page.tsx'
 
@@ -15,7 +16,9 @@ export type Controls =
 	settingsMenu: () => void,
 	goToChap: ( chapNum: number ) => void,
 	goToBook: ( book: string ) => void,
+	questions: () => void,
 	goToPrevScreen: () => void,
+	checkAnswers: ( questions: Question[] ) => void,
 }
 
 export type AppStates =
@@ -25,6 +28,8 @@ export type AppStates =
 	screen: Screen,
 	prevScreens: Screen[],
 	navWidth: number,
+	correct: boolean,
+	feedback: boolean,
 }
 
 export default function App()
@@ -34,6 +39,8 @@ export default function App()
 	const [currBook, setCurrBook] = useState<string | null>(null);
 	const [currChap, setCurrChap] = useState<number>(-1);
 	const [navWidth, setNavWidth] = useState<number>(0);
+	const [correct, setCorrect] = useState<boolean>(false);
+	const [feedback, setFeedback] = useState<boolean>(false);
 
 	const book: Chap[] = useMemo(() => getBook(currBook), [currBook]);
 
@@ -61,7 +68,12 @@ export default function App()
 	{
 		window.scrollTo(0, 0);
 		if ( currChap < book.length - 1 )
+		{
+			setCorrect(false);
+			setFeedback(false);
 			setCurrChap(currChap + 1);
+		}
+		setScreen(Screens.reader);
 	}
 
 	function handlePrevChapter()
@@ -69,6 +81,7 @@ export default function App()
 		window.scrollTo(0, 0);
 		if ( currChap !== 0 )
 			setCurrChap(currChap - 1);
+		setScreen(Screens.reader);
 	}
 
 	function goToStart()
@@ -116,6 +129,13 @@ export default function App()
 		setScreen(Screens.reader);
 	}
 
+	function goToQuestions()
+	{
+		window.scrollTo(0, 0);
+		setPrevScreens([...prevScreens, screen]);
+		setScreen(Screens.questions);
+	}
+
 	function goToPrevScreen()
 	{
 		if ( prevScreens.length === 0 )
@@ -128,6 +148,25 @@ export default function App()
 		setPrevScreens(copy);
 	}
 
+	function checkAnswers( questions: Question[] )
+	{
+		const form = document.querySelector('form');
+		const data = new FormData(form!);
+
+		console.log(Object.fromEntries(data));
+
+		setFeedback(true);
+
+		for ( let i = 0; i < questions.length; i++ )
+		{
+			if ( data.get(`q${i}`) !== questions[i].answer )
+				return;
+		}
+
+
+		setCorrect(true);
+	}
+
 	const controls: Controls =
 	{
 		next: handleNextChapter,
@@ -138,7 +177,9 @@ export default function App()
 		settingsMenu: goToSettings,
 		goToBook: goToBook,
 		goToChap: goToChapter,
+		questions: goToQuestions,
 		goToPrevScreen: goToPrevScreen,
+		checkAnswers: checkAnswers,
 	}
 
 	const states: AppStates =
@@ -148,6 +189,8 @@ export default function App()
 		screen: screen,
 		prevScreens: prevScreens,
 		navWidth: navWidth,
+		correct: correct,
+		feedback: feedback,
 	}
 
 	return <Page book={book} states={states} controls={controls}/>

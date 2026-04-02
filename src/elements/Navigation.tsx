@@ -1,5 +1,6 @@
 import styles from './Navigation.module.css'
 import type { Controls, AppStates } from '../App';
+import { useSettings } from './SettingsContext'
 
 type NavigationProps =
 {
@@ -26,22 +27,26 @@ function getButtonText( currChap: number )
 
 function Buttons( { states, controls } : ButtonsProps )
 {
+	const settings = useSettings();
+
 	return (
 		<>
 			<button onClick={() => controls.prev()}>{getButtonText(states.currChap)}</button>
 			<button onClick={() => controls.startMenu()}>Start Menu</button>
 			<button onClick={() => controls.chapSelect()}>Chapter Select</button>
-			<button onClick={() => controls.next()}>Next Chapter</button>
+			<button onClick={() => settings.questionsEnabled ? controls.questions() : controls.next()}>{settings.questionsEnabled ? "End Chapter" : "Next Chapter"}</button>
 		</>
 	)
 }
 
 function InvNav( { states, controls } : InvNavProps )
 {
+	const settings = useSettings();
+
 	return (
 		<>
 			<div style={{width: states.navWidth}} className={styles.invNavLeft} onClick={() => controls.prev()}></div>
-			<div style={{width: states.navWidth}} className={styles.invNavRight} onClick={() => controls.next()}></div>
+			<div style={{width: states.navWidth}} className={styles.invNavRight} onClick={() => settings.questionsEnabled ? controls.questions() : controls.next()}></div>
 		</>
 	)
 }

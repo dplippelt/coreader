@@ -7,6 +7,7 @@ import Navigation from "./Navigation"
 import ChapterSelect from "./ChapterSelect"
 import BookSelect from "./BookSelect"
 import Settings from "./Settings"
+import Questions from "./Questions"
 
 type PageProps =
 {
@@ -27,6 +28,8 @@ export default function Page( { book, states, controls} : PageProps )
 			{ return states.currBook ? <ChapterSelect book={book} controls={controls}/> : <BookSelect controls={controls}/> };
 		case Screens.settingsMenu:
 			return <Settings controls={controls}/>;
+		case Screens.questions:
+			return <Questions questions={book[states.currChap].questions} states={states} controls={controls}/>
 		case Screens.reader:
 			return (
 				<>

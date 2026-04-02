@@ -1,0 +1,52 @@
+.buttonMenu
+{
+	text-align: center;
+}
+
+.header
+{
+	max-width: 90vw;
+	width: fit-content;
+	margin: auto;
+	margin-top: 0rem;
+	margin-bottom: 2rem;
+	font-size: 2rem;
+}
+
+.question
+{
+	max-width: 40vw;
+	width: fit-content;
+	margin-left: 30vw;
+	margin-bottom: 1rem;
+}
+
+.responseBox
+{
+	display: flex;
+	flex-direction: column;
+	max-width: 40vw;
+	width: fit-content;
+	margin-left: 30vw;
+	margin-bottom: 2rem;
+}
+
+.response
+{
+	margin-bottom: 0.5rem;
+	margin-left: 0.5rem;
+}
+
+.textReponse
+{
+	display: flex;
+	flex-direction: row;
+}
+
+.feedback
+{
+	max-width: 90vw;
+	width: fit-content;
+	margin: auto;
+	margin-bottom: 2rem;
+}

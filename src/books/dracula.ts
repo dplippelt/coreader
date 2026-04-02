@@ -1,3 +1,5 @@
+import qs from './draculaQuestions.json'
+
 const rawBook: string = `The Project Gutenberg eBook of Dracula
 
 This eBook is for the use of anyone anywhere in the United States and
@@ -15853,6 +15855,23 @@ subscribe to our email newsletter to hear about new eBooks.
 
 `
 
+export type Question =
+{
+	chapter: number,
+	type: 'multiple choice' | 'true-false' | 'text',
+	question: string,
+	options?: string[],
+	answer: string,
+}
+
+export type Chapter =
+{
+	num: number,
+	title: string,
+	content: string,
+	questions: Question[],
+}
+
 function getTitle( start_chap_idx: number ): string
 {
 	const temp = rawBook.substring(start_chap_idx, start_chap_idx + 200);
@@ -15871,11 +15890,25 @@ function getContent( start_chap_idx: number, end_chap_idx: number ): string
 	return temp.substring(start_idx).replace(/(?<!\n)\n(?!(\n|[ \t]))/g, " ");
 }
 
-export type Chapter =
+function getQuestions( chap_num: number ): Question[]
 {
-	num: number,
-	title: string,
-	content: string,
+	const questions: Question[] = [];
+	const key = `chapter_${chap_num}` as string as keyof typeof qs;
+	const chap_qs = qs[key] ?? [];
+
+	for ( let q of chap_qs )
+	{
+		questions.push(
+		{
+			chapter: chap_num,
+			type: q.type as Question['type'],
+			question: q.question,
+			options: q.options,
+			answer: q.answer
+		});
+	}
+
+	return questions;
 }
 
 export default function getDracula(): Array<Chapter>
@@ -15883,7 +15916,7 @@ export default function getDracula(): Array<Chapter>
 	const chapters = [...rawBook.matchAll(/\nCHAPTER [IVXLC]+\n/g)];
 	const book: Array<Chapter> = [];
 
-	book.push({ num: 0, title: "Dracula", content: "" });
+	book.push({ num: 0, title: "Dracula", content: "", questions: [] });
 
 	for ( let i = 0; i < chapters.length; i++ )
 	{
@@ -15892,8 +15925,9 @@ export default function getDracula(): Array<Chapter>
 		const end_chap_idx = i + 1 < chapters.length ? chapters[i + 1].index : rawBook.indexOf("THE END") + 7;
 		const chap_title = getTitle(start_chap_idx);
 		const chap_content = getContent(start_chap_idx, end_chap_idx);
+		const questions = getQuestions(chap_num)
 
-		book.push({ num: chap_num, title: chap_title, content: chap_content });
+		book.push({ num: chap_num, title: chap_title, content: chap_content, questions: questions });
 	}
 
 	return book;
