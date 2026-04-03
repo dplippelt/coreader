@@ -77,29 +77,46 @@ function ResponseField( { question, idx } : { question: Question, idx: number } 
 function Qs( { questions, controls } : QsProps )
 {
 	const [correct, setCorrect] = useState<boolean>(false);
-	const [feedback, setFeedback] = useState<boolean>(false);
+	const [giveFeedback, setGiveFeedback] = useState<boolean>(false);
+	const [feedback, setFeedback] = useState<boolean[]>([]);
 	const settings = useSettings();
 
 	function checkAnswers( questions: Question[] )
 	{
 		const form = document.querySelector('form');
 		const data = new FormData(form!);
+		const fb: boolean[] = [];
 
 		console.log(Object.fromEntries(data));
 
-		setFeedback(true);
 		for ( let i = 0; i < questions.length; i++ )
 		{
-			if ( data.get(`q${i}`) !== questions[i].answer )
-				return;
+			const response: (string | undefined) = data.get(`q${i}`)?.toString();
+			if ( response === undefined )
+			{
+				fb.push(false);
+				continue;
+			}
+
+			if ( response.toLowerCase() !== questions[i].answer.toLowerCase() )
+			{
+				fb.push(false);
+				continue;
+			}
+
+			fb.push(true);
 		}
-		setCorrect(true);
+
+		if ( fb.find((q) => q === false) === undefined )
+			setCorrect(true);
+		setFeedback(fb);
+		setGiveFeedback(true);
 	}
 
 	return (
 		<form>
 			{questions.map((question, idx) => (
-				<div key={idx} style={{fontSize: `${settings.fontSize}px`}}>
+				<div key={idx} style={{fontSize: `${settings.fontSize}px`, ...(feedback[idx] === false ? {color: "red"} : {})}}>
 					<div className={styles.question}>{question.question}</div>
 					<div className={styles.responseBox}>
 						<ResponseField question={question} idx={idx}/>
@@ -111,7 +128,7 @@ function Qs( { questions, controls } : QsProps )
 					{correct ? "Next Chapter" : "Check Answers"}
 				</button>
 			</div>
-			{feedback && <div className={styles.feedback}>{correct ? "Correct!" : "Incorrect!"}</div>}
+			{giveFeedback && <div className={styles.feedback}>{correct ? "Correct!" : "Incorrect!"}</div>}
 		</form>
 	);
 }
