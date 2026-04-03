@@ -4,7 +4,13 @@
 		{
 			"type": "multiple choice",
 			"question": "Which hotel in Bistritz had Count Dracula arranged for Jonathan to stay at?",
-			"options": ["Golden Krone Hotel", "Hotel Royale", "Hotel Transylvania", "Borgo Pass Inn"],
+			"options":
+			[
+				"Hotel Transylvania",
+				"Golden Krone Hotel",
+				"Borgo Pass Inn",
+				"Hotel Royale"
+			],
 			"answer": "Golden Krone Hotel"
 		},
 		{
@@ -15,7 +21,13 @@
 		{
 			"type": "multiple choice",
 			"question": "Jonathan consulted his polyglot dictionary on the coach and found that 'vrolok' and 'vlkoslak' both meant the same thing. What was it?",
-			"options": ["Vampire or werewolf", "Witch or demon", "Satan or sorcerer", "Evil spirit or ghoul"],
+			"options":
+			[
+				"Satan or sorcerer",
+				"Vampire or werewolf",
+				"Evil spirit or ghoul",
+				"Witch or demon"
+			],
 			"answer": "Vampire or werewolf"
 		},
 		{
@@ -39,7 +51,13 @@
 		{
 			"type": "multiple choice",
 			"question": "What was Count Dracula reading when Jonathan returned from his room to fetch the estate papers?",
-			"options": ["An English Bradshaw's Guide", "A map of London streets", "The London Directory", "A deed of sale from Peter Hawkins"],
+			"options":
+			[
+				"An English Bradshaw's Guide",
+				"A deed of sale from Peter Hawkins",
+				"The London Directory",
+				"A map of London streets"
+			],
 			"answer": "An English Bradshaw's Guide"
 		},
 		{
@@ -50,7 +68,13 @@
 		{
 			"type": "multiple choice",
 			"question": "What stopped Count Dracula from completing his grab at Jonathan's throat after seeing blood from the razor cut?",
-			"options": ["The crucifix on Jonathan's neck", "Jonathan stepping sharply away", "The sound of wolves howling outside", "The crow of a cock in the courtyard"],
+			"options":
+			[
+				"The crucifix on Jonathan's neck",
+				"Jonathan stepping sharply away",
+				"The crow of a cock in the courtyard",
+				"The sound of wolves howling outside"
+			],
 			"answer": "The crucifix on Jonathan's neck"
 		},
 		{
@@ -69,7 +93,13 @@
 		{
 			"type": "multiple choice",
 			"question": "When Jonathan watched from his window, how did Count Dracula descend the outer castle wall?",
-			"options": ["Face down, like a lizard moving along a wall", "Hanging from ropes tied to the battlements", "Sliding along a narrow stone ledge sideways", "Swinging from window ledge to window ledge"],
+			"options":
+			[
+				"Hanging from ropes tied to the battlements",
+				"Face down, like a lizard moving along a wall",
+				"Sliding along a narrow stone ledge sideways",
+				"Swinging from window ledge to window ledge"
+			],
 			"answer": "Face down, like a lizard moving along a wall"
 		},
 		{
@@ -85,7 +115,13 @@
 		{
 			"type": "multiple choice",
 			"question": "When Count Dracula burst in and seized the fair woman away from Jonathan, what did he say to the three women about him?",
-			"options": ["\"This man belongs to me!\"", "\"He is not yet ready for you!\"", "\"Leave him; he still serves my purpose!\"", "\"He must not be harmed before morning!\""],
+			"options":
+			[
+				"\"Leave him; he still serves my purpose!\"",
+				"\"He is not yet ready for you!\"",
+				"\"This man belongs to me!\"",
+				"\"He must not be harmed before morning!\""
+			],
 			"answer": "\"This man belongs to me!\""
 		}
 	],
@@ -94,7 +130,13 @@
 		{
 			"type": "multiple choice",
 			"question": "The Count demanded Jonathan write three post-dated letters. What date did he assign to the final letter—the one claiming Jonathan had already arrived at Bistritz?",
-			"options": ["June 29", "June 12", "June 19", "July 1"],
+			"options":
+			[
+				"July 1",
+				"June 29",
+				"June 19",
+				"June 12"
+			],
 			"answer": "June 29"
 		},
 		{
@@ -110,7 +152,13 @@
 		{
 			"type": "multiple choice",
 			"question": "When Jonathan climbed through the window into the Count's room for the first time, what was the only significant thing he found there?",
-			"options": ["A great heap of old gold coins", "The missing key to the front door", "A stack of Jonathan's confiscated papers", "A box filled with freshly turned earth"],
+			"options":
+			[
+				"A stack of Jonathan's confiscated papers",
+				"The missing key to the front door",
+				"A great heap of old gold coins",
+				"A box filled with freshly turned earth"
+			],
 			"answer": "A great heap of old gold coins"
 		},
 		{
@@ -124,7 +172,13 @@
 		{
 			"type": "multiple choice",
 			"question": "What is Mina's occupation at the time she writes her first letter to Lucy?",
-			"options": ["Assistant schoolmistress", "Typist at a law firm", "Governess to a noble family", "Journalist for a London paper"],
+			"options":
+			[
+				"Journalist for a London paper",
+				"Governess to a noble family",
+				"Typist at a law firm",
+				"Assistant schoolmistress"
+			],
 			"answer": "Assistant schoolmistress"
 		},
 		{
@@ -145,7 +199,13 @@
 		{
 			"type": "multiple choice",
 			"question": "In what order did Lucy's three proposals arrive on May 24th?",
-			"options": ["Dr. Seward, then Quincey Morris, then Arthur Holmwood", "Arthur Holmwood, then Dr. Seward, then Quincey Morris", "Quincey Morris, then Arthur Holmwood, then Dr. Seward", "Dr. Seward, then Arthur Holmwood, then Quincey Morris"],
+			"options":
+			[
+				"Dr. Seward, then Quincey Morris, then Arthur Holmwood",
+				"Quincey Morris, then Arthur Holmwood, then Dr. Seward",
+				"Dr. Seward, then Arthur Holmwood, then Quincey Morris",
+				"Arthur Holmwood, then Dr. Seward, then Quincey Morris"
+			],
 			"answer": "Dr. Seward, then Quincey Morris, then Arthur Holmwood"
 		}
 	],
@@ -164,7 +224,13 @@
 		{
 			"type": "multiple choice",
 			"question": "What did Mr. Swales claim really happened to George Canon, whose tombstone says he fell from the rocks at Kettleness?",
-			"options": ["He shot himself with a musket to spite his mother", "He fell drunk from the cliffs after a night at the pub", "He was murdered by a rival over a fishing dispute", "He drowned after his boat capsized near the harbour"],
+			"options":
+			[
+				"He fell drunk from the cliffs after a night at the pub",
+				"He drowned after his boat capsized near the harbour",
+				"He was murdered by a rival over a fishing dispute",
+				"He shot himself with a musket to spite his mother"
+			],
 			"answer": "He shot himself with a musket to spite his mother"
 		},
 		{
@@ -175,7 +241,13 @@
 		{
 			"type": "multiple choice",
 			"question": "When Dr. Seward sedated Renfield and examined his pocket-book, what did he find inside it?",
-			"options": ["Masses of figures, single numbers added up in batches", "Sketches of flies, spiders, and birds he had caught", "Lists of names and dates copied from asylum records", "Letters addressed to an unknown person outside the asylum"],
+			"options":
+			[
+				"Masses of figures, single numbers added up in batches",
+				"Lists of names and dates copied from asylum records",
+				"Sketches of flies, spiders, and birds he had caught",
+				"Letters addressed to an unknown person outside the asylum"
+			],
 			"answer": "Masses of figures, single numbers added up in batches"
 		}
 	],
@@ -194,7 +266,13 @@
 		{
 			"type": "multiple choice",
 			"question": "According to the ship's log, which crew member was the first to go missing during the Demeter's voyage?",
-			"options": ["Petrofsky", "Olgaren", "Abramoff", "Romanov"],
+			"options":
+			[
+				"Olgaren",
+				"Abramoff",
+				"Romanov",
+				"Petrofsky"
+			],
 			"answer": "Petrofsky"
 		},
 		{
@@ -205,7 +283,13 @@
 		{
 			"type": "multiple choice",
 			"question": "Where exactly did the Demeter run aground when it crashed into the Whitby harbour?",
-			"options": ["Tate Hill Pier", "The East Lighthouse", "The harbour mouth between the piers", "The foot of the West Cliff"],
+			"options":
+			[
+				"The East Lighthouse",
+				"Tate Hill Pier",
+				"The foot of the West Cliff",
+				"The harbour mouth between the piers"
+			],
 			"answer": "Tate Hill Pier"
 		}
 	],
@@ -214,7 +298,13 @@
 		{
 			"type": "multiple choice",
 			"question": "When Mina searched Lucy's room and found her gone, what told her that Lucy had gone outside in only her nightdress rather than somewhere inside the house?",
-			"options": ["Both her dressing-gown and dress were still in the room", "The front door was standing wide open", "Lucy's outdoor shoes were missing from the hall", "Mrs. Westenra's light was still on down the corridor"],
+			"options":
+			[
+				"Mrs. Westenra's light was still on down the corridor",
+				"Lucy's outdoor shoes were missing from the hall",
+				"The front door was standing wide open",
+				"Both her dressing-gown and dress were still in the room"
+			],
 			"answer": "Both her dressing-gown and dress were still in the room"
 		},
 		{
@@ -230,7 +320,13 @@
 		{
 			"type": "multiple choice",
 			"question": "When Renfield escaped from the asylum, where did Dr. Seward find him and what was he doing?",
-			"options": ["Pressed against the chapel door at Carfax, talking to 'the Master'", "Hiding in the belt of trees at the edge of the asylum grounds", "Standing at the gate of Carfax, trying to force it open", "Crouched beneath a window of the Carfax house, watching inside"],
+			"options":
+			[
+				"Crouched beneath a window of the Carfax house, watching inside",
+				"Pressed against the chapel door at Carfax, talking to 'the Master'",
+				"Hiding in the belt of trees at the edge of the asylum grounds",
+				"Standing at the gate of Carfax, trying to force it open"
+			],
 			"answer": "Pressed against the chapel door at Carfax, talking to 'the Master'"
 		},
 		{
@@ -244,7 +340,13 @@
 		{
 			"type": "multiple choice",
 			"question": "Which two stops did Mina travel through on her journey from Whitby to Buda-Pesth to reach Jonathan?",
-			"options": ["Hull and Hamburg", "Dover and Paris", "Calais and Vienna", "Liverpool and Munich"],
+			"options":
+			[
+				"Hull and Hamburg",
+				"Calais and Vienna",
+				"Dover and Paris",
+				"Liverpool and Munich"
+			],
 			"answer": "Hull and Hamburg"
 		},
 		{
@@ -260,7 +362,13 @@
 		{
 			"type": "multiple choice",
 			"question": "When Seward deliberately left Renfield's cage open on August 23rd to observe his behaviour, what did Renfield do?",
-			"options": ["He stayed put and did not leave when he found it open", "He ran straight to Carfax and had to be dragged back", "He escaped but returned of his own accord within minutes", "He climbed to the asylum roof and watched a bat fly west"],
+			"options":
+			[
+				"He climbed to the asylum roof and watched a bat fly west",
+				"He escaped but returned of his own accord within minutes",
+				"He ran straight to Carfax and had to be dragged back",
+				"He stayed put and did not leave when he found it open"
+			],
 			"answer": "He stayed put and did not leave when he found it open"
 		},
 		{
@@ -279,13 +387,25 @@
 		{
 			"type": "multiple choice",
 			"question": "When Arthur arrived unexpectedly at Hillingham while Van Helsing was preparing the first transfusion, what did Van Helsing ask him to do?",
-			"options": ["Donate his blood directly for the transfusion", "Fetch a second doctor from the nearest town", "Wait outside and keep Mrs. Westenra from being alarmed", "Return to London and wire for additional medicines"],
+			"options":
+			[
+				"Donate his blood directly for the transfusion",
+				"Fetch a second doctor from the nearest town",
+				"Return to London and wire for additional medicines",
+				"Wait outside and keep Mrs. Westenra from being alarmed"
+			],
 			"answer": "Donate his blood directly for the transfusion"
 		},
 		{
 			"type": "multiple choice",
 			"question": "When Van Helsing noticed the mark on Lucy's throat during the first transfusion, what was concealing it?",
-			"options": ["A narrow black velvet band buckled with a diamond buckle", "A white silk scarf tied loosely around her neck", "A bandage applied during an earlier medical examination", "The collar of her nightdress, pinned close at the throat"],
+			"options":
+			[
+				"A narrow black velvet band buckled with a diamond buckle",
+				"The collar of her nightdress, pinned close at the throat",
+				"A white silk scarf tied loosely around her neck",
+				"A bandage applied during an earlier medical examination"
+			],
 			"answer": "A narrow black velvet band buckled with a diamond buckle"
 		},
 		{
@@ -304,7 +424,13 @@
 		{
 			"type": "multiple choice",
 			"question": "What did Mrs. Westenra do during the night of September 12th that caused Van Helsing's face to go ashen when he heard about it?",
-			"options": ["She removed all the garlic flowers and opened Lucy's window", "She woke Lucy by entering the room to check on her", "She found Lucy sleepwalking and called the servants in", "She removed the silk handkerchief Van Helsing had tied at Lucy's throat"],
+			"options":
+			[
+				"She woke Lucy by entering the room to check on her",
+				"She removed all the garlic flowers and opened Lucy's window",
+				"She found Lucy sleepwalking and called the servants in",
+				"She removed the silk handkerchief Van Helsing had tied at Lucy's throat"
+			],
 			"answer": "She removed all the garlic flowers and opened Lucy's window"
 		},
 		{
@@ -325,7 +451,13 @@
 		{
 			"type": "multiple choice",
 			"question": "In Lucy's memorandum describing the night of September 17th, what happened to Mrs. Westenra when the wolf's head crashed through the bedroom window?",
-			"options": ["She clutched Lucy's garlic wreath, tore it off, then collapsed and died", "She fainted and fell back silently onto the bed", "She ran screaming from the room to fetch the servants", "She threw herself at the window to drive the wolf away"],
+			"options":
+			[
+				"She threw herself at the window to drive the wolf away",
+				"She clutched Lucy's garlic wreath, tore it off, then collapsed and died",
+				"She ran screaming from the room to fetch the servants",
+				"She fainted and fell back silently onto the bed"
+			],
 			"answer": "She clutched Lucy's garlic wreath, tore it off, then collapsed and died"
 		}
 	],
@@ -339,7 +471,13 @@
 		{
 			"type": "multiple choice",
 			"question": "Who provided the blood for the fourth transfusion given to Lucy at Hillingham?",
-			"options": ["Quincey Morris", "Arthur Holmwood", "Dr. Van Helsing", "Dr. Patrick Hennessey"],
+			"options":
+			[
+				"Dr. Patrick Hennessey",
+				"Dr. Van Helsing",
+				"Arthur Holmwood",
+				"Quincey Morris"
+			],
 			"answer": "Quincey Morris"
 		},
 		{
@@ -355,7 +493,13 @@
 		{
 			"type": "multiple choice",
 			"question": "When Seward said 'It is the end!' after Lucy died, what were Van Helsing's final words in the chapter?",
-			"options": ["\"Not so; alas! not so. It is only the beginning!\"", "\"She is at peace; we have done all we could for her.\"", "\"The wounds have gone; there is still much mystery here.\"", "\"We must not grieve; her suffering is over at last.\""],
+			"options":
+			[
+				"\"We must not grieve; her suffering is over at last.\"",
+				"\"Not so; alas! not so. It is only the beginning!\"",
+				"\"The wounds have gone; there is still much mystery here.\"",
+				"\"She is at peace; we have done all we could for her.\""
+			],
 			"answer": "\"Not so; alas! not so. It is only the beginning!\""
 		}
 	],
@@ -369,7 +513,13 @@
 		{
 			"type": "multiple choice",
 			"question": "What did Van Helsing tell Seward he intended to do to Lucy's body before the coffin was sealed for burial?",
-			"options": ["Cut off her head and take out her heart", "Perform a complete post-mortem examination", "Apply holy water and garlic directly to the wounds on her throat", "Remove a sample of blood for further analysis"],
+			"options":
+			[
+				"Cut off her head and take out her heart",
+				"Apply holy water and garlic directly to the wounds on her throat",
+				"Perform a complete post-mortem examination",
+				"Remove a sample of blood for further analysis"
+			],
 			"answer": "Cut off her head and take out her heart"
 		},
 		{
@@ -385,7 +535,13 @@
 		{
 			"type": "multiple choice",
 			"question": "When Jonathan spotted the tall thin man with a beaky nose and pointed beard on Piccadilly and Mina asked who he was, what did Jonathan say?",
-			"options": ["\"It is the man himself!\"", "\"It is the Count—I would know him anywhere!\"", "\"My God, he has followed us to London!\"", "\"Do you not see the evil in his face?\""],
+			"options":
+			[
+				"\"It is the Count—I would know him anywhere!\"",
+				"\"My God, he has followed us to London!\"",
+				"\"Do you not see the evil in his face?\"",
+				"\"It is the man himself!\""
+			],
 			"answer": "\"It is the man himself!\""
 		}
 	],
@@ -394,7 +550,13 @@
 		{
 			"type": "multiple choice",
 			"question": "When Mina first handed Van Helsing her diary during his visit, why could he not read it?",
-			"options": ["It was written in shorthand", "It was written in Hungarian, which she had learned while visiting Jonathan", "Her handwriting was too small and cramped to decipher", "It was encrypted using a personal cipher she had devised"],
+			"options":
+			[
+				"It was written in shorthand",
+				"Her handwriting was too small and cramped to decipher",
+				"It was encrypted using a personal cipher she had devised",
+				"It was written in Hungarian, which she had learned while visiting Jonathan"
+			],
 			"answer": "It was written in shorthand"
 		},
 		{
@@ -405,7 +567,13 @@
 		{
 			"type": "multiple choice",
 			"question": "When Van Helsing showed Seward the Westminster Gazette and pointed out the paragraph about the Hampstead children, what was Seward's initial conclusion about their throat wounds?",
-			"options": ["That whatever had injured Lucy had injured them too", "That Bersicker or another escaped animal was responsible", "That the children had imagined the wounds while playing the 'bloofer lady' game", "That a human criminal was preying on the children of Hampstead Heath"],
+			"options":
+			[
+				"That a human criminal was preying on the children of Hampstead Heath",
+				"That whatever had injured Lucy had injured them too",
+				"That the children had imagined the wounds while playing the 'bloofer lady' game",
+				"That Bersicker or another escaped animal was responsible"
+			],
 			"answer": "That whatever had injured Lucy had injured them too"
 		},
 		{
@@ -424,7 +592,13 @@
 		{
 			"type": "multiple choice",
 			"question": "Where did Van Helsing and Seward dine before making their way to the churchyard on the first night?",
-			"options": ["Jack Straw's Castle", "The Spaniards Inn", "The North Hospital canteen", "A chophouse near Piccadilly"],
+			"options":
+			[
+				"A chophouse near Piccadilly",
+				"Jack Straw's Castle",
+				"The North Hospital canteen",
+				"The Spaniards Inn"
+			],
 			"answer": "Jack Straw's Castle"
 		},
 		{
@@ -440,7 +614,13 @@
 		{
 			"type": "multiple choice",
 			"question": "When Van Helsing and Seward examined the child's throat by matchlight after finding it in the churchyard, what did they discover?",
-			"options": ["It had no scratch or scar of any kind", "It bore two small puncture wounds identical to those on Lucy's throat", "It had a single bite mark that had not yet begun to bleed", "The wounds had already begun to heal over since the previous night"],
+			"options":
+			[
+				"It bore two small puncture wounds identical to those on Lucy's throat",
+				"The wounds had already begun to heal over since the previous night",
+				"It had a single bite mark that had not yet begun to bleed",
+				"It had no scratch or scar of any kind"
+			],
 			"answer": "It had no scratch or scar of any kind"
 		},
 		{
@@ -459,13 +639,25 @@
 		{
 			"type": "multiple choice",
 			"question": "What did Van Helsing use to seal the cracks of the tomb door so that the Un-Dead could not enter?",
-			"options": ["Crumbled pieces of the Host mixed into putty", "Garlic paste pressed into the crevices", "Holy water poured into the gaps and left to set", "Strips of cloth soaked in garlic oil and wedged in tightly"],
+			"options":
+			[
+				"Crumbled pieces of the Host mixed into putty",
+				"Holy water poured into the gaps and left to set",
+				"Garlic paste pressed into the crevices",
+				"Strips of cloth soaked in garlic oil and wedged in tightly"
+			],
 			"answer": "Crumbled pieces of the Host mixed into putty"
 		},
 		{
 			"type": "multiple choice",
 			"question": "When the Un-Dead Lucy saw the men waiting by the tomb, what did she do with the child she had been carrying?",
-			"options": ["She flung it to the ground callously and advanced toward Arthur", "She set it gently against a headstone and hissed at the men", "She pressed it harder to her breast and retreated into the darkness", "She dropped it and fled back the way she had come"],
+			"options":
+			[
+				"She flung it to the ground callously and advanced toward Arthur",
+				"She pressed it harder to her breast and retreated into the darkness",
+				"She dropped it and fled back the way she had come",
+				"She set it gently against a headstone and hissed at the men"
+			],
 			"answer": "She flung it to the ground callously and advanced toward Arthur"
 		},
 		{
@@ -494,7 +686,13 @@
 		{
 			"type": "multiple choice",
 			"question": "When Jonathan traced the Count's boxes at Whitby, how were they described on the invoice?",
-			"options": ["Fifty cases of common earth, to be used for experimental purposes", "Fifty wooden crates of soil, consigned for scientific research", "Fifty boxes of Transylvanian loam, destination unknown", "Fifty sealed crates of foreign earth, to be delivered to Carfax"],
+			"options":
+			[
+				"Fifty cases of common earth, to be used for experimental purposes",
+				"Fifty boxes of Transylvanian loam, destination unknown",
+				"Fifty wooden crates of soil, consigned for scientific research",
+				"Fifty sealed crates of foreign earth, to be delivered to Carfax"
+			],
 			"answer": "Fifty cases of common earth, to be used for experimental purposes"
 		},
 		{
@@ -505,7 +703,13 @@
 		{
 			"type": "multiple choice",
 			"question": "Which carrier company, according to Jonathan's investigation, had delivered the Count's boxes from King's Cross to Carfax?",
-			"options": ["Carter Paterson", "Billington & Sons", "The Whitby Haulage Company", "Tookey & Marsh of London"],
+			"options":
+			[
+				"Billington & Sons",
+				"Tookey & Marsh of London",
+				"Carter Paterson",
+				"The Whitby Haulage Company"
+			],
 			"answer": "Carter Paterson"
 		}
 	],
@@ -514,7 +718,13 @@
 		{
 			"type": "multiple choice",
 			"question": "Before Mina was allowed into Renfield's room, what did he do to tidy up?",
-			"options": ["He swallowed all the flies and spiders in his boxes", "He stacked his collection boxes neatly against the wall", "He hid his jars and specimens under the bed", "He straightened his clothes and smoothed his hair"],
+			"options":
+			[
+				"He stacked his collection boxes neatly against the wall",
+				"He hid his jars and specimens under the bed",
+				"He straightened his clothes and smoothed his hair",
+				"He swallowed all the flies and spiders in his boxes"
+			],
 			"answer": "He swallowed all the flies and spiders in his boxes"
 		},
 		{
@@ -530,7 +740,13 @@
 		{
 			"type": "multiple choice",
 			"question": "What interrupted Van Helsing's council and shattered the window-glass during the meeting?",
-			"options": ["A pistol shot fired by Quincey Morris at a bat on the window-sill", "A large stone thrown from the grounds outside the house", "A sudden gust of wind that drove a heavy branch through the pane", "A ricochet caused by Van Helsing's crucifix falling against the glass"],
+			"options":
+			[
+				"A large stone thrown from the grounds outside the house",
+				"A sudden gust of wind that drove a heavy branch through the pane",
+				"A ricochet caused by Van Helsing's crucifix falling against the glass",
+				"A pistol shot fired by Quincey Morris at a bat on the window-sill"
+			],
 			"answer": "A pistol shot fired by Quincey Morris at a bat on the window-sill"
 		},
 		{
@@ -544,7 +760,13 @@
 		{
 			"type": "multiple choice",
 			"question": "When the group counted the earth-boxes in the Carfax chapel, how many of the original fifty remained?",
-			"options": ["Twenty-nine", "Thirty-four", "Forty-one", "Twenty-one"],
+			"options":
+			[
+				"Twenty-nine",
+				"Forty-one",
+				"Thirty-four",
+				"Twenty-one"
+			],
 			"answer": "Twenty-nine"
 		},
 		{
@@ -565,7 +787,13 @@
 		{
 			"type": "multiple choice",
 			"question": "In her journal, what past decision did Mina blame herself for, believing it had ultimately led to Lucy's destruction?",
-			"options": ["Going to Whitby, which led to Lucy's sleepwalking there at night", "Failing to warn Mrs. Westenra about Lucy's sleepwalking sooner", "Leaving Whitby before Lucy's condition had properly improved", "Introducing Lucy to Van Helsing too late to save her"],
+			"options":
+			[
+				"Failing to warn Mrs. Westenra about Lucy's sleepwalking sooner",
+				"Leaving Whitby before Lucy's condition had properly improved",
+				"Going to Whitby, which led to Lucy's sleepwalking there at night",
+				"Introducing Lucy to Van Helsing too late to save her"
+			],
 			"answer": "Going to Whitby, which led to Lucy's sleepwalking there at night"
 		}
 	],
@@ -579,7 +807,13 @@
 		{
 			"type": "multiple choice",
 			"question": "According to Sam Bloxam, how many boxes did he move from Carfax to the Piccadilly house, and in how many trips?",
-			"options": ["Nine boxes in two trips—five in the first, four in the second", "Twelve boxes in three trips—four in each", "Six boxes in a single trip on the same day", "Nine boxes in three trips—three in each load"],
+			"options":
+			[
+				"Twelve boxes in three trips—four in each",
+				"Six boxes in a single trip on the same day",
+				"Nine boxes in three trips—three in each load",
+				"Nine boxes in two trips—five in the first, four in the second"
+			],
 			"answer": "Nine boxes in two trips—five in the first, four in the second"
 		},
 		{
@@ -590,7 +824,13 @@
 		{
 			"type": "multiple choice",
 			"question": "When Sam Bloxam described the old man who helped load the boxes, which detail particularly thrilled Jonathan?",
-			"options": ["He said the man was so thin 'you would think he couldn't throw a shadder'", "He said the man had eyes that 'burned like fire in the dark'", "He said the man lifted the boxes 'as if they was filled with straw'", "He said the man 'never spoke once the whole time, not a single word'"],
+			"options":
+			[
+				"He said the man lifted the boxes 'as if they was filled with straw'",
+				"He said the man was so thin 'you would think he couldn't throw a shadder'",
+				"He said the man had eyes that 'burned like fire in the dark'",
+				"He said the man 'never spoke once the whole time, not a single word'"
+			],
 			"answer": "He said the man was so thin 'you would think he couldn't throw a shadder'"
 		},
 		{
@@ -609,7 +849,13 @@
 		{
 			"type": "multiple choice",
 			"question": "According to Renfield's dying account, what were the first things the Count sent as proof of his promises?",
-			"options": ["Great fat flies with steel and sapphire wings, and moths with skull and cross-bones on their backs", "Hundreds of rats with blazing red eyes moving like a flame across the grass", "A pack of wolves howling beyond the dark trees in the Count's house", "A dark cloud of bats that filled the room and circled above his bed"],
+			"options":
+			[
+				"Great fat flies with steel and sapphire wings, and moths with skull and cross-bones on their backs",
+				"Hundreds of rats with blazing red eyes moving like a flame across the grass",
+				"A pack of wolves howling beyond the dark trees in the Count's house",
+				"A dark cloud of bats that filled the room and circled above his bed"
+			],
 			"answer": "Great fat flies with steel and sapphire wings, and moths with skull and cross-bones on their backs"
 		},
 		{
@@ -620,7 +866,13 @@
 		{
 			"type": "multiple choice",
 			"question": "When the group burst into the Harkers' room, what was the Count forcing Mina to do?",
-			"options": ["Drink blood from an open wound in his breast", "Look into his eyes while he held her wrists pinned above her head", "Recite his name while he gripped her by the throat", "Drink from a goblet of blood he had placed to her lips"],
+			"options":
+			[
+				"Drink from a goblet of blood he had placed to her lips",
+				"Drink blood from an open wound in his breast",
+				"Look into his eyes while he held her wrists pinned above her head",
+				"Recite his name while he gripped her by the throat"
+			],
 			"answer": "Drink blood from an open wound in his breast"
 		},
 		{
@@ -634,7 +886,13 @@
 		{
 			"type": "multiple choice",
 			"question": "According to Van Helsing, what key advantage did the group have while the sun was up on October 3rd?",
-			"options": ["The Count could not change form or disappear and had to use doors like a mortal", "The Count would be deep in sleep and unable to sense them approaching his lairs", "The Sacred Wafer in his coffins would weaken him throughout the daylight hours", "The rats and wolves under his command could not be summoned during daylight"],
+			"options":
+			[
+				"The rats and wolves under his command could not be summoned during daylight",
+				"The Count would be deep in sleep and unable to sense them approaching his lairs",
+				"The Sacred Wafer in his coffins would weaken him throughout the daylight hours",
+				"The Count could not change form or disappear and had to use doors like a mortal"
+			],
 			"answer": "The Count could not change form or disappear and had to use doors like a mortal"
 		},
 		{
@@ -645,7 +903,13 @@
 		{
 			"type": "multiple choice",
 			"question": "In the Piccadilly dining room, how many of the expected nine boxes did the group find?",
-			"options": ["Eight", "Seven", "Nine", "Six"],
+			"options":
+			[
+				"Eight",
+				"Six",
+				"Nine",
+				"Seven"
+			],
 			"answer": "Eight"
 		},
 		{
@@ -669,7 +933,13 @@
 		{
 			"type": "multiple choice",
 			"question": "When Jonathan's knife cut through the Count's coat, what tumbled out of it?",
-			"options": ["Bank-notes and a stream of gold coins", "A handful of soil from one of his earth-boxes", "A bundle of keys and a roll of title deeds", "A silver crucifix that burned his hand as he grasped it"],
+			"options":
+			[
+				"A silver crucifix that burned his hand as he grasped it",
+				"A bundle of keys and a roll of title deeds",
+				"Bank-notes and a stream of gold coins",
+				"A handful of soil from one of his earth-boxes"
+			],
 			"answer": "Bank-notes and a stream of gold coins"
 		},
 		{
@@ -680,7 +950,13 @@
 		{
 			"type": "multiple choice",
 			"question": "When Van Helsing hypnotised Mina before dawn, what did she report hearing that revealed the Count was on a ship?",
-			"options": ["The lapping of water, men stamping overhead, and the creaking of a capstan chain", "The howling of wind in rigging and the tolling of a harbour bell", "The cry of seagulls and the distant sound of a foghorn", "The splash of oars and men calling to one another across the water"],
+			"options":
+			[
+				"The howling of wind in rigging and the tolling of a harbour bell",
+				"The splash of oars and men calling to one another across the water",
+				"The lapping of water, men stamping overhead, and the creaking of a capstan chain",
+				"The cry of seagulls and the distant sound of a foghorn"
+			],
 			"answer": "The lapping of water, men stamping overhead, and the creaking of a capstan chain"
 		},
 		{
@@ -694,7 +970,13 @@
 		{
 			"type": "multiple choice",
 			"question": "What was the name of the ship the Count had boarded to return to Transylvania?",
-			"options": ["The Czarina Catherine", "The Demeter", "The Voivode", "The Black Sea Star"],
+			"options":
+			[
+				"The Demeter",
+				"The Black Sea Star",
+				"The Czarina Catherine",
+				"The Voivode"
+			],
 			"answer": "The Czarina Catherine"
 		},
 		{
@@ -705,7 +987,13 @@
 		{
 			"type": "multiple choice",
 			"question": "What additional weapon did Quincey Morris suggest the group carry for the journey, citing wolf country as the reason?",
-			"options": ["Winchesters", "Revolvers", "Shotguns", "Martini-Henry repeating rifles"],
+			"options":
+			[
+				"Revolvers",
+				"Martini-Henry repeating rifles",
+				"Shotguns",
+				"Winchesters"
+			],
 			"answer": "Winchesters"
 		},
 		{
@@ -729,7 +1017,13 @@
 		{
 			"type": "multiple choice",
 			"question": "Who was the Lloyd's agent that Lord Godalming used to track the reported positions of the Czarina Catherine during the group's wait at Varna?",
-			"options": ["Rufus Smith", "Immanuel Hildesheim", "Captain Donelson", "Petrof Skinsky"],
+			"options":
+			[
+				"Captain Donelson",
+				"Petrof Skinsky",
+				"Rufus Smith",
+				"Immanuel Hildesheim"
+			],
 			"answer": "Rufus Smith"
 		},
 		{
@@ -745,7 +1039,13 @@
 		{
 			"type": "multiple choice",
 			"question": "How did Van Helsing explain why the Count had diverted the Czarina Catherine to Galatz instead of Varna?",
-			"options": ["He had used Mina's trance to learn they were waiting at Varna and changed his route to evade them", "He had bribed Captain Donelson to sail for Galatz under cover of fog", "He had sent coded letters to his Galatz agents before leaving England", "He had compelled Mina during a trance to give the group false information about the ship's course"],
+			"options":
+			[
+				"He had bribed Captain Donelson to sail for Galatz under cover of fog",
+				"He had used Mina's trance to learn they were waiting at Varna and changed his route to evade them",
+				"He had sent coded letters to his Galatz agents before leaving England",
+				"He had compelled Mina during a trance to give the group false information about the ship's course"
+			],
 			"answer": "He had used Mina's trance to learn they were waiting at Varna and changed his route to evade them"
 		}
 	],
@@ -754,7 +1054,13 @@
 		{
 			"type": "multiple choice",
 			"question": "Who signed the receipt for the Count's box when it was collected from the Czarina Catherine at Galatz?",
-			"options": ["Immanuel Hildesheim", "Petrof Skinsky", "Captain Donelson", "Mr. de Ville"],
+			"options":
+			[
+				"Captain Donelson",
+				"Immanuel Hildesheim",
+				"Petrof Skinsky",
+				"Mr. de Ville"
+			],
 			"answer": "Immanuel Hildesheim"
 		},
 		{
@@ -770,7 +1076,13 @@
 		{
 			"type": "multiple choice",
 			"question": "What plan did Van Helsing propose for himself and Mina while the other men pursued the Count by steam launch and on horseback?",
-			"options": ["To travel overland via Veresti and the Borgo Pass directly to Castle Dracula", "To remain in Galatz and coordinate the pursuit by telegraph with authorities along the river", "To hire a faster vessel and race ahead of the Count's boat up the Sereth", "To follow Seward and Morris on horseback along the right bank of the river"],
+			"options":
+			[
+				"To follow Seward and Morris on horseback along the right bank of the river",
+				"To hire a faster vessel and race ahead of the Count's boat up the Sereth",
+				"To travel overland via Veresti and the Borgo Pass directly to Castle Dracula",
+				"To remain in Galatz and coordinate the pursuit by telegraph with authorities along the river"
+			],
 			"answer": "To travel overland via Veresti and the Borgo Pass directly to Castle Dracula"
 		},
 		{
@@ -789,7 +1101,13 @@
 		{
 			"type": "multiple choice",
 			"question": "What had happened to all the horses Van Helsing had tethered outside the protective ring by the morning of November 5?",
-			"options": ["They were all dead", "They had broken their tethers and fled into the mountains", "They had been stolen by the Szgany during the night", "They were huddled together, exhausted but alive"],
+			"options":
+			[
+				"They had broken their tethers and fled into the mountains",
+				"They were all dead",
+				"They had been stolen by the Szgany during the night",
+				"They were huddled together, exhausted but alive"
+			],
 			"answer": "They were all dead"
 		},
 		{
@@ -805,7 +1123,13 @@
 		{
 			"type": "multiple choice",
 			"question": "In the epilogue written seven years after the events, what name was given to Jonathan and Mina's son?",
-			"options": ["Quincey", "Abraham", "Arthur", "John"],
+			"options":
+			[
+				"Abraham",
+				"John",
+				"Quincey",
+				"Arthur"
+			],
 			"answer": "Quincey"
 		}
 	]
