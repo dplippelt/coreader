@@ -98,7 +98,7 @@ function Qs( { questions, controls } : QsProps )
 				continue;
 			}
 
-			if ( response.toLowerCase() !== questions[i].answer.toLowerCase() )
+			if ( !response.toLowerCase().includes(questions[i].answer.toLowerCase()) )
 			{
 				fb.push(false);
 				continue;
