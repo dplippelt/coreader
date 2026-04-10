@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { Chapter as Chap } from './books/dracula.ts'
+import { musicUrls } from './books/dracula.ts'
 import { getBook, Screens } from './util/utils.ts'
 import Page from './elements/Page.tsx'
-import { useSettings } from './elements/SettingsContext.tsx';
+import { useSettings } from './elements/SettingsContext.tsx'
+import useMusic from './hooks/useMusic.ts'
 
 export type Screen = typeof Screens[keyof typeof Screens];
 
@@ -18,6 +20,10 @@ export type Controls =
 	goToBook: ( book: string ) => void,
 	questions: () => void,
 	goToPrevScreen: () => void,
+	play: ( url: string ) => Promise<void>,
+	pause: () => void,
+	resume: () => void,
+	stop: () => void,
 }
 
 export type AppStates =
@@ -32,6 +38,7 @@ export type AppStates =
 export default function App()
 {
 	const settings = useSettings();
+	const { preload, play, pause, resume, stop } = useMusic();
 	const [screen, setScreen] = useState<Screen>(Screens.startMenu);
 	const [prevScreens, setPrevScreens] = useState<Screen[]>([]);
 	const [currBook, setCurrBook] = useState<string | null>(null);
@@ -59,6 +66,10 @@ export default function App()
 		return () => window.removeEventListener('resize', updateNavWidth);
 	}, [currChap]);
 
+	useEffect(() =>
+	{
+		preload(musicUrls);
+	}, [])
 
 	function handleNextChapter()
 	{
@@ -154,6 +165,10 @@ export default function App()
 		goToChap: goToChapter,
 		questions: goToQuestions,
 		goToPrevScreen: goToPrevScreen,
+		play: play,
+		pause: pause,
+		resume: resume,
+		stop: stop,
 	}
 
 	const states: AppStates =

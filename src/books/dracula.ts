@@ -15855,6 +15855,13 @@ subscribe to our email newsletter to hear about new eBooks.
 
 `
 
+export const musicUrls =
+[
+	"/music/Venice 1348.mp3",
+	"/music/Prague 1348.mp3",
+	"/music/The Reapers Cello.mp3",
+]
+
 export type Question =
 {
 	chapter: number,
@@ -15870,6 +15877,7 @@ export type Chapter =
 	title: string,
 	content: string,
 	questions: Question[],
+	music: string,
 }
 
 function getTitle( start_chap_idx: number ): string
@@ -15911,12 +15919,25 @@ function getQuestions( chap_num: number ): Question[]
 	return questions;
 }
 
+function getMusicTrack( chap_num: number ) : string
+{
+	switch (chap_num)
+	{
+		case 1:
+			return musicUrls[0];
+		case 2:
+			return musicUrls[1];
+		default:
+			return musicUrls[0];
+	}
+}
+
 export default function getDracula(): Array<Chapter>
 {
 	const chapters = [...rawBook.matchAll(/\nCHAPTER [IVXLC]+\n/g)];
 	const book: Array<Chapter> = [];
 
-	book.push({ num: 0, title: "Dracula", content: "", questions: [] });
+	book.push({ num: 0, title: "Dracula", content: "", questions: [], music: "" });
 
 	for ( let i = 0; i < chapters.length; i++ )
 	{
@@ -15925,9 +15946,10 @@ export default function getDracula(): Array<Chapter>
 		const end_chap_idx = i + 1 < chapters.length ? chapters[i + 1].index : rawBook.indexOf("THE END") + 7;
 		const chap_title = getTitle(start_chap_idx);
 		const chap_content = getContent(start_chap_idx, end_chap_idx);
-		const questions = getQuestions(chap_num)
+		const questions = getQuestions(chap_num);
+		const music = getMusicTrack(chap_num);
 
-		book.push({ num: chap_num, title: chap_title, content: chap_content, questions: questions });
+		book.push({ num: chap_num, title: chap_title, content: chap_content, questions: questions, music: music });
 	}
 
 	return book;
