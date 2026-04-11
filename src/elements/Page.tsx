@@ -24,20 +24,23 @@ function playMusic( chapter: Chap, states: AppStates, controls: Controls )
 
 	useEffect(() =>
 	{
-		if ( states.screen === Screens.reader && prevMusicRef.current !== chapter.music )
+		const currScreen = states.screen;
+		const prevScreen = states.prevScreens[states.prevScreens.length - 1];
+
+		if ( currScreen === Screens.reader && prevMusicRef.current !== chapter.music )
 		{
 			controls.stop();
 			prevMusicRef.current = null;
-			if ( states.screen === Screens.reader && chapter.music )
+			if ( currScreen === Screens.reader && chapter.music )
 			{
 				controls.play(chapter.music);
 				prevMusicRef.current = chapter.music;
 			}
 		}
-		else if ( states.screen !== Screens.reader )
-			controls.pause();
-		else
+		else if ( currScreen === Screens.reader )
 			controls.resume();
+		else if ( prevScreen === Screens.reader )
+			controls.pause();
 	}, [chapter?.num, states.screen]);
 }
 
