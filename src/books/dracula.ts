@@ -15855,13 +15855,6 @@ subscribe to our email newsletter to hear about new eBooks.
 
 `
 
-export const musicUrls =
-[
-	"/music/Venice 1348.mp3",
-	"/music/Prague 1348.mp3",
-	"/music/The Reapers Cello.mp3",
-]
-
 export type Question =
 {
 	chapter: number,
@@ -15879,6 +15872,61 @@ export type Chapter =
 	questions: Question[],
 	music: string,
 }
+
+export type MusicTrack =
+{
+	url: string,
+	title: string,
+	artist: string,
+}
+
+export const draculaMusic: Record<string, MusicTrack> =
+{
+	chapter_1:
+	{
+		url: "/music/chapter_1.mp3",
+		title: "Quiet Winter in an Old European Riverside Village P1",
+		artist: "Nostalgic Dark Academia",
+	},
+	chapter_2:
+	{
+		url: "/music/chapter_2.mp3",
+		title: "Dark and Mysterious Ambient Music",
+		artist: "Arondight Studios",
+	},
+	chapter_3:
+	{
+		url: "/music/chapter_3.mp3",
+		title: "The Fallen Vampire Prince",
+		artist: "Mortis Academia",
+	},
+	chapter_4:
+	{
+		url: "/music/chapter_4.mp3",
+		title: "Dark Ambient Horror Music To Unlock Your Deepest Nightmares",
+		artist: "Arondight Studios",
+	},
+	chapter_5:
+	{
+		url: "/music/chapter_1.mp3",
+		title: "Quiet Winter in an Old European Riverside Village P1",
+		artist: "Nostalgic Dark Academia",
+	},
+	chapter_6:
+	{
+		url: "/music/chapter_1.mp3",
+		title: "Quiet Winter in an Old European Riverside Village P1",
+		artist: "Nostalgic Dark Academia",
+	},
+	chapter_7:
+	{
+		url: "/music/chapter_2.mp3",
+		title: "Dark and Mysterious Ambient Music",
+		artist: "Arondight Studios",
+	},
+}
+
+export const musicUrls = Object.values(draculaMusic).map(track => track.url);
 
 function getTitle( start_chap_idx: number ): string
 {
@@ -15921,15 +15969,9 @@ function getQuestions( chap_num: number ): Question[]
 
 function getMusicTrack( chap_num: number ) : string
 {
-	switch (chap_num)
-	{
-		case 1:
-			return musicUrls[0];
-		case 2:
-			return musicUrls[1];
-		default:
-			return musicUrls[0];
-	}
+	if ( draculaMusic[`chapter_${chap_num}`] )
+		return draculaMusic[`chapter_${chap_num}`].url;
+	return draculaMusic[`chapter_1`].url;
 }
 
 export default function getDracula(): Array<Chapter>
