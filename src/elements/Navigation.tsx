@@ -22,7 +22,7 @@ type InvNavProps =
 
 function getButtonText( currChap: number )
 {
-	return currChap === 1 ? "Title Screen" : "Prev Chapter";
+	return currChap === 1 ? "Title Page" : "Prev Chapter";
 }
 
 function Buttons( { states, controls } : ButtonsProps )

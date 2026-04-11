@@ -12,7 +12,7 @@ type ChapterSelectProps =
 function getText( chapNum: number, chapTitle: string): string
 {
 	if ( chapNum === 0 )
-		return `0. TITLE SCREEN`;
+		return `0. TITLE PAGE`;
 	return `${chapNum}. ${chapTitle}`;
 }
 
