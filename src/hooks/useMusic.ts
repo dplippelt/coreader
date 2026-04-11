@@ -27,9 +27,14 @@ export default function useMusic()
 		if ( ctxRef.current.state === "suspended" )
 			await ctxRef.current.resume();
 
+		// Pause and reset track that was previously playing
 		if ( audioRef.current )
+		{
+			audioRef.current.currentTime = 0;
 			audioRef.current.pause();
+		}
 
+		// If required audio element was not cached yet, create it and add it to the cache
 		if ( !audioCacheRef.current[url] )
 			audioCacheRef.current[url] = new Audio(url);
 
@@ -64,7 +69,6 @@ export default function useMusic()
 
 		const fadeOutDur = 2;
 
-		// gainRef.current.gain.cancelScheduledValues(ctxRef.current.currentTime);
 		gainRef.current.gain.setValueAtTime(gainRef.current.gain.value, ctxRef.current.currentTime);
 		gainRef.current.gain.linearRampToValueAtTime(0, ctxRef.current.currentTime + fadeOutDur);
 		suspendTimeOutIDRef.current = setTimeout(() => audioRef.current!.pause(), fadeOutDur * 1000);
