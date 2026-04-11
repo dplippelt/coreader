@@ -1,4 +1,5 @@
 import qs from './draculaQuestions.json'
+import music from './draculaMusic.json'
 
 const rawBook: string = `The Project Gutenberg eBook of Dracula
 
@@ -15880,53 +15881,7 @@ export type MusicTrack =
 	artist: string,
 }
 
-export const draculaMusic: Record<string, MusicTrack> =
-{
-	chapter_1:
-	{
-		url: "/music/chapter_1.mp3",
-		title: "Quiet Winter in an Old European Riverside Village P1",
-		artist: "Nostalgic Dark Academia",
-	},
-	chapter_2:
-	{
-		url: "/music/chapter_2.mp3",
-		title: "Dark and Mysterious Ambient Music",
-		artist: "Arondight Studios",
-	},
-	chapter_3:
-	{
-		url: "/music/chapter_3.mp3",
-		title: "The Fallen Vampire Prince",
-		artist: "Mortis Academia",
-	},
-	chapter_4:
-	{
-		url: "/music/chapter_4.mp3",
-		title: "Dark Ambient Horror Music To Unlock Your Deepest Nightmares",
-		artist: "Arondight Studios",
-	},
-	chapter_5:
-	{
-		url: "/music/chapter_1.mp3",
-		title: "Quiet Winter in an Old European Riverside Village P1",
-		artist: "Nostalgic Dark Academia",
-	},
-	chapter_6:
-	{
-		url: "/music/chapter_1.mp3",
-		title: "Quiet Winter in an Old European Riverside Village P1",
-		artist: "Nostalgic Dark Academia",
-	},
-	chapter_7:
-	{
-		url: "/music/chapter_2.mp3",
-		title: "Dark and Mysterious Ambient Music",
-		artist: "Arondight Studios",
-	},
-}
-
-export const musicUrls = Object.values(draculaMusic).map(track => track.url);
+export const musicUrls = Object.values(music).map(track => track.url);
 
 function getTitle( start_chap_idx: number ): string
 {
@@ -15969,9 +15924,11 @@ function getQuestions( chap_num: number ): Question[]
 
 function getMusicTrack( chap_num: number ) : string
 {
-	if ( draculaMusic[`chapter_${chap_num}`] )
-		return draculaMusic[`chapter_${chap_num}`].url;
-	return draculaMusic[`chapter_1`].url;
+	const key = `chapter_${chap_num}` as keyof typeof music;
+
+	if ( music[key] )
+		return music[key].url;
+	return music[`chapter_1`].url;
 }
 
 export default function getDracula(): Array<Chapter>
