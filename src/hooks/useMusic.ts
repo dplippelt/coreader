@@ -8,8 +8,9 @@ export default function useMusic()
 	const srcRef = useRef<MediaElementAudioSourceNode | null>(null);
 	const gainRef = useRef<GainNode | null>(null);
 	const audioCacheRef = useRef<Record<string, HTMLAudioElement>>({});
-	const suspendTimeOutIDRef = useRef<number | undefined>(undefined);
+	const pauseTimeOutIDRef = useRef<number | undefined>(undefined);
 	const stopTimeOutIDRef = useRef<number | undefined>(undefined);
+	const fadeOutEndTime = useRef<number>(0);
 	const settings = useSettings();
 
 	function preload( urls: string[] )
@@ -29,39 +30,46 @@ export default function useMusic()
 		if ( ctxRef.current.state === "suspended" )
 			await ctxRef.current.resume();
 
-		// Pause and reset track that was previously playing
-		if ( audioRef.current )
-		{
-			audioRef.current.currentTime = 0;
-			audioRef.current.pause();
-		}
-
 		// If required audio element was not cached yet, create it and add it to the cache
 		if ( !audioCacheRef.current[url] )
 			audioCacheRef.current[url] = new Audio(url);
 
-		audioRef.current = audioCacheRef.current[url];
-
-		if ( !srcRef.current || srcRef.current.mediaElement !== audioRef.current )
-		{
-			srcRef.current = ctxRef.current.createMediaElementSource(audioRef.current);
-			gainRef.current = ctxRef.current.createGain();
-
-			srcRef.current.connect(gainRef.current);
-			gainRef.current.connect(ctxRef.current.destination);
-		}
-
 		clearTimeout(stopTimeOutIDRef.current);
 		stopTimeOutIDRef.current = undefined;
-		clearTimeout(suspendTimeOutIDRef.current);
-		suspendTimeOutIDRef.current = undefined;
+		clearTimeout(pauseTimeOutIDRef.current);
+		pauseTimeOutIDRef.current = undefined;
 
-		gainRef.current!.gain.cancelScheduledValues(ctxRef.current.currentTime);
-		gainRef.current!.gain.setValueAtTime(0, ctxRef.current.currentTime);
-		gainRef.current!.gain.linearRampToValueAtTime(settings.volume, ctxRef.current.currentTime + 4);
+		const fadeInDur = 4;
+		const delay = Math.max(0, fadeOutEndTime.current - ctxRef.current.currentTime);
+		const startTime = ctxRef.current.currentTime + delay;
 
-		audioRef.current.loop = true;
-		audioRef.current.play();
+		setTimeout(async () => {
+
+			// Reset and pause track that was previously playing
+			if ( audioRef.current )
+			{
+				audioRef.current.currentTime = 0;
+				audioRef.current.pause();
+			}
+
+			audioRef.current = audioCacheRef.current[url];
+
+			if ( !srcRef.current || srcRef.current.mediaElement !== audioRef.current )
+			{
+				srcRef.current = ctxRef.current!.createMediaElementSource(audioRef.current);
+				gainRef.current = ctxRef.current!.createGain();
+
+				srcRef.current.connect(gainRef.current);
+				gainRef.current.connect(ctxRef.current!.destination);
+			}
+
+			gainRef.current!.gain.setValueAtTime(0, ctxRef.current!.currentTime);
+			gainRef.current!.gain.linearRampToValueAtTime(settings.volume, startTime + fadeInDur);
+
+			audioRef.current!.loop = true;
+			audioRef.current!.play();
+
+		}, delay * 1000);
 	}
 
 	function pause()
@@ -70,10 +78,11 @@ export default function useMusic()
 			return;
 
 		const fadeOutDur = 2;
+		fadeOutEndTime.current = ctxRef.current.currentTime + fadeOutDur;
 
 		gainRef.current.gain.setValueAtTime(gainRef.current.gain.value, ctxRef.current.currentTime);
-		gainRef.current.gain.linearRampToValueAtTime(0, ctxRef.current.currentTime + fadeOutDur);
-		suspendTimeOutIDRef.current = setTimeout(() => audioRef.current!.pause(), fadeOutDur * 1000);
+		gainRef.current.gain.linearRampToValueAtTime(0, fadeOutEndTime.current);
+		pauseTimeOutIDRef.current = setTimeout(() => audioRef.current!.pause(), fadeOutDur * 1000);
 	}
 
 	async function resume()
@@ -81,16 +90,21 @@ export default function useMusic()
 		if ( !ctxRef.current || !audioRef.current || !gainRef.current )
 			return;
 
-		clearTimeout(suspendTimeOutIDRef.current);
-		suspendTimeOutIDRef.current = undefined;
+		clearTimeout(pauseTimeOutIDRef.current);
+		pauseTimeOutIDRef.current = undefined;
 
 		const fadeInDur = 2;
+		const delay = Math.max(0, fadeOutEndTime.current - ctxRef.current.currentTime);
+		const startTime = ctxRef.current.currentTime + delay;
 
-		gainRef.current.gain.cancelScheduledValues(ctxRef.current.currentTime);
-		gainRef.current.gain.setValueAtTime(0, ctxRef.current.currentTime);
-		gainRef.current.gain.linearRampToValueAtTime(settings.volume, ctxRef.current.currentTime + fadeInDur);
+		setTimeout(async () => {
 
-		audioRef.current!.play();
+			gainRef.current!.gain.setValueAtTime(0, ctxRef.current!.currentTime);
+			gainRef.current!.gain.linearRampToValueAtTime(settings.volume, startTime + fadeInDur);
+
+			audioRef.current!.play();
+
+		}, delay * 1000);
 	}
 
 	function stop()
@@ -99,10 +113,10 @@ export default function useMusic()
 			return;
 
 		const fadeOutDur = 2;
+		fadeOutEndTime.current = ctxRef.current.currentTime + fadeOutDur;
 
-		gainRef.current.gain.cancelScheduledValues(ctxRef.current.currentTime);
 		gainRef.current.gain.setValueAtTime(gainRef.current.gain.value, ctxRef.current.currentTime);
-		gainRef.current.gain.linearRampToValueAtTime(0, ctxRef.current.currentTime + fadeOutDur);
+		gainRef.current.gain.linearRampToValueAtTime(0, fadeOutEndTime.current);
 		stopTimeOutIDRef.current = setTimeout(() => { audioRef.current!.currentTime = 0; audioRef.current?.pause() }, fadeOutDur * 1000);
 	}
 
