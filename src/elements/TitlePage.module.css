@@ -1,0 +1,26 @@
+.info
+{
+	position: fixed;
+	top: 40%;
+	left: 50%;
+}
+
+.title
+{
+	position: relative;
+	text-align: center;
+	font-size: 5rem;
+	top: 0rem;
+	left: 0rem;
+	transform: translateX(-50%);
+}
+
+.author
+{
+	position: relative;
+	text-align: center;
+	font-size: 2rem;
+	top: 1rem;
+	left: 0rem;
+	transform: translateX(-50%);
+}

@@ -5,18 +5,11 @@ import styles from './ChapterSelect.module.css'
 
 type ChapterSelectProps =
 {
-	book: Chapter[],
+	chapters: Chapter[],
 	controls: Controls,
 }
 
-function getText( chapNum: number, chapTitle: string): string
-{
-	if ( chapNum === 0 )
-		return `0. TITLE PAGE`;
-	return `${chapNum}. ${chapTitle}`;
-}
-
-export default function ChapterSelect( { book, controls } : ChapterSelectProps )
+export default function ChapterSelect( { chapters, controls } : ChapterSelectProps )
 {
 	return (
 		<>
@@ -24,9 +17,12 @@ export default function ChapterSelect( { book, controls } : ChapterSelectProps )
 				<button onClick={() => controls.goToPrevScreen()}>Back</button>
 			</div>
 			<div className={styles.menuHeader}>Chapters</div>
-			{book.map((chapter, chapNum) => (
-				<div className={styles.chapter} key={chapNum} onClick={() => controls.goToChap(chapNum)}>
-					<Markdown unwrapDisallowed disallowedElements={['p']}>{getText(chapter.num, chapter.title)}</Markdown>
+			<div className={styles.chapter} onClick={() => controls.goToChap(0)}>
+				<Markdown unwrapDisallowed disallowedElements={['p']}>0. TITLE PAGE</Markdown>
+			</div>
+			{chapters.map((chapter, idx) => (
+				<div className={styles.chapter} key={idx} onClick={() => controls.goToChap(chapter.num)}>
+					<Markdown unwrapDisallowed disallowedElements={['p']}>{`${chapter.num}. ${chapter.title}`}</Markdown>
 				</div>
 			))}
 		</>

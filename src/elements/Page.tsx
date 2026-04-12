@@ -1,8 +1,8 @@
 import type { Controls, AppStates } from "../App"
-import type { Chapter as Chap } from "../books/dracula"
+import type { Book as Bk, Chapter as Chap } from "../books/dracula"
 import { Screens } from "../util/utils"
 import StartMenu from "./StartMenu"
-import Chapter from "./Chapter"
+import Book from "./Book"
 import Navigation from "./Navigation"
 import ChapterSelect from "./ChapterSelect"
 import BookSelect from "./BookSelect"
@@ -13,21 +13,27 @@ import { useEffect, useRef } from 'react'
 
 type PageProps =
 {
-	book: Chap[],
+	book: Bk,
 	states: AppStates,
 	controls: Controls,
 }
 
-function playMusic( chapter: Chap, states: AppStates, controls: Controls )
+function playMusic( chapter: Chap | null, states: AppStates, controls: Controls )
 {
 	const prevMusicRef = useRef<string | null>(null);
+	const settings = useSettings();
 
 	useEffect(() =>
 	{
+		if ( !settings.musicEnabled )
+			return;
+
 		const currScreen = states.screen;
 		const prevScreen = states.prevScreens[states.prevScreens.length - 1];
 
-		if ( currScreen === Screens.reader && prevMusicRef.current !== chapter.music )
+		if ( !chapter )
+			controls.pause();
+		else if ( currScreen === Screens.reader && prevMusicRef.current !== chapter.music )
 		{
 			controls.stop();
 			prevMusicRef.current = null;
@@ -47,10 +53,9 @@ function playMusic( chapter: Chap, states: AppStates, controls: Controls )
 export default function Page( { book, states, controls} : PageProps )
 {
 	const settings = useSettings();
-	const currChap = book[states.currChap];
+	const currChap: Chap | null = !states.currChap ? null : book.chapters[states.currChap - 1];
 
-	if ( settings.musicEnabled )
-		playMusic(currChap, states, controls);
+	playMusic(currChap, states, controls);
 
 	switch (states.screen)
 	{
@@ -59,7 +64,7 @@ export default function Page( { book, states, controls} : PageProps )
 		case Screens.bookSelectMenu:
 			return <BookSelect controls={controls}/>;
 		case Screens.chapSelectMenu:
-			{ return states.currBook ? <ChapterSelect book={book} controls={controls}/> : <BookSelect controls={controls}/> };
+			{ return states.currBook ? <ChapterSelect chapters={book.chapters} controls={controls}/> : <BookSelect controls={controls}/> };
 		case Screens.settingsMenu:
 			return <Settings controls={controls}/>;
 		case Screens.questions:
@@ -68,12 +73,12 @@ export default function Page( { book, states, controls} : PageProps )
 				controls.next();
 				return;
 			}
-			return <Questions key={states.currChap} questions={currChap.questions} states={states} controls={controls}/>
+			return <Questions key={states.currChap} questions={currChap!.questions} states={states} controls={controls}/>
 		case Screens.reader:
 			return (
 				<>
 					<Navigation states={states} controls={controls}/>
-					<Chapter chapter={currChap} controls={controls}/>
+					<Book book={book} states={states} controls={controls}/>
 					<Navigation states={states} controls={controls}/>
 				</>
 			);

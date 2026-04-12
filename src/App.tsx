@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import type { Chapter as Chap } from './books/dracula.ts'
+import type { Book } from './books/dracula.ts'
 import { musicUrls } from './books/dracula.ts'
 import { getBook, Screens } from './util/utils.ts'
 import Page from './elements/Page.tsx'
@@ -45,7 +45,7 @@ export default function App()
 	const [currChap, setCurrChap] = useState<number>(-1);
 	const [navWidth, setNavWidth] = useState<number>(0);
 
-	const book: Chap[] = useMemo(() => getBook(currBook), [currBook]);
+	const book: Book = useMemo(() => getBook(currBook), [currBook]);
 
 	useEffect(() =>
 	{
@@ -74,7 +74,7 @@ export default function App()
 	function handleNextChapter()
 	{
 		window.scrollTo(0, 0);
-		if ( currChap < book.length - 1 )
+		if ( currChap < book.chapters.length - 1 )
 			setCurrChap(currChap + 1);
 		setScreen(Screens.reader);
 	}

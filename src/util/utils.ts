@@ -1,19 +1,19 @@
 import dracula from '../books/dracula.ts'
-import type { Chapter } from '../books/dracula.ts'
+import type { Book } from '../books/dracula.ts'
 
 export const BOOK =
 {
 	dracula: 'Dracula',
 }
 
-export function getBook( bookID: string | null ) : Chapter[]
+export function getBook( bookID: string | null ) : Book
 {
 	switch (bookID)
 	{
 		case BOOK.dracula:
 			return dracula();
 		default:
-			return [];
+			return { title: { num: 0, title: "none", author: "none"}, chapters: []};
 	}
 }
 

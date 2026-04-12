@@ -15874,6 +15874,19 @@ export type Chapter =
 	music: string,
 }
 
+export type Title =
+{
+	num: 0,
+	title: string,
+	author: string,
+}
+
+export type Book =
+{
+	title: Title,
+	chapters: Chapter[],
+}
+
 export type MusicTrack =
 {
 	url: string,
@@ -15931,25 +15944,24 @@ function getMusicTrack( chap_num: number ) : string
 	return music[`chapter_1`].url;
 }
 
-export default function getDracula(): Array<Chapter>
+export default function getDracula(): Book
 {
-	const chapters = [...rawBook.matchAll(/\nCHAPTER [IVXLC]+\n/g)];
-	const book: Array<Chapter> = [];
+	const rawChapters = [...rawBook.matchAll(/\nCHAPTER [IVXLC]+\n/g)];
+	const title: Title = { num: 0, title: "Dracula", author: "Bram Stoker"};
+	const chapters: Chapter[] = [];
 
-	book.push({ num: 0, title: "Dracula", content: "", questions: [], music: "" });
-
-	for ( let i = 0; i < chapters.length; i++ )
+	for ( let i = 0; i < rawChapters.length; i++ )
 	{
 		const chap_num = i + 1;
-		const start_chap_idx = chapters[i].index + 1;
-		const end_chap_idx = i + 1 < chapters.length ? chapters[i + 1].index : rawBook.indexOf("THE END") + 7;
+		const start_chap_idx = rawChapters[i].index + 1;
+		const end_chap_idx = i + 1 < rawChapters.length ? rawChapters[i + 1].index : rawBook.indexOf("THE END") + 7;
 		const chap_title = getTitle(start_chap_idx);
 		const chap_content = getContent(start_chap_idx, end_chap_idx);
 		const questions = getQuestions(chap_num);
 		const music = getMusicTrack(chap_num);
 
-		book.push({ num: chap_num, title: chap_title, content: chap_content, questions: questions, music: music });
+		chapters.push({ num: chap_num, title: chap_title, content: chap_content, questions: questions, music: music });
 	}
 
-	return book;
+	return { title: title, chapters: chapters};
 }
