@@ -49,7 +49,8 @@ export default function Page( { book, states, controls} : PageProps )
 	const settings = useSettings();
 	const currChap = book[states.currChap];
 
-	playMusic(currChap, states, controls);
+	if ( settings.musicEnabled )
+		playMusic(currChap, states, controls);
 
 	switch (states.screen)
 	{

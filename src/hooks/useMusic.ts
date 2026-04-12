@@ -1,4 +1,5 @@
 import { useRef } from "react"
+import { useSettings } from "../elements/SettingsContext"
 
 export default function useMusic()
 {
@@ -9,6 +10,7 @@ export default function useMusic()
 	const audioCacheRef = useRef<Record<string, HTMLAudioElement>>({});
 	const suspendTimeOutIDRef = useRef<number | undefined>(undefined);
 	const stopTimeOutIDRef = useRef<number | undefined>(undefined);
+	const settings = useSettings();
 
 	function preload( urls: string[] )
 	{
@@ -56,7 +58,7 @@ export default function useMusic()
 
 		gainRef.current!.gain.cancelScheduledValues(ctxRef.current.currentTime);
 		gainRef.current!.gain.setValueAtTime(0, ctxRef.current.currentTime);
-		gainRef.current!.gain.linearRampToValueAtTime(1.0, ctxRef.current.currentTime + 4);
+		gainRef.current!.gain.linearRampToValueAtTime(settings.volume, ctxRef.current.currentTime + 4);
 
 		audioRef.current.loop = true;
 		audioRef.current.play();
@@ -86,7 +88,7 @@ export default function useMusic()
 
 		gainRef.current.gain.cancelScheduledValues(ctxRef.current.currentTime);
 		gainRef.current.gain.setValueAtTime(0, ctxRef.current.currentTime);
-		gainRef.current.gain.linearRampToValueAtTime(1, ctxRef.current.currentTime + fadeInDur);
+		gainRef.current.gain.linearRampToValueAtTime(settings.volume, ctxRef.current.currentTime + fadeInDur);
 
 		audioRef.current!.play();
 	}

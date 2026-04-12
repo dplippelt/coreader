@@ -27,7 +27,7 @@ export default function Settings( { controls } : SettingsProps )
 					onChange={(e) => settings.setQuestionsEnabled(e.target.checked)}/>
 
 				<label>Font size:</label>
-				<div className={styles.fontSize}>
+				<div className={styles.slider}>
 					<input
 						type="range"
 						min={12}
@@ -41,6 +41,30 @@ export default function Settings( { controls } : SettingsProps )
 						max={28}
 						value={settings.fontSize}
 						onChange={(e) => settings.setFontSize(Number(e.target.value))}/>
+				</div>
+
+				<label htmlFor="music">Enable music:</label>
+				<input
+					id="music"
+					type="checkbox"
+					checked={settings.musicEnabled}
+					onChange={(e) => settings.setMusicEnabled(e.target.checked)}/>
+					
+				<label>Music volume:</label>
+				<div className={styles.slider}>
+					<input
+						type="range"
+						min={0}
+						max={100}
+						value={Math.floor(settings.volume * 100)}
+						onChange={(e) => settings.setVolume(Number(e.target.value) / 100)}/>
+					<input
+						style={{marginLeft: "1rem"}}
+						type="number"
+						min={0}
+						max={100}
+						value={Math.floor(settings.volume * 100)}
+						onChange={(e) => settings.setVolume(Number(e.target.value) / 100)}/>
 				</div>
 			</div>
 		</>
