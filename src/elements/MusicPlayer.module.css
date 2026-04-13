@@ -1,0 +1,7 @@
+.musicPlayer
+{
+	position: fixed;
+	display: flex;
+	top: 5%;
+	right: 5%;
+}

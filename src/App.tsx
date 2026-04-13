@@ -20,10 +20,12 @@ export type Controls =
 	goToBook: ( book: string ) => void,
 	questions: () => void,
 	goToPrevScreen: () => void,
-	play: ( url: string ) => Promise<void>,
+	play: ( url: string, muteOn: boolean ) => Promise<void>,
 	pause: () => void,
-	resume: () => void,
+	resume: ( muteOn: boolean ) => void,
 	stop: () => void,
+	setMusicIsPlayingTo: ( setMusicIsPlaying: boolean ) => void,
+	setMuteTo: ( doMute: boolean ) => void,
 }
 
 export type AppStates =
@@ -33,17 +35,21 @@ export type AppStates =
 	screen: Screen,
 	prevScreens: Screen[],
 	navWidth: number,
+	musicIsPlaying: boolean,
+	muteOn: boolean,
 }
 
 export default function App()
 {
 	const settings = useSettings();
-	const { preload, play, pause, resume, stop } = useMusic();
+	const { preload, play, pause, resume, stop, mute } = useMusic();
 	const [screen, setScreen] = useState<Screen>(Screens.startMenu);
 	const [prevScreens, setPrevScreens] = useState<Screen[]>([]);
 	const [currBook, setCurrBook] = useState<string | null>(null);
 	const [currChap, setCurrChap] = useState<number>(-1);
 	const [navWidth, setNavWidth] = useState<number>(0);
+	const [musicIsPlaying, setMusicIsPlaying] = useState<boolean>(false);
+	const [muteOn, setMuteOn] = useState<boolean>(false);
 
 	const book: Book = useMemo(() => getBook(currBook), [currBook]);
 
@@ -153,6 +159,17 @@ export default function App()
 		setPrevScreens(copy);
 	}
 
+	function setMusicIsPlayingTo( musicIsPlaying: boolean )
+	{
+		setMusicIsPlaying(musicIsPlaying);
+	}
+
+	function setMuteTo( doMute: boolean )
+	{
+		setMuteOn(doMute);
+		mute(doMute);
+	}
+
 	const controls: Controls =
 	{
 		next: handleNextChapter,
@@ -169,6 +186,8 @@ export default function App()
 		pause: pause,
 		resume: resume,
 		stop: stop,
+		setMusicIsPlayingTo: setMusicIsPlayingTo,
+		setMuteTo: setMuteTo,
 	}
 
 	const states: AppStates =
@@ -178,6 +197,8 @@ export default function App()
 		screen: screen,
 		prevScreens: prevScreens,
 		navWidth: navWidth,
+		musicIsPlaying: musicIsPlaying,
+		muteOn: muteOn,
 	}
 
 	return <Page book={book} states={states} controls={controls}/>

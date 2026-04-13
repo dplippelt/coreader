@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react"
 import type { Dispatch, SetStateAction, ReactNode } from "react"
 
-type SettingsContextType =
+export type SettingsContextType =
 {
 	questionsEnabled: boolean,
 	setQuestionsEnabled: Dispatch<SetStateAction<boolean>>,

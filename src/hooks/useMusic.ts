@@ -21,7 +21,7 @@ export default function useMusic()
 		}
 	}
 
-	async function play( url: string )
+	async function play( url: string, muteOn: boolean )
 	{
 		if ( !ctxRef.current )
 			ctxRef.current = new AudioContext;
@@ -63,8 +63,11 @@ export default function useMusic()
 				gainRef.current.connect(ctxRef.current!.destination);
 			}
 
-			gainRef.current!.gain.setValueAtTime(0, ctxRef.current!.currentTime);
-			gainRef.current!.gain.linearRampToValueAtTime(settings.volume, startTime + fadeInDur);
+			if ( !muteOn )
+			{
+				gainRef.current!.gain.setValueAtTime(0, ctxRef.current!.currentTime);
+				gainRef.current!.gain.linearRampToValueAtTime(settings.volume, startTime + fadeInDur);
+			}
 
 			audioRef.current!.loop = true;
 			audioRef.current!.play();
@@ -85,7 +88,7 @@ export default function useMusic()
 		pauseTimeOutIDRef.current = setTimeout(() => audioRef.current!.pause(), fadeOutDur * 1000);
 	}
 
-	async function resume()
+	async function resume( muteOn: boolean )
 	{
 		if ( !ctxRef.current || !audioRef.current || !gainRef.current )
 			return;
@@ -99,8 +102,11 @@ export default function useMusic()
 
 		setTimeout(async () => {
 
-			gainRef.current!.gain.setValueAtTime(0, ctxRef.current!.currentTime);
-			gainRef.current!.gain.linearRampToValueAtTime(settings.volume, startTime + fadeInDur);
+			if ( !muteOn )
+			{
+				gainRef.current!.gain.setValueAtTime(0, ctxRef.current!.currentTime);
+				gainRef.current!.gain.linearRampToValueAtTime(settings.volume, startTime + fadeInDur);
+			}
 
 			audioRef.current!.play();
 
@@ -109,7 +115,7 @@ export default function useMusic()
 
 	function stop()
 	{
-		if ( !ctxRef.current || !srcRef.current ||  !gainRef.current )
+		if ( !ctxRef.current || !audioRef.current ||  !gainRef.current )
 			return;
 
 		const fadeOutDur = 2;
@@ -117,8 +123,21 @@ export default function useMusic()
 
 		gainRef.current.gain.setValueAtTime(gainRef.current.gain.value, ctxRef.current.currentTime);
 		gainRef.current.gain.linearRampToValueAtTime(0, fadeOutEndTime.current);
-		stopTimeOutIDRef.current = setTimeout(() => { audioRef.current!.currentTime = 0; audioRef.current?.pause() }, fadeOutDur * 1000);
+		stopTimeOutIDRef.current = setTimeout(() => { audioRef.current!.currentTime = 0; audioRef.current!.pause() }, fadeOutDur * 1000);
 	}
 
-	return { preload, play, pause, resume, stop };
+	function mute( doMute: boolean )
+	{
+		if ( !ctxRef.current || !gainRef.current )
+			return;
+
+		gainRef.current.gain.cancelScheduledValues(ctxRef.current.currentTime);
+		
+		if ( doMute )
+			gainRef.current.gain.setValueAtTime(0, ctxRef.current.currentTime);
+		else
+			gainRef.current.gain.setValueAtTime(settings.volume, ctxRef.current.currentTime);
+	}
+
+	return { preload, play, pause, resume, stop, mute };
 }
