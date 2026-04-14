@@ -12,6 +12,14 @@
 .musicPlayerZoomed
 {
 	flex-direction: column;
+	top: 15%;
+	right: 2%;
+}
+
+.musicPlayerZoomedMore
+{
+	top: 20%;
+	right: 0%;
 }
 
 .musicPlayer:hover

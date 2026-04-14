@@ -40,12 +40,24 @@ function buttonBehavior( type: ButtonType, states: AppStates, controls: Controls
 	}
 }
 
+function musicPlayerStyle( zoomLevel: number ) : string
+{
+	let style = styles.musicPlayer;
+
+	if ( zoomLevel >= 1.5 )
+		style = style.concat(` ${styles.musicPlayerZoomed}`);
+	if ( zoomLevel >= 2.22 )
+		style = style.concat(` ${styles.musicPlayerZoomedMore}`);
+
+	return style;
+}
+
 export default function MusicPlayer( { states, controls } : MusicPlayerProps )
 {
 	const settings = useSettings();
 
 	return (
-		<div className={`${styles.musicPlayer} ${states.zoomLevel >= 2 ? styles.musicPlayerZoomed : ''}`}>
+		<div className={musicPlayerStyle(states.zoomLevel)}>
 			<MusicButton type={`${ButtonType.play}`} onClick={ () => buttonBehavior(ButtonType.play, states, controls, settings) }/>
 			<MusicButton type={`${ButtonType.pause}`} onClick={ () => buttonBehavior(ButtonType.pause, states, controls, settings) }/>
 			{ states.muteOn
