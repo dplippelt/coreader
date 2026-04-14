@@ -31,14 +31,14 @@ export default function Settings( { controls } : SettingsProps )
 					<input
 						type="range"
 						min={12}
-						max={28}
+						max={42}
 						value={settings.fontSize}
 						onChange={(e) => settings.setFontSize(Number(e.target.value))}/>
 					<input
 						style={{marginLeft: "1rem"}}
 						type="number"
 						min={12}
-						max={28}
+						max={42}
 						value={settings.fontSize}
 						onChange={(e) => settings.setFontSize(Number(e.target.value))}/>
 				</div>
@@ -49,7 +49,7 @@ export default function Settings( { controls } : SettingsProps )
 					type="checkbox"
 					checked={settings.musicEnabled}
 					onChange={(e) => settings.setMusicEnabled(e.target.checked)}/>
-					
+
 				<label>Music volume:</label>
 				<div className={styles.slider}>
 					<input

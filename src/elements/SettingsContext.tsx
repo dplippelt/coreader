@@ -18,7 +18,7 @@ const SettingsContext = createContext<SettingsContextType | null>(null);
 export default function SettingsProvider( { children } : {children: ReactNode} )
 {
 	const [questionsEnabled, setQuestionsEnabled] = useState<boolean>(true);
-	const [fontSize, setFontSize] = useState<number>(16);
+	const [fontSize, setFontSize] = useState<number>(24);
 	const [musicEnabled, setMusicEnabled] = useState<boolean>(true);
 	const [volume, setVolume] = useState<number>(0.5);
 

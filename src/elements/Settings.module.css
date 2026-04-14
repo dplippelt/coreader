@@ -16,7 +16,7 @@
 .settings
 {
 	display: grid;
-	max-width: 40vw;
+	max-width: 30rem;
 	width: fit-content;
 	margin: auto;
 	grid-template-columns: 2fr 1fr;
