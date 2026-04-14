@@ -44,13 +44,13 @@ function playMusic( chapter: Chap | null, states: AppStates, controls: Controls 
 			prevMusicRef.current = null;
 			if ( currScreen === Screens.reader && chapter.music )
 			{
-				controls.play(chapter.music, states.muteOn);
+				controls.play(chapter.music);
 				controls.setMusicIsPlayingTo(true);
 				prevMusicRef.current = chapter.music;
 			}
 		}
 		else if ( currScreen === Screens.reader )
-			controls.resume(states.muteOn);
+			controls.resume();
 		else if ( prevScreen === Screens.reader )
 			controls.pause();
 	}, [chapter?.num, states.screen]);

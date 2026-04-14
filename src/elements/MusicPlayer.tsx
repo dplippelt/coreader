@@ -18,7 +18,7 @@ function buttonBehavior( type: ButtonType, states: AppStates, controls: Controls
 		case ButtonType.play:
 			if ( settings.musicEnabled && !states.musicIsPlaying )
 			{
-				controls.resume(states.muteOn);
+				controls.resume();
 				controls.setMusicIsPlayingTo(true);
 			}
 			break;
@@ -30,10 +30,10 @@ function buttonBehavior( type: ButtonType, states: AppStates, controls: Controls
 			}
 			break;
 		case ButtonType.soundOn:
-			controls.setMuteTo(true);
+			controls.toggleMute();
 			break;
 		case ButtonType.soundOff:
-			controls.setMuteTo(false);
+			controls.toggleMute();
 			break;
 		default:
 			return;

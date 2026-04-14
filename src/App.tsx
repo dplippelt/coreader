@@ -20,12 +20,12 @@ export type Controls =
 	goToBook: ( book: string ) => void,
 	questions: () => void,
 	goToPrevScreen: () => void,
-	play: ( url: string, muteOn: boolean ) => Promise<void>,
+	play: ( url: string ) => Promise<void>,
 	pause: () => void,
-	resume: ( muteOn: boolean ) => void,
+	resume: () => void,
 	stop: () => void,
+	toggleMute: () => void,
 	setMusicIsPlayingTo: ( setMusicIsPlaying: boolean ) => void,
-	setMuteTo: ( doMute: boolean ) => void,
 }
 
 export type AppStates =
@@ -164,10 +164,10 @@ export default function App()
 		setMusicIsPlaying(musicIsPlaying);
 	}
 
-	function setMuteTo( doMute: boolean )
+	function toggleMute()
 	{
-		setMuteOn(doMute);
-		mute(doMute);
+		mute();
+		setMuteOn(!muteOn);
 	}
 
 	const controls: Controls =
@@ -187,7 +187,7 @@ export default function App()
 		resume: resume,
 		stop: stop,
 		setMusicIsPlayingTo: setMusicIsPlayingTo,
-		setMuteTo: setMuteTo,
+		toggleMute: toggleMute,
 	}
 
 	const states: AppStates =

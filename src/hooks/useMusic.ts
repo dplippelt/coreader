@@ -11,6 +11,7 @@ export default function useMusic()
 	const pauseTimeOutIDRef = useRef<number | undefined>(undefined);
 	const stopTimeOutIDRef = useRef<number | undefined>(undefined);
 	const fadeOutEndTime = useRef<number>(0);
+	const muteOnRef = useRef<boolean>(false);
 	const settings = useSettings();
 
 	function preload( urls: string[] )
@@ -21,7 +22,7 @@ export default function useMusic()
 		}
 	}
 
-	async function play( url: string, muteOn: boolean )
+	async function play( url: string )
 	{
 		if ( !ctxRef.current )
 			ctxRef.current = new AudioContext;
@@ -63,7 +64,7 @@ export default function useMusic()
 				gainRef.current.connect(ctxRef.current!.destination);
 			}
 
-			if ( !muteOn )
+			if ( !muteOnRef.current )
 			{
 				gainRef.current!.gain.setValueAtTime(0, ctxRef.current!.currentTime);
 				gainRef.current!.gain.linearRampToValueAtTime(settings.volume, startTime + fadeInDur);
@@ -88,7 +89,7 @@ export default function useMusic()
 		pauseTimeOutIDRef.current = setTimeout(() => audioRef.current!.pause(), fadeOutDur * 1000);
 	}
 
-	async function resume( muteOn: boolean )
+	async function resume()
 	{
 		if ( !ctxRef.current || !audioRef.current || !gainRef.current )
 			return;
@@ -102,7 +103,7 @@ export default function useMusic()
 
 		setTimeout(async () => {
 
-			if ( !muteOn )
+			if ( !muteOnRef.current )
 			{
 				gainRef.current!.gain.setValueAtTime(0, ctxRef.current!.currentTime);
 				gainRef.current!.gain.linearRampToValueAtTime(settings.volume, startTime + fadeInDur);
@@ -126,17 +127,19 @@ export default function useMusic()
 		stopTimeOutIDRef.current = setTimeout(() => { audioRef.current!.currentTime = 0; audioRef.current!.pause() }, fadeOutDur * 1000);
 	}
 
-	function mute( doMute: boolean )
+	function mute()
 	{
 		if ( !ctxRef.current || !gainRef.current )
 			return;
 
 		gainRef.current.gain.cancelScheduledValues(ctxRef.current.currentTime);
-		
-		if ( doMute )
+
+		if ( !muteOnRef.current )
 			gainRef.current.gain.setValueAtTime(0, ctxRef.current.currentTime);
 		else
 			gainRef.current.gain.setValueAtTime(settings.volume, ctxRef.current.currentTime);
+
+		muteOnRef.current = !muteOnRef.current;
 	}
 
 	return { preload, play, pause, resume, stop, mute };
