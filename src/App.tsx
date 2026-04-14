@@ -103,6 +103,8 @@ export default function App()
 				return;
 			if ( questions[`chapter_${currChap}`] !== undefined )
 				return;
+			if ( apiKey === undefined )
+				return setQuestions(prev => ({ ...prev, [`chapter_${currChap}`]: book.chapters[currChap - 1].questions }));
 
 			const response = await fetch("https://api.groq.com/openai/v1/chat/completions",
 				{
@@ -129,7 +131,7 @@ export default function App()
 			if ( !response.ok )
 			{
 				console.error(`GroqError: ${JSON.stringify(data)}`);
-				return;
+				return setQuestions(prev => ({ ...prev, [`chapter_${currChap}`]: book.chapters[currChap - 1].questions }));
 			}
 
 			const text = data.choices[0].message.content;
