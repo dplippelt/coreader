@@ -2,6 +2,19 @@
 {
 	position: fixed;
 	display: flex;
-	top: 5%;
-	right: 5%;
+	top: 4%;
+	right: 4%;
+	opacity: 15%;
+	transition: opacity 0.2s ease;
+	padding: 15px;
+}
+
+.musicPlayerZoomed
+{
+	flex-direction: column;
+}
+
+.musicPlayer:hover
+{
+	opacity: 100%;
 }

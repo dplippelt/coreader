@@ -24,8 +24,6 @@ function playMusic( chapter: Chap | null, states: AppStates, controls: Controls 
 	const prevMusicRef = useRef<string | null>(null);
 	const settings = useSettings();
 
-	console.log(`prevMusicRef: ${prevMusicRef.current}`);
-
 	useEffect(() =>
 	{
 		if ( !settings.musicEnabled )
@@ -54,8 +52,6 @@ function playMusic( chapter: Chap | null, states: AppStates, controls: Controls 
 		else if ( prevScreen === Screens.reader )
 			controls.pause();
 	}, [chapter?.num, states.screen]);
-
-	console.log(`musicIsPlaying: ${states.musicIsPlaying}`);
 }
 
 export default function Page( { book, states, controls} : PageProps )
@@ -85,10 +81,10 @@ export default function Page( { book, states, controls} : PageProps )
 		case Screens.reader:
 			return (
 				<>
-					<MusicPlayer states={states} controls={controls}/>
 					<Navigation states={states} controls={controls}/>
 					<Book book={book} states={states} controls={controls}/>
 					<Navigation states={states} controls={controls}/>
+					<MusicPlayer states={states} controls={controls}/>
 				</>
 			);
 		default:

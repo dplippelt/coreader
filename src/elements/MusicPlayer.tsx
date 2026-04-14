@@ -45,12 +45,12 @@ export default function MusicPlayer( { states, controls } : MusicPlayerProps )
 	const settings = useSettings();
 
 	return (
-		<div className={styles.musicPlayer}>
-			<MusicButton type={`${ButtonType.play}`} pressed={false} onClick={ () => buttonBehavior(ButtonType.play, states, controls, settings) } />
-			<MusicButton type={`${ButtonType.pause}`} pressed={false} onClick={ () => buttonBehavior(ButtonType.pause, states, controls, settings) } />
+		<div className={`${styles.musicPlayer} ${states.zoomLevel >= 2 ? styles.musicPlayerZoomed : ''}`}>
+			<MusicButton type={`${ButtonType.play}`} onClick={ () => buttonBehavior(ButtonType.play, states, controls, settings) }/>
+			<MusicButton type={`${ButtonType.pause}`} onClick={ () => buttonBehavior(ButtonType.pause, states, controls, settings) }/>
 			{ states.muteOn
-				? <MusicButton type={`${ButtonType.soundOff}`} pressed={false} onClick={ () => buttonBehavior(ButtonType.soundOff, states, controls, settings) } />
-				: <MusicButton type={`${ButtonType.soundOn}`} pressed={false} onClick={ () => buttonBehavior(ButtonType.soundOn, states, controls, settings) } />
+				? <MusicButton type={`${ButtonType.soundOff}`} onClick={ () => buttonBehavior(ButtonType.soundOff, states, controls, settings) }/>
+				: <MusicButton type={`${ButtonType.soundOn}`} onClick={ () => buttonBehavior(ButtonType.soundOn, states, controls, settings) }/>
 			}
 		</div>
 	);

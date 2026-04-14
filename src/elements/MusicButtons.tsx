@@ -13,29 +13,24 @@ export type ButtonType = typeof ButtonType[keyof typeof ButtonType];
 type MusicButtonProps =
 {
 	type: ButtonType,
-	pressed: boolean,
 	onClick: () => void,
 }
 
-export default function MusicButton( { type, pressed, onClick } : MusicButtonProps )
+export default function MusicButton( { type, onClick } : MusicButtonProps )
 {
-	let cirleFill = "#474747";
-	if ( pressed )
-		cirleFill = "#303030";
-
 	switch (type)
 	{
 		case ButtonType.play:
 			return (
 				<svg className={styles.musicButton} onClick={onClick} viewBox="273.983 161.757 210.968 210.968" xmlns="http://www.w3.org/2000/svg">
-					<circle style={{fill: cirleFill}} cx="379.467" cy="267.241" r="105.484"/>
+					<circle className={styles.circle} cx="379.467" cy="267.241" r="105.484"/>
 					<polygon style={{fill: "#FFFFFF"}} points="423.174,267.241 352.315,223.618 352.315,310.864 "/>
 				</svg>
 			);
 		case ButtonType.pause:
 			return (
 				<svg className={styles.musicButton} onClick={onClick} viewBox="714.647 161.757 210.968 210.968" xmlns="http://www.w3.org/2000/svg">
-					<circle style={{fill: cirleFill}} cx="820.133" cy="267.241" r="105.484"/>
+					<circle className={styles.circle} cx="820.133" cy="267.241" r="105.484"/>
 					<g>
 						<rect x="791.813" y="230.509" style={{fill: "#FFFFFF"}} width="18.805" height="73.464"/>
 						<rect x="829.643" y="230.5" style={{fill: "#FFFFFF"}} width="18.81" height="73.482"/>
@@ -45,10 +40,10 @@ export default function MusicButton( { type, pressed, onClick } : MusicButtonPro
 		case ButtonType.soundOn:
 			return (
 				<svg className={styles.musicButton} onClick={onClick} viewBox="273.983 821.531 210.968 210.968" xmlns="http://www.w3.org/2000/svg">
-					<circle style={{fill: cirleFill}} cx="379.467" cy="927.015" r="105.484"/>
+					<circle className={styles.circle} cx="379.467" cy="927.015" r="105.484"/>
 					<g>
 						<g>
-							<polygon style={{fill: "#FFFFFF"}} points="326.183,927.015 383.129,969.44 383.129,884.589 						"/>
+							<polygon style={{fill: "#FFFFFF"}} points="326.183,927.015 383.129,969.44 383.129,884.589"/>
 							<rect x="326.183" y="908.642" style={{fill: "#FFFFFF"}} width="24.945" height="36.744"/>
 						</g>
 						<g>
@@ -75,10 +70,10 @@ export default function MusicButton( { type, pressed, onClick } : MusicButtonPro
 		case ButtonType.soundOff:
 			return (
 				<svg className={styles.musicButton} onClick={onClick} viewBox="714.647 821.531 210.968 210.968" xmlns="http://www.w3.org/2000/svg">
-					<circle style={{fill: cirleFill}} cx="820.133" cy="927.015" r="105.484"/>
+					<circle className={styles.circle} cx="820.133" cy="927.015" r="105.484"/>
 					<g>
 						<g>
-							<polygon style={{fill: "#FFFFFF"}} points="769.896,927.015 826.842,969.44 826.842,884.589 						"/>
+							<polygon style={{fill: "#FFFFFF"}} points="769.896,927.015 826.842,969.44 826.842,884.589"/>
 							<rect x="769.896" y="908.642" style={{fill: "#FFFFFF"}} width="24.946" height="36.744"/>
 						</g>
 						<g>

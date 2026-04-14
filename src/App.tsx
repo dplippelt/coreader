@@ -35,6 +35,7 @@ export type AppStates =
 	screen: Screen,
 	prevScreens: Screen[],
 	navWidth: number,
+	zoomLevel: number,
 	musicIsPlaying: boolean,
 	muteOn: boolean,
 }
@@ -50,6 +51,7 @@ export default function App()
 	const [navWidth, setNavWidth] = useState<number>(0);
 	const [musicIsPlaying, setMusicIsPlaying] = useState<boolean>(false);
 	const [muteOn, setMuteOn] = useState<boolean>(false);
+	const [zoomLevel, setZoomLevel] = useState<number>(1);
 
 	const book: Book = useMemo(() => getBook(currBook), [currBook]);
 
@@ -65,11 +67,18 @@ export default function App()
 			setNavWidth(left - 20);
 		}
 
+		function updateZoomLevel()
+		{
+			setZoomLevel(window.devicePixelRatio);
+		}
+
 		updateNavWidth();
+		updateZoomLevel();
 
 		window.addEventListener('resize', updateNavWidth);
+		window.addEventListener('resize', updateZoomLevel);
 
-		return () => window.removeEventListener('resize', updateNavWidth);
+		return () => { window.removeEventListener('resize', updateNavWidth); window.removeEventListener('resize', updateZoomLevel); };
 	}, [currChap]);
 
 	useEffect(() =>
@@ -197,6 +206,7 @@ export default function App()
 		screen: screen,
 		prevScreens: prevScreens,
 		navWidth: navWidth,
+		zoomLevel: zoomLevel,
 		musicIsPlaying: musicIsPlaying,
 		muteOn: muteOn,
 	}
