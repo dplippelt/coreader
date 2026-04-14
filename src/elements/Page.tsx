@@ -77,7 +77,11 @@ export default function Page( { book, states, controls} : PageProps )
 				controls.next();
 				return;
 			}
-			return <Questions key={states.currChap} questions={currChap!.questions} states={states} controls={controls}/>
+			
+			const questions = states.questions[`chapter_${states.currChap}`];
+
+			return <Questions key={states.currChap} questions={questions} states={states} controls={controls}/>
+			// return <Questions key={states.currChap} questions={currChap!.questions} states={states} controls={controls}/>
 		case Screens.reader:
 			return (
 				<>

@@ -133,13 +133,22 @@ function Qs( { questions, controls } : QsProps )
 	);
 }
 
+function LoadingScreen()
+{
+	return <div className={styles.loading}>Loading questions...</div>
+}
+
 export default function Questions( { questions, states, controls } : QuestionsProps )
 {
 	return (
 		<>
 			<Buttons controls={controls}/>
 			<Header states={states}/>
-			<Qs questions={questions} controls={controls}/>
+			{
+				questions === undefined
+				? <LoadingScreen/>
+				: <Qs questions={questions} controls={controls}/>
+			}
 		</>
 	)
 }

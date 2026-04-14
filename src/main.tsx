@@ -5,9 +5,9 @@ import App from './App.tsx'
 import SettingsProvider from './elements/SettingsContext.tsx'
 
 createRoot(document.getElementById('root')!).render(
-<StrictMode>
+//<StrictMode>
 	<SettingsProvider>
 		<App />
 	</SettingsProvider>
-</StrictMode>,
+//</StrictMode>,
 )

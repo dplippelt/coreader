@@ -1,10 +1,14 @@
-import { useEffect, useMemo, useState } from 'react'
-import type { Book } from './books/dracula.ts'
+import { useEffect, useMemo, useState, useRef } from 'react'
+import type { Book, Question } from './books/dracula.ts'
 import { musicUrls } from './books/dracula.ts'
 import { getBook, Screens } from './util/utils.ts'
 import Page from './elements/Page.tsx'
 import { useSettings } from './elements/SettingsContext.tsx'
 import useMusic from './hooks/useMusic.ts'
+import { systemPrompt, userPrompt } from './ai/promptInfo.ts'
+import { model } from './ai/model.ts'
+
+const DEBUG = true;
 
 export type Screen = typeof Screens[keyof typeof Screens];
 
@@ -38,6 +42,7 @@ export type AppStates =
 	zoomLevel: number,
 	musicIsPlaying: boolean,
 	muteOn: boolean,
+	questions: Record<string, Question[]>,
 }
 
 export default function App()
@@ -52,6 +57,8 @@ export default function App()
 	const [musicIsPlaying, setMusicIsPlaying] = useState<boolean>(false);
 	const [muteOn, setMuteOn] = useState<boolean>(false);
 	const [zoomLevel, setZoomLevel] = useState<number>(1);
+	const [questions, setQuestions] = useState<Record<string, Question[]>>({});
+	const apiKey = useRef<string>(import.meta.env.VITE_GROQ_API_KEY);
 
 	const book: Book = useMemo(() => getBook(currBook), [currBook]);
 
@@ -79,6 +86,59 @@ export default function App()
 		window.addEventListener('resize', updateZoomLevel);
 
 		return () => { window.removeEventListener('resize', updateNavWidth); window.removeEventListener('resize', updateZoomLevel); };
+	}, [currChap]);
+
+	useEffect(() =>
+	{
+		function getChapterContent()
+		{
+			if ( DEBUG )
+				return book.chapters[currChap - 1].content.slice(0, 3000);
+			return book.chapters[currChap - 1].content;
+		}
+
+		async function fetchGroq()
+		{
+			if ( currChap <= 0 )
+				return;
+			if ( questions[`chapter_${currChap}`] !== undefined )
+				return;
+
+			const response = await fetch("https://api.groq.com/openai/v1/chat/completions",
+				{
+					method: "POST",
+					headers:
+					{
+						"Authorization": `Bearer ${apiKey.current}`,
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(
+					{
+						model: model,
+						messages:
+						[
+							{ role: "system", content: systemPrompt },
+							{ role: "user", content: userPrompt(currChap, getChapterContent(), 5) },
+						],
+						response_format: { type: "json_object" },
+					})
+				}
+			);
+
+			const data = await response.json();
+			if ( !response.ok )
+			{
+				console.error(`GroqError: ${JSON.stringify(data)}`);
+				return;
+			}
+
+			const text = data.choices[0].message.content;
+			console.log(`Groq: ${text}`);
+			const parsed = JSON.parse(text);
+			setQuestions(prev => ({ ...prev, [`chapter_${currChap}`]: parsed.questions }));
+		}
+
+		fetchGroq();
 	}, [currChap]);
 
 	useEffect(() =>
@@ -209,6 +269,7 @@ export default function App()
 		zoomLevel: zoomLevel,
 		musicIsPlaying: musicIsPlaying,
 		muteOn: muteOn,
+		questions: questions,
 	}
 
 	return <Page book={book} states={states} controls={controls}/>
