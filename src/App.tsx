@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, useRef } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import type { Book, Question } from './books/dracula.ts'
 import { musicUrls } from './books/dracula.ts'
 import { getBook, Screens } from './util/utils.ts'
@@ -65,7 +65,6 @@ export default function App()
 			const questions = stored ? JSON.parse(stored) : {};
 			return questions;
 		});
-	const apiKey = useRef<string>(import.meta.env.VITE_GROQ_API_KEY);
 
 	const book: Book = useMemo(() => getBook(currBook), [currBook]);
 
@@ -116,8 +115,6 @@ export default function App()
 			return;
 		if ( questions[`chapter_${currChap}`] !== undefined )
 			return;
-		if ( apiKey === undefined )
-			return setQuestions(prev => ({ ...prev, [`chapter_${currChap}`]: book.chapters[currChap - 1].questions }));
 		if ( !settings.aiQuestionsEnabled )
 			return setQuestions(prev => ({ ...prev, [`chapter_${currChap}`]: book.chapters[currChap - 1].questions }));
 
