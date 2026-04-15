@@ -5,6 +5,8 @@ export type SettingsContextType =
 {
 	questionsEnabled: boolean,
 	setQuestionsEnabled: Dispatch<SetStateAction<boolean>>,
+	aiQuestionsEnabled: boolean,
+	setAiQuestionsEnabled: Dispatch<SetStateAction<boolean>>,
 	fontSize: number,
 	setFontSize: Dispatch<SetStateAction<number>>,
 	musicEnabled: boolean,
@@ -18,6 +20,7 @@ const SettingsContext = createContext<SettingsContextType | null>(null);
 export default function SettingsProvider( { children } : {children: ReactNode} )
 {
 	const [questionsEnabled, setQuestionsEnabled] = useState<boolean>(true);
+	const [aiQuestionsEnabled, setAiQuestionsEnabled] = useState<boolean>(true);
 	const [fontSize, setFontSize] = useState<number>(24);
 	const [musicEnabled, setMusicEnabled] = useState<boolean>(true);
 	const [volume, setVolume] = useState<number>(0.5);
@@ -27,6 +30,7 @@ export default function SettingsProvider( { children } : {children: ReactNode} )
 			value=
 			{{
 				questionsEnabled, setQuestionsEnabled,
+				aiQuestionsEnabled, setAiQuestionsEnabled,
 				fontSize, setFontSize,
 				musicEnabled, setMusicEnabled,
 				volume, setVolume,

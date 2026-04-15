@@ -28,3 +28,23 @@
 {
 	display: flex;
 }
+
+.settingButton
+{
+	width: fit-content;
+	margin: auto;
+	margin-left: 0rem;
+	padding-left: 0.3rem;
+	padding-right: 0.3rem;
+	font-size: 0.8rem;
+}
+
+/* button
+{
+	width: 8rem;
+	margin: 2rem;
+	margin-left: 1.2rem;
+	margin-right: 1.2rem;
+	padding: 0.2rem;
+	font-size: 0.9rem;
+} */

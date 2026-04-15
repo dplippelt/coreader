@@ -30,6 +30,8 @@ export type Controls =
 	stop: () => void,
 	toggleMute: () => void,
 	setMusicIsPlayingTo: ( setMusicIsPlaying: boolean ) => void,
+	clearGeneratedQuestions: () => void,
+	getQuestions: () => Promise<void>,
 }
 
 export type AppStates =
@@ -90,6 +92,20 @@ export default function App()
 
 	useEffect(() =>
 	{
+		getQuestions();
+	}, [currChap]);
+
+	async function getQuestions()
+	{
+		if ( currChap <= 0 )
+			return;
+		if ( questions[`chapter_${currChap}`] !== undefined )
+			return;
+		if ( apiKey === undefined )
+			return setQuestions(prev => ({ ...prev, [`chapter_${currChap}`]: book.chapters[currChap - 1].questions }));
+		if ( !settings.aiQuestionsEnabled )
+			return setQuestions(prev => ({ ...prev, [`chapter_${currChap}`]: book.chapters[currChap - 1].questions }));
+
 		function getChapterContent()
 		{
 			if ( DEBUG )
@@ -97,51 +113,39 @@ export default function App()
 			return book.chapters[currChap - 1].content;
 		}
 
-		async function fetchGroq()
-		{
-			if ( currChap <= 0 )
-				return;
-			if ( questions[`chapter_${currChap}`] !== undefined )
-				return;
-			if ( apiKey === undefined )
-				return setQuestions(prev => ({ ...prev, [`chapter_${currChap}`]: book.chapters[currChap - 1].questions }));
-
-			const response = await fetch("https://api.groq.com/openai/v1/chat/completions",
-				{
-					method: "POST",
-					headers:
-					{
-						"Authorization": `Bearer ${apiKey.current}`,
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify(
-					{
-						model: model,
-						messages:
-						[
-							{ role: "system", content: systemPrompt },
-							{ role: "user", content: userPrompt(currChap, getChapterContent(), 5) },
-						],
-						response_format: { type: "json_object" },
-					})
-				}
-			);
-
-			const data = await response.json();
-			if ( !response.ok )
+		const response = await fetch("https://api.groq.com/openai/v1/chat/completions",
 			{
-				console.error(`GroqError: ${JSON.stringify(data)}`);
-				return setQuestions(prev => ({ ...prev, [`chapter_${currChap}`]: book.chapters[currChap - 1].questions }));
+				method: "POST",
+				headers:
+				{
+					"Authorization": `Bearer ${apiKey.current}`,
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(
+				{
+					model: model,
+					messages:
+					[
+						{ role: "system", content: systemPrompt },
+						{ role: "user", content: userPrompt(currChap, getChapterContent(), 5) },
+					],
+					response_format: { type: "json_object" },
+				})
 			}
+		);
 
-			const text = data.choices[0].message.content;
-			console.log(`Groq: ${text}`);
-			const parsed = JSON.parse(text);
-			setQuestions(prev => ({ ...prev, [`chapter_${currChap}`]: parsed.questions }));
+		const data = await response.json();
+		if ( !response.ok )
+		{
+			console.error(`GroqError: ${JSON.stringify(data)}`);
+			return setQuestions(prev => ({ ...prev, [`chapter_${currChap}`]: book.chapters[currChap - 1].questions }));
 		}
 
-		fetchGroq();
-	}, [currChap]);
+		const text = data.choices[0].message.content;
+		console.log(`Groq: ${text}`);
+		const parsed = JSON.parse(text);
+		setQuestions(prev => ({ ...prev, [`chapter_${currChap}`]: parsed.questions }));
+	}
 
 	useEffect(() =>
 	{
@@ -241,6 +245,11 @@ export default function App()
 		setMuteOn(!muteOn);
 	}
 
+	function clearGeneratedQuestions()
+	{
+		setQuestions({});
+	}
+
 	const controls: Controls =
 	{
 		next: handleNextChapter,
@@ -259,6 +268,8 @@ export default function App()
 		stop: stop,
 		setMusicIsPlayingTo: setMusicIsPlayingTo,
 		toggleMute: toggleMute,
+		clearGeneratedQuestions: clearGeneratedQuestions,
+		getQuestions: getQuestions,
 	}
 
 	const states: AppStates =

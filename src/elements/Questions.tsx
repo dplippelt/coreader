@@ -140,6 +140,9 @@ function LoadingScreen()
 
 export default function Questions( { questions, states, controls } : QuestionsProps )
 {
+	if ( questions === undefined )
+		controls.getQuestions();
+
 	return (
 		<>
 			<Buttons controls={controls}/>
