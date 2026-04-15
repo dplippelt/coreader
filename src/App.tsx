@@ -8,7 +8,7 @@ import useMusic from './hooks/useMusic.ts'
 import { systemPrompt, userPrompt } from './ai/promptInfo.ts'
 import { model } from './ai/model.ts'
 
-const DEBUG = true;
+export const DEBUG = true;
 
 export type Screen = typeof Screens[keyof typeof Screens];
 
@@ -128,23 +128,18 @@ export default function App()
 			return book.chapters[currChap - 1].content;
 		}
 
-		const response = await fetch("https://api.groq.com/openai/v1/chat/completions",
+		const response = await fetch("/api/groq",
 			{
 				method: "POST",
 				headers:
 				{
-					"Authorization": `Bearer ${apiKey.current}`,
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify(
 				{
 					model: model,
-					messages:
-					[
-						{ role: "system", content: systemPrompt },
-						{ role: "user", content: userPrompt(currChap, getChapterContent(), 5) },
-					],
-					response_format: { type: "json_object" },
+					systemPrompt: systemPrompt,
+					userPrompt: userPrompt(currChap, getChapterContent(), 5),
 				})
 			}
 		);

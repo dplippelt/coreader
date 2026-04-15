@@ -13,6 +13,7 @@ dist
 dist-ssr
 *.local
 notes.txt
+.vercel
 
 # Editor directories and files
 .vscode/*
@@ -27,3 +28,4 @@ notes.txt
 
 # Environment variables
 .env
+.env*.local
