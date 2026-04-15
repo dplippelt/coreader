@@ -43,6 +43,11 @@ function Header( { states } : HeaderProps )
 	return <div className={styles.header}>{`Questions Chapter ${states.currChap}`}</div>;
 }
 
+function capitalize( s: string )
+{
+	return s[0].toUpperCase() + s.slice(1);
+}
+
 function ResponseField( { question, idx } : { question: Question, idx: number } )
 {
 	switch ( question.type )
@@ -51,15 +56,15 @@ function ResponseField( { question, idx } : { question: Question, idx: number } 
 			return (
 				<>
 					{question.options?.map((op, i) => (
-						<label key={i}><input className={styles.response} key={i} type="radio" name={`q${idx}`} value={op}/> {op}</label>
+						<label className={styles.label} key={i}><input key={i} type="radio" name={`q${idx}`} value={op}/>{capitalize(op)}</label>
 					))}
 				</>
 			);
 		case "true-false":
 			return (
 				<>
-					<label><input className={styles.response} type="radio" name={`q${idx}`} value={"true"}/> True</label>
-					<label><input className={styles.response} type="radio" name={`q${idx}`} value={"false"}/> False</label>
+					<label className={styles.label}><input type="radio" name={`q${idx}`} value={"true"}/>True</label>
+					<label className={styles.label}><input type="radio" name={`q${idx}`} value={"false"}/>False</label>
 				</>
 			);
 		case "text":
