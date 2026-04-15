@@ -13,6 +13,7 @@ export type SettingsContextType =
 	setMusicEnabled: Dispatch<SetStateAction<boolean>>,
 	volume: number,
 	setVolume: Dispatch<SetStateAction<number>>,
+	resetSettings: () => void,
 }
 
 type Settings =
@@ -24,22 +25,21 @@ type Settings =
 	volume: number,
 }
 
+const defaultSettings: Settings =
+{
+	questionsEnabled: true,
+	aiQuestionsEnabled: true,
+	fontSize: 24,
+	musicEnabled: true,
+	volume: 0.5,
+};
+
 const SettingsContext = createContext<SettingsContextType | null>(null);
 
 function loadSettings()
 {
-	const defaultSettings: Settings =
-	{
-		questionsEnabled: true,
-		aiQuestionsEnabled: true,
-		fontSize: 24,
-		musicEnabled: true,
-		volume: 0.5,
-	};
-
 	const stored = localStorage.getItem("settings");
 	const settings = stored ? JSON.parse(stored) : defaultSettings;
-
 	return settings;
 }
 
@@ -52,6 +52,15 @@ export default function SettingsProvider( { children } : {children: ReactNode} )
 	const [musicEnabled, setMusicEnabled] = useState<boolean>(settings.musicEnabled);
 	const [volume, setVolume] = useState<number>(settings.volume);
 
+	function resetSettings()
+	{
+		setQuestionsEnabled(defaultSettings.questionsEnabled);
+		setAiQuestionsEnabled(defaultSettings.aiQuestionsEnabled);
+		setFontSize(defaultSettings.fontSize);
+		setMusicEnabled(defaultSettings.musicEnabled);
+		setVolume(defaultSettings.volume);
+	}
+
 	return (
 		<SettingsContext.Provider
 			value=
@@ -61,6 +70,7 @@ export default function SettingsProvider( { children } : {children: ReactNode} )
 				fontSize, setFontSize,
 				musicEnabled, setMusicEnabled,
 				volume, setVolume,
+				resetSettings,
 			}}>
 			{children}
 		</SettingsContext.Provider>

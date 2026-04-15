@@ -153,6 +153,11 @@ export default function Settings( { controls } : SettingsProps )
 					setting={Math.floor(settings.volume * 100)}
 					onChange={(e) => settings.setVolume(Number(e.target.value) / 100)}/>
 
+				<Button
+					label="Reset settings to default:"
+					buttonText="Reset"
+					onClick={settings.resetSettings}/>
+
 			</div>
 		</>
 	)
