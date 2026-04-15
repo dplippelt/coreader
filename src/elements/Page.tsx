@@ -68,7 +68,7 @@ export default function Page( { book, states, controls} : PageProps )
 		case Screens.bookSelectMenu:
 			return <BookSelect controls={controls}/>;
 		case Screens.chapSelectMenu:
-			{ return states.currBook ? <ChapterSelect chapters={book.chapters} controls={controls}/> : <BookSelect controls={controls}/> };
+			return <ChapterSelect chapters={book.chapters} controls={controls}/>;
 		case Screens.settingsMenu:
 			return <Settings controls={controls}/>;
 		case Screens.questions:
@@ -77,11 +77,10 @@ export default function Page( { book, states, controls} : PageProps )
 				controls.next();
 				return;
 			}
-			
+
 			const questions = states.questions[`chapter_${states.currChap}`];
 
 			return <Questions key={states.currChap} questions={questions} states={states} controls={controls}/>
-			// return <Questions key={states.currChap} questions={currChap!.questions} states={states} controls={controls}/>
 		case Screens.reader:
 			return (
 				<>

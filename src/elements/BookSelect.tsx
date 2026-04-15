@@ -16,7 +16,7 @@ export default function BookSelect( { controls } : BookSelectProps )
 			</div>
 			<div className={styles.menuHeader}>Books</div>
 			{books.map((book, idx) => (
-				<div key={idx} className={styles.book} onClick={() => controls.goToBook(book)}>{book}</div>
+				<div key={idx} className={styles.book} onClick={() => { controls.setBook(book); controls.goToChapSelect() }}>{book}</div>
 			))}
 		</>
 	)

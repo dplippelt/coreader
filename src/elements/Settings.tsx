@@ -154,6 +154,11 @@ export default function Settings( { controls } : SettingsProps )
 					onChange={(e) => settings.setVolume(Number(e.target.value) / 100)}/>
 
 				<Button
+					label="Reset book progress:"
+					buttonText="Reset"
+					onClick={controls.resetBookProgress}/>
+
+				<Button
 					label="Reset settings to default:"
 					buttonText="Reset"
 					onClick={settings.resetSettings}/>

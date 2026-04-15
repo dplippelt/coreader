@@ -23,9 +23,9 @@ function Buttons( { states, controls } : ButtonProps )
 	return (
 		<>
 			<button className={styles.startMenuButton} onClick={controls.goToBookSelect}>Book Selection</button>
-			<button className={styles.startMenuButton} onClick={controls.goToChapSelect}>Chapter Selection</button>
+			<button className={styles.startMenuButton} onClick={ states.currChap === -1 ? controls.goToBookSelect : controls.goToChapSelect}>Chapter Selection</button>
 			<button className={styles.startMenuButton} onClick={controls.goToSettings}>Settings</button>
-			{ states.currChap !== -1 ? <button className={styles.startMenuButton} onClick={controls.goToPrevScreen}>Continue Reading</button> : <></> }
+			{ states.currChap !== -1 ? <button className={styles.startMenuButton} onClick={() => controls.goToChap(states.currChap)}>Continue Reading</button> : <></> }
 		</>
 	)
 }

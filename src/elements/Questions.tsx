@@ -92,8 +92,6 @@ function Qs( { questions, controls } : QsProps )
 		const data = new FormData(form!);
 		const fb: boolean[] = [];
 
-		console.log(Object.fromEntries(data));
-
 		for ( let i = 0; i < questions.length; i++ )
 		{
 			const response: (string | undefined) = data.get(`q${i}`)?.toString();

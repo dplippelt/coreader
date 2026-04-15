@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo } from 'react'
 import type { Book, Question } from './books/dracula.ts'
 import { musicUrls } from './books/dracula.ts'
 import { getBook, Screens } from './util/utils.ts'
 import Page from './elements/Page.tsx'
 import { useSettings } from './elements/SettingsContext.tsx'
 import useMusic from './hooks/useMusic.ts'
+import useAppState from './hooks/useAppState.ts'
 import { systemPrompt, userPrompt } from './ai/promptInfo.ts'
 import { model } from './ai/model.ts'
 
@@ -21,7 +22,6 @@ export type Controls =
 	goToBookSelect: () => void,
 	goToSettings: () => void,
 	goToChap: ( chapNum: number ) => void,
-	goToBook: ( book: string ) => void,
 	goToQuestions: () => void,
 	goToPrevScreen: () => void,
 	play: ( url: string ) => Promise<void>,
@@ -31,6 +31,8 @@ export type Controls =
 	toggleMute: () => void,
 	setMusicIsPlayingTo: ( setMusicIsPlaying: boolean ) => void,
 	clearGeneratedQuestions: () => void,
+	resetBookProgress: () => void,
+	setBook: ( bookID: string ) => void,
 	getQuestions: () => Promise<void>,
 }
 
@@ -51,20 +53,18 @@ export default function App()
 {
 	const settings = useSettings();
 	const { preload, play, pause, resume, stop, mute } = useMusic();
-	const [screen, setScreen] = useState<Screen>(Screens.startMenu);
-	const [prevScreens, setPrevScreens] = useState<Screen[]>([]);
-	const [currBook, setCurrBook] = useState<string | null>(null);
-	const [currChap, setCurrChap] = useState<number>(-1);
-	const [navWidth, setNavWidth] = useState<number>(0);
-	const [musicIsPlaying, setMusicIsPlaying] = useState<boolean>(false);
-	const [muteOn, setMuteOn] = useState<boolean>(false);
-	const [zoomLevel, setZoomLevel] = useState<number>(1);
-	const [questions, setQuestions] = useState<Record<string, Question[]>>(() =>
-		{
-			const stored = localStorage.getItem("questions");
-			const questions = stored ? JSON.parse(stored) : {};
-			return questions;
-		});
+	const
+	{
+		screen, setScreen,
+		prevScreens, setPrevScreens,
+		navWidth, setNavWidth,
+		musicIsPlaying, setMusicIsPlaying,
+		muteOn, setMuteOn,
+		zoomLevel, setZoomLevel,
+		currBook, setCurrBook,
+		currChap, setCurrChap,
+		questions, setQuestions,
+	} = useAppState();
 
 	const book: Book = useMemo(() => getBook(currBook), [currBook]);
 
@@ -97,12 +97,22 @@ export default function App()
 	useEffect(() =>
 	{
 		localStorage.setItem("settings", JSON.stringify(settings));
-	});
+	}, [settings]);
 
 	useEffect(() =>
 	{
 		localStorage.setItem("questions", JSON.stringify(questions));
 	}, [questions]);
+
+	useEffect(() =>
+	{
+		localStorage.setItem("currBook", currBook ? currBook : "");
+	}, [currBook]);
+
+	useEffect(() =>
+	{
+		localStorage.setItem("currChap", currChap.toString());
+	}, [currChap]);
 
 	useEffect(() =>
 	{
@@ -149,7 +159,6 @@ export default function App()
 		}
 
 		const text = data.choices[0].message.content;
-		console.log(`Groq: ${text}`);
 		const parsed = JSON.parse(text);
 		setQuestions(prev => ({ ...prev, [`chapter_${currChap}`]: parsed.questions }));
 	}
@@ -203,15 +212,6 @@ export default function App()
 		setScreen(Screens.settingsMenu);
 	}
 
-	function goToBook( bookID: string )
-	{
-		window.scrollTo(0,0);
-		setCurrChap(0);
-		setCurrBook(bookID);
-		setPrevScreens([...prevScreens, screen]);
-		setScreen(Screens.reader);
-	}
-
 	function goToChapter( chapNum: number )
 	{
 		window.scrollTo(0, 0);
@@ -233,10 +233,12 @@ export default function App()
 			return;
 
 		window.scrollTo(0, 0);
+
 		const copy = prevScreens.slice();
 		let prev = copy.pop()!;
 		if ( prev === Screens.questions && !settings.questionsEnabled )
 			prev = copy.pop()!;
+
 		setScreen(prev);
 		setPrevScreens(copy);
 	}
@@ -257,6 +259,17 @@ export default function App()
 		setQuestions({});
 	}
 
+	function resetBookProgress()
+	{
+		setCurrChap(-1);
+		setCurrBook(null);
+	}
+
+	function setBook( bookID: string )
+	{
+		setCurrBook(bookID);
+	}
+
 	const controls: Controls =
 	{
 		next: handleNextChapter,
@@ -265,7 +278,6 @@ export default function App()
 		goToChapSelect: goToChapterSelect,
 		goToBookSelect: goToBookSelect,
 		goToSettings: goToSettings,
-		goToBook: goToBook,
 		goToChap: goToChapter,
 		goToQuestions: goToQuestions,
 		goToPrevScreen: goToPrevScreen,
@@ -276,6 +288,8 @@ export default function App()
 		setMusicIsPlayingTo: setMusicIsPlayingTo,
 		toggleMute: toggleMute,
 		clearGeneratedQuestions: clearGeneratedQuestions,
+		resetBookProgress: resetBookProgress,
+		setBook: setBook,
 		getQuestions: getQuestions,
 	}
 
