@@ -59,7 +59,12 @@ export default function App()
 	const [musicIsPlaying, setMusicIsPlaying] = useState<boolean>(false);
 	const [muteOn, setMuteOn] = useState<boolean>(false);
 	const [zoomLevel, setZoomLevel] = useState<number>(1);
-	const [questions, setQuestions] = useState<Record<string, Question[]>>({});
+	const [questions, setQuestions] = useState<Record<string, Question[]>>(() =>
+		{
+			const stored = localStorage.getItem("questions");
+			const questions = stored ? JSON.parse(stored) : {};
+			return questions;
+		});
 	const apiKey = useRef<string>(import.meta.env.VITE_GROQ_API_KEY);
 
 	const book: Book = useMemo(() => getBook(currBook), [currBook]);
@@ -89,6 +94,16 @@ export default function App()
 
 		return () => { window.removeEventListener('resize', updateNavWidth); window.removeEventListener('resize', updateZoomLevel); };
 	}, [currChap]);
+
+	useEffect(() =>
+	{
+		localStorage.setItem("settings", JSON.stringify(settings));
+	});
+
+	useEffect(() =>
+	{
+		localStorage.setItem("questions", JSON.stringify(questions));
+	}, [questions]);
 
 	useEffect(() =>
 	{

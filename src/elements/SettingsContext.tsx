@@ -15,15 +15,42 @@ export type SettingsContextType =
 	setVolume: Dispatch<SetStateAction<number>>,
 }
 
+type Settings =
+{
+	questionsEnabled: boolean,
+	aiQuestionsEnabled: boolean,
+	fontSize: number,
+	musicEnabled: boolean,
+	volume: number,
+}
+
 const SettingsContext = createContext<SettingsContextType | null>(null);
+
+function loadSettings()
+{
+	const defaultSettings: Settings =
+	{
+		questionsEnabled: true,
+		aiQuestionsEnabled: true,
+		fontSize: 24,
+		musicEnabled: true,
+		volume: 0.5,
+	};
+
+	const stored = localStorage.getItem("settings");
+	const settings = stored ? JSON.parse(stored) : defaultSettings;
+
+	return settings;
+}
 
 export default function SettingsProvider( { children } : {children: ReactNode} )
 {
-	const [questionsEnabled, setQuestionsEnabled] = useState<boolean>(true);
-	const [aiQuestionsEnabled, setAiQuestionsEnabled] = useState<boolean>(true);
-	const [fontSize, setFontSize] = useState<number>(24);
-	const [musicEnabled, setMusicEnabled] = useState<boolean>(true);
-	const [volume, setVolume] = useState<number>(0.5);
+	const [settings] = useState<Settings>(loadSettings());
+	const [questionsEnabled, setQuestionsEnabled] = useState<boolean>(settings.questionsEnabled);
+	const [aiQuestionsEnabled, setAiQuestionsEnabled] = useState<boolean>(settings.aiQuestionsEnabled);
+	const [fontSize, setFontSize] = useState<number>(settings.fontSize);
+	const [musicEnabled, setMusicEnabled] = useState<boolean>(settings.musicEnabled);
+	const [volume, setVolume] = useState<number>(settings.volume);
 
 	return (
 		<SettingsContext.Provider
