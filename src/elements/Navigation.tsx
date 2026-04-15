@@ -32,9 +32,9 @@ function Buttons( { states, controls } : ButtonsProps )
 	return (
 		<>
 			<button onClick={() => controls.prev()}>{getButtonText(states.currChap)}</button>
-			<button onClick={() => controls.startMenu()}>Start Menu</button>
-			<button onClick={() => controls.chapSelect()}>Chapter Select</button>
-			<button onClick={() => settings.questionsEnabled ? controls.questions() : controls.next()}>{settings.questionsEnabled ? "End Chapter" : "Next Chapter"}</button>
+			<button onClick={() => controls.goToStart()}>Start Menu</button>
+			<button onClick={() => controls.goToChapSelect()}>Chapter Select</button>
+			<button onClick={() => settings.questionsEnabled ? controls.goToQuestions() : controls.next()}>{settings.questionsEnabled ? "End Chapter" : "Next Chapter"}</button>
 		</>
 	)
 }
@@ -46,7 +46,7 @@ function InvNav( { states, controls } : InvNavProps )
 	return (
 		<>
 			<div style={{width: states.navWidth}} className={styles.invNavLeft} onClick={() => controls.prev()}></div>
-			<div style={{width: states.navWidth}} className={styles.invNavRight} onClick={() => settings.questionsEnabled ? controls.questions() : controls.next()}></div>
+			<div style={{width: states.navWidth}} className={styles.invNavRight} onClick={() => settings.questionsEnabled ? controls.goToQuestions() : controls.next()}></div>
 		</>
 	)
 }

@@ -22,9 +22,9 @@ function Buttons( { states, controls } : ButtonProps )
 {
 	return (
 		<>
-			<button className={styles.startMenuButton} onClick={controls.bookSelect}>Book Selection</button>
-			<button className={styles.startMenuButton} onClick={controls.chapSelect}>Chapter Selection</button>
-			<button className={styles.startMenuButton} onClick={controls.settingsMenu}>Settings</button>
+			<button className={styles.startMenuButton} onClick={controls.goToBookSelect}>Book Selection</button>
+			<button className={styles.startMenuButton} onClick={controls.goToChapSelect}>Chapter Selection</button>
+			<button className={styles.startMenuButton} onClick={controls.goToSettings}>Settings</button>
 			{ states.currChap !== -1 ? <button className={styles.startMenuButton} onClick={controls.goToPrevScreen}>Continue Reading</button> : <></> }
 		</>
 	)

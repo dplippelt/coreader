@@ -32,7 +32,7 @@ function Buttons( { controls } : ButtonProps )
 	return (
 		<div className={styles.buttonMenu}>
 			<button onClick={() => controls.goToPrevScreen()}>Back</button>
-			<button onClick={() => controls.startMenu()}>Start Menu</button>
+			<button onClick={() => controls.goToStart()}>Start Menu</button>
 			<button onClick={() => controls.next()}>Skip</button>
 		</div>
 	);
