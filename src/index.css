@@ -34,9 +34,9 @@ button
 	padding-top: 0.25rem;
 	padding-bottom: 0.25rem;
 	font-size: 0.9rem;
-	background-color: #93592f;
+	background-color: #986b4b;
 	transition: background-color 0.2s ease;
-	color: #f5f0e8;
+	color: #f8f3ed;
 	border: none;
 	border-radius: 8px;
 	font-family: 'Lato', sans-serif;
@@ -44,7 +44,8 @@ button
 
 button:hover
 {
-	background-color: #6b3410d9;
+	background-color: #7b4d2e;
+	color: #f5f0e8;
 }
 
 input[type="number"]
