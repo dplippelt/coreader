@@ -1,4 +1,4 @@
-import MusicButton from "./MusicButtons"
+import { Play, Pause, SoundOn, SoundOff } from "./MusicButtons"
 import { ButtonType } from "./MusicButtons"
 import styles from "./MusicPlayer.module.css"
 import type { AppStates, Controls } from "../App"
@@ -58,11 +58,11 @@ export default function MusicPlayer( { states, controls } : MusicPlayerProps )
 
 	return (
 		<div className={musicPlayerStyle(states.zoomLevel)}>
-			<MusicButton type={`${ButtonType.play}`} onClick={ () => buttonBehavior(ButtonType.play, states, controls, settings) }/>
-			<MusicButton type={`${ButtonType.pause}`} onClick={ () => buttonBehavior(ButtonType.pause, states, controls, settings) }/>
+			<Play onClick={ () => buttonBehavior(ButtonType.play, states, controls, settings) }/>
+			<Pause onClick={ () => buttonBehavior(ButtonType.pause, states, controls, settings) }/>
 			{ states.muteOn
-				? <MusicButton type={`${ButtonType.soundOff}`} onClick={ () => buttonBehavior(ButtonType.soundOff, states, controls, settings) }/>
-				: <MusicButton type={`${ButtonType.soundOn}`} onClick={ () => buttonBehavior(ButtonType.soundOn, states, controls, settings) }/>
+				? <SoundOff onClick={ () => buttonBehavior(ButtonType.soundOff, states, controls, settings) }/>
+				: <SoundOn onClick={ () => buttonBehavior(ButtonType.soundOn, states, controls, settings) }/>
 			}
 		</div>
 	);
