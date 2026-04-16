@@ -3,6 +3,8 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+	background-color: #f5f0e8;
+	color: #2c1810;
 }
 
 h1
@@ -29,7 +31,20 @@ button
 	margin-left: 1.2rem;
 	margin-right: 1.2rem;
 	padding: 0.2rem;
+	padding-top: 0.25rem;
+	padding-bottom: 0.25rem;
 	font-size: 0.9rem;
+	background-color: #925225d9;
+	transition: background-color 0.2s ease;
+	color: #f3ede3;
+	border: none;
+	border-radius: 8px;
+	font-family: 'Lato', sans-serif;
+}
+
+button:hover
+{
+	background-color: #6b3410d9;
 }
 
 input[type="number"]
@@ -38,15 +53,68 @@ input[type="number"]
 	width: 4rem;
 }
 
+input[type="number"],
+select
+{
+	background-color: #f5f0e8;
+	border: 1px solid #d4c5a9;
+	color: #2c1810;
+	border-radius: 4px;
+	padding-left: 0.3rem;
+	padding-top: 0.1rem;
+	padding-bottom: 0.1rem;
+}
+
 input[type="checkbox"]
 {
 	width: 0.8rem;
 	height: 0.8rem;
+	accent-color: #925225d9;
 }
 
 input[type="range"]
 {
 	width: 8rem;
+}
+
+input[type="range"]::-moz-range-track
+{
+	background-color: #925225d9;
+	height: 4px;
+	border-radius: 8px;
+}
+
+input[type="range"]::-webkit-slider-runnable-track
+{
+	background-color: #925225d9;
+	height: 4px;
+	border-radius: 8px;
+}
+
+input[type="range"]::-moz-range-thumb
+{
+	background-color: #a7876e;
+	border-color: #7e5c42;
+	border-width: 3px;
+	border-radius: 16px;
+}
+
+input[type="range"]::-webkit-slider-thumb
+{
+	background-color: #a7876e;
+	border-color: #7e5c42;
+	border-width: 3px;
+	border-radius: 16px;
+}
+
+input[type="range"]::-moz-range-thumb:hover
+{
+	background-color: #946c4d;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover
+{
+	background-color: #946c4d;
 }
 
 input[type="text"]

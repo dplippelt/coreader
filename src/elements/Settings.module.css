@@ -11,6 +11,8 @@
 	margin-top: 0rem;
 	margin-bottom: 2rem;
 	font-size: 2rem;
+	font-family: 'Lora', serif;
+	font-weight: bold;
 }
 
 .settings
@@ -22,6 +24,7 @@
 	grid-template-columns: 2fr 1fr;
 	row-gap: 1.5rem;
 	align-items: center;
+	font-family: 'Lora', serif;
 }
 
 .slider

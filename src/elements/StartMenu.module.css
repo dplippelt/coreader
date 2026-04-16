@@ -4,6 +4,8 @@
 	text-align: center;
 	margin-top: 5rem;
 	font-size: 3rem;
+	font-family: 'Playfair Display', serif;
+	font-weight: bold;
 }
 
 .startMenuButton
@@ -14,6 +16,6 @@
 	margin-bottom: 1rem;
 	font-size: 1rem;
 	width: 20rem;
-	padding-top: 0.2rem;
-	padding-bottom: 0.2rem;
+	padding-top: 0.3rem;
+	padding-bottom: 0.3rem;
 }
