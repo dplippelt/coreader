@@ -87,7 +87,7 @@ export default function Page( { book, states, controls} : PageProps )
 					<Navigation states={states} controls={controls}/>
 					<Book book={book} states={states} controls={controls}/>
 					<Navigation states={states} controls={controls}/>
-					<MusicPlayer states={states} controls={controls}/>
+					{ settings.musicEnabled ? <MusicPlayer states={states} controls={controls}/> : <></> }
 				</>
 			);
 		default:
