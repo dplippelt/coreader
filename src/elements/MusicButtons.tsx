@@ -1,21 +1,5 @@
 import styles from './MusicButtons.module.css'
 
-export const ButtonType =
-{
-	play: "play",
-	pause: "pause",
-	soundOn: "soundOn",
-	soundOff: "soundOff",
-} as const;
-
-export type ButtonType = typeof ButtonType[keyof typeof ButtonType];
-
-type MusicButtonProps =
-{
-	type: ButtonType,
-	onClick: () => void,
-}
-
 type ButtonProps =
 {
 	onClick: () => void,
@@ -77,20 +61,3 @@ export function SoundOff( { onClick } : ButtonProps )
 		</svg>
 	);
 }
-
-// export default function MusicButton( { type, onClick } : MusicButtonProps )
-// {
-// 	switch (type)
-// 	{
-// 		case ButtonType.play:
-// 			return <Play onClick={onClick}/>
-// 		case ButtonType.pause:
-// 			return <Pause onClick={onClick}/>
-// 		case ButtonType.soundOn:
-// 			return <SoundOn onClick={onClick}/>
-// 		case ButtonType.soundOff:
-// 			return <SoundOff onClick={onClick}/>
-// 		default:
-// 			return null;
-// 	}
-// }

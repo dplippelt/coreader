@@ -1,5 +1,4 @@
 import { Play, Pause, SoundOn, SoundOff } from "./MusicButtons"
-import { ButtonType } from "./MusicButtons"
 import styles from "./MusicPlayer.module.css"
 import type { AppStates, Controls } from "../App"
 import type { SettingsContextType } from "./SettingsContext"
@@ -10,6 +9,16 @@ type MusicPlayerProps =
 	states: AppStates,
 	controls: Controls
 }
+
+const ButtonType =
+{
+	play: "play",
+	pause: "pause",
+	soundOn: "soundOn",
+	soundOff: "soundOff",
+} as const;
+
+type ButtonType = typeof ButtonType[keyof typeof ButtonType];
 
 function buttonBehavior( type: ButtonType, states: AppStates, controls: Controls, settings: SettingsContextType )
 {
