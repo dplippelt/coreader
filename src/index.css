@@ -34,9 +34,9 @@ button
 	padding-top: 0.25rem;
 	padding-bottom: 0.25rem;
 	font-size: 0.9rem;
-	background-color: #925225d9;
+	background-color: #93592f;
 	transition: background-color 0.2s ease;
-	color: #f3ede3;
+	color: #f5f0e8;
 	border: none;
 	border-radius: 8px;
 	font-family: 'Lato', sans-serif;
@@ -49,7 +49,7 @@ button:hover
 
 input[type="number"]
 {
-	font-size: 0.85rem;
+	font-size: 0.8rem;
 	width: 4rem;
 }
 
@@ -57,7 +57,7 @@ input[type="number"],
 select
 {
 	background-color: #f5f0e8;
-	border: 1px solid #d4c5a9;
+	border: 1px solid #b3a488;
 	color: #2c1810;
 	border-radius: 4px;
 	padding-left: 0.3rem;
@@ -69,7 +69,7 @@ input[type="checkbox"]
 {
 	width: 0.8rem;
 	height: 0.8rem;
-	accent-color: #925225d9;
+	accent-color: #93592f;
 }
 
 input[type="range"]
@@ -79,14 +79,14 @@ input[type="range"]
 
 input[type="range"]::-moz-range-track
 {
-	background-color: #925225d9;
+	background-color: #93592f;
 	height: 4px;
 	border-radius: 8px;
 }
 
 input[type="range"]::-webkit-slider-runnable-track
 {
-	background-color: #925225d9;
+	background-color: #93592f;
 	height: 4px;
 	border-radius: 8px;
 }
@@ -130,5 +130,5 @@ html
 
 select
 {
-	font-size: 0.80rem;
+	font-size: 0.8rem;
 }
