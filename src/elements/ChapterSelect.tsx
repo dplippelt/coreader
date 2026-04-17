@@ -1,5 +1,5 @@
 import Markdown from "react-markdown";
-import type { Chapter } from "../books/dracula"
+import type { Chapter } from "../books/types"
 import type { Controls } from "../App";
 import styles from './ChapterSelect.module.css'
 

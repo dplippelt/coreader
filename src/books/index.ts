@@ -1,4 +1,4 @@
-const books = ["Dracula"];
+const books = ["Dracula", "Frankenstein"];
 
 export default books;
 

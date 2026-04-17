@@ -30,6 +30,3 @@ notes.txt
 .env
 .env*.local
 
-# Temp
-src/books/dracula/
-src/books/myDracula.epub

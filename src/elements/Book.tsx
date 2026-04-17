@@ -1,5 +1,5 @@
 import type { AppStates, Controls } from "../App"
-import type { Book } from "../books/dracula"
+import type { Book } from "../books/types"
 import TitlePage from "./TitlePage"
 import Chapter from "./Chapter"
 

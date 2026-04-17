@@ -1,4 +1,4 @@
-import type { Title } from '../books/dracula.ts'
+import type { Title } from '../books/types.ts'
 import type { Controls } from '../App.tsx'
 import styles from './TitlePage.module.css'
 

@@ -1,6 +1,6 @@
 import styles from './Questions.module.css'
-import type { Controls, AppStates } from '../App'
-import type { Question } from '../books/dracula'
+import type { Controls } from '../App'
+import type { Question } from '../books/types'
 import { useSettings } from './SettingsContext'
 import { useState } from 'react'
 
@@ -11,13 +11,13 @@ type ButtonProps =
 
 type HeaderProps =
 {
-	states: AppStates,
+	header: string,
 }
 
 type QuestionsProps =
 {
+	header: string,
 	questions: Question[],
-	states: AppStates,
 	controls: Controls,
 }
 
@@ -38,9 +38,9 @@ function Buttons( { controls } : ButtonProps )
 	);
 }
 
-function Header( { states } : HeaderProps )
+function Header( { header } : HeaderProps )
 {
-	return <div className={styles.header}>{`Questions Chapter ${states.currChap}`}</div>;
+	return <div className={styles.header}>{`Questions ${header}`}</div>;
 }
 
 function capitalize( s: string )
@@ -141,7 +141,7 @@ function LoadingScreen()
 	return <div className={styles.loading}>Loading questions...</div>
 }
 
-export default function Questions( { questions, states, controls } : QuestionsProps )
+export default function Questions( { header, questions, controls } : QuestionsProps )
 {
 	if ( questions === undefined )
 		controls.getQuestions();
@@ -149,7 +149,7 @@ export default function Questions( { questions, states, controls } : QuestionsPr
 	return (
 		<>
 			<Buttons controls={controls}/>
-			<Header states={states}/>
+			<Header header={header}/>
 			{
 				questions === undefined
 				? <LoadingScreen/>

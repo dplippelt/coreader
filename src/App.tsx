@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import type { Book, Question } from './books/dracula.ts'
-import { musicUrls } from './books/dracula.ts'
+import type { Book, Question } from './books/types'
+import { musicUrls } from './books/types'
 import { Screens } from './util/utils.ts'
 import Page from './elements/Page.tsx'
 import { useSettings } from './elements/SettingsContext.tsx'
@@ -8,7 +8,8 @@ import useMusic from './hooks/useMusic.ts'
 import useAppState from './hooks/useAppState.ts'
 import { systemPrompt, userPrompt } from './ai/promptInfo.ts'
 import { model } from './ai/model.ts'
-import dracula from './books/dracula.ts'
+import dracula from './books/dracula/dracula.ts'
+import frankstein from './books/frankenstein/frankenstein.ts'
 
 export const DEBUG = true;
 
@@ -76,6 +77,8 @@ export default function App()
 
 			if ( !books["dracula"] )
 				books["dracula"] = dracula();
+			if ( !books["frankenstein"] )
+				books["frankenstein"] = frankstein();
 
 			localStorage.setItem("books", JSON.stringify(books));
 		}

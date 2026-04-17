@@ -1,16 +1,7 @@
 import { useState } from "react";
 import { Screens } from "../util/utils";
 import type { Screen } from "../App";
-import type { Book, Question } from "../books/dracula";
-
-function getDraculaFromStorage() : Book | null
-{
-	const stored = localStorage.getItem("books");
-	const books = stored ? JSON.parse(stored) : null;
-	if ( !books )
-		return null;
-	return books["dracula"];
-}
+import type { Book, Question } from "../books/types";
 
 export default function useAppState()
 {
@@ -24,7 +15,7 @@ export default function useAppState()
 	const [book, setBook] = useState<Book | null>(() =>
 		{
 			const stored = localStorage.getItem("book");
-			const book = stored ? JSON.parse(stored) : getDraculaFromStorage();
+			const book = stored ? JSON.parse(stored) : null;
 			return book;
 		});
 

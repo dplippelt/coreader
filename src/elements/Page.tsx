@@ -1,5 +1,5 @@
 import type { Controls, AppStates } from "../App"
-import type { Book as Bk, Chapter as Chap } from "../books/dracula"
+import type { Book as Bk, Chapter as Chap } from "../books/types"
 import { Screens } from "../util/utils"
 import StartMenu from "./StartMenu"
 import Book from "./Book"
@@ -80,7 +80,7 @@ export default function Page( { book, states, controls} : PageProps )
 
 			const questions = states.questions[`chapter_${states.currChap}`];
 
-			return <Questions key={states.currChap} questions={questions} states={states} controls={controls}/>
+			return <Questions key={states.currChap} header={currChap!.header} questions={questions} controls={controls}/>
 		case Screens.reader:
 			return (
 				<>
