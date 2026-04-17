@@ -66,7 +66,7 @@ export default function Page( { book, states, controls} : PageProps )
 		case Screens.startMenu:
 			return <StartMenu states={states} controls={controls}/>;
 		case Screens.bookSelectMenu:
-			return <BookSelect states={states} controls={controls}/>;
+			return <BookSelect controls={controls}/>;
 		case Screens.chapSelectMenu:
 			return <ChapterSelect chapters={book!.chapters} controls={controls}/>;
 		case Screens.settingsMenu:

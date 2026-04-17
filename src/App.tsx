@@ -72,7 +72,18 @@ export default function App()
 
 	useEffect(() =>
 	{
-		dracula();
+		function initBooks()
+		{
+			const stored = localStorage.getItem("books");
+			const books = stored ? JSON.parse(stored) : {};
+
+			if ( !books["dracula"] )
+				books["dracula"] = dracula();
+
+			localStorage.setItem("books", JSON.stringify(books));
+		}
+
+		initBooks();
 	}, []);
 
 	useEffect(() =>
