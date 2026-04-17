@@ -34,13 +34,11 @@ export type Controls =
 	clearGeneratedQuestions: () => void,
 	resetBookProgress: () => void,
 	setCurrBook: ( bookID: string ) => void,
-	addBookToIndex: ( bookID: string ) => void,
 	getQuestions: () => Promise<void>,
 }
 
 export type AppStates =
 {
-	booksIndex: string[],
 	book: Book | null,
 	currChap: number,
 	screen: Screen,
@@ -64,7 +62,6 @@ export default function App()
 		musicIsPlaying, setMusicIsPlaying,
 		muteOn, setMuteOn,
 		zoomLevel, setZoomLevel,
-		booksIndex, setBooksIndex,
 		book, setBook,
 		currChap, setCurrChap,
 		questions, setQuestions,
@@ -121,11 +118,6 @@ export default function App()
 	{
 		localStorage.setItem("questions", JSON.stringify(questions));
 	}, [questions]);
-
-	useEffect(() =>
-	{
-		localStorage.setItem("booksIndex", JSON.stringify(booksIndex));
-	}, [booksIndex]);
 
 	useEffect(() =>
 	{
@@ -299,11 +291,6 @@ export default function App()
 			setBook(books[bookID]);
 	}
 
-	function addBookToIndex( bookID: string )
-	{
-		setBooksIndex(prev => [...prev, bookID]);
-	}
-
 	const controls: Controls =
 	{
 		next: handleNextChapter,
@@ -324,13 +311,11 @@ export default function App()
 		clearGeneratedQuestions: clearGeneratedQuestions,
 		resetBookProgress: resetBookProgress,
 		setCurrBook: setCurrBook,
-		addBookToIndex: addBookToIndex,
 		getQuestions: getQuestions,
 	}
 
 	const states: AppStates =
 	{
-		booksIndex: booksIndex,
 		book: book,
 		currChap: currChap,
 		screen: screen,
