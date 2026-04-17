@@ -8,8 +8,8 @@ export default function useMusic()
 	const srcRef = useRef<MediaElementAudioSourceNode | null>(null);
 	const gainRef = useRef<GainNode | null>(null);
 	const audioCacheRef = useRef<Record<string, HTMLAudioElement>>({});
-	const pauseTimeOutIDRef = useRef<number | undefined>(undefined);
-	const stopTimeOutIDRef = useRef<number | undefined>(undefined);
+	const pauseTimeOutIDRef = useRef<NodeJS.Timeout | undefined>(undefined);
+	const stopTimeOutIDRef = useRef<NodeJS.Timeout | undefined>(undefined);
 	const fadeOutEndTime = useRef<number>(0);
 	const muteOnRef = useRef<boolean>(false);
 	const settings = useSettings();
