@@ -15944,8 +15944,12 @@ function getMusicTrack( chap_num: number ) : string
 	return music[`chapter_1`].url;
 }
 
-export default function getDracula(): Book
+export default function getDracula(): void
 {
+	const stored = localStorage.getItem("books");
+	if ( stored )
+		return;
+
 	const rawChapters = [...rawBook.matchAll(/\nCHAPTER [IVXLC]+\n/g)];
 	const title: Title = { num: 0, title: "Dracula", author: "Bram Stoker"};
 	const chapters: Chapter[] = [];
@@ -15963,5 +15967,5 @@ export default function getDracula(): Book
 		chapters.push({ num: chap_num, title: chap_title, content: chap_content, questions: questions, music: music });
 	}
 
-	return { title: title, chapters: chapters};
+	localStorage.setItem("books", JSON.stringify({ "dracula": { title: title, chapters: chapters } }));
 }

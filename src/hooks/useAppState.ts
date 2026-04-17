@@ -1,7 +1,17 @@
 import { useState } from "react";
 import { Screens } from "../util/utils";
 import type { Screen } from "../App";
-import type { Question } from "../books/dracula";
+import type { Book, Question } from "../books/dracula";
+import bks from "../books";
+
+function getDraculaFromStorage() : Book | null
+{
+	const stored = localStorage.getItem("books");
+	const books = stored ? JSON.parse(stored) : null;
+	if ( !books )
+		return null;
+	return books["dracula"];
+}
 
 export default function useAppState()
 {
@@ -12,11 +22,18 @@ export default function useAppState()
 	const [muteOn, setMuteOn] = useState<boolean>(false);
 	const [zoomLevel, setZoomLevel] = useState<number>(1);
 
-	const [currBook, setCurrBook] = useState<string | null>(() =>
+	const [booksIndex, setBooksIndex] = useState<string[]>(() =>
 		{
-			const stored = localStorage.getItem("currBook");
-			const currBook = stored && stored.length ? stored : null;
-			return currBook;
+			const stored = localStorage.getItem("booksIndex");
+			const booksIndex = stored ? JSON.parse(stored) : bks;
+			return booksIndex;
+		});
+
+	const [book, setBook] = useState<Book | null>(() =>
+		{
+			const stored = localStorage.getItem("book");
+			const book = stored ? JSON.parse(stored) : getDraculaFromStorage();
+			return book;
 		});
 
 	const [currChap, setCurrChap] = useState<number>(() =>
@@ -40,7 +57,8 @@ export default function useAppState()
 				musicIsPlaying, setMusicIsPlaying,
 				muteOn, setMuteOn,
 				zoomLevel, setZoomLevel,
-				currBook, setCurrBook,
+				booksIndex, setBooksIndex,
+				book, setBook,
 				currChap, setCurrChap,
 				questions, setQuestions,
 			}

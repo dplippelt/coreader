@@ -1,13 +1,14 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect } from 'react'
 import type { Book, Question } from './books/dracula.ts'
 import { musicUrls } from './books/dracula.ts'
-import { getBook, Screens } from './util/utils.ts'
+import { Screens } from './util/utils.ts'
 import Page from './elements/Page.tsx'
 import { useSettings } from './elements/SettingsContext.tsx'
 import useMusic from './hooks/useMusic.ts'
 import useAppState from './hooks/useAppState.ts'
 import { systemPrompt, userPrompt } from './ai/promptInfo.ts'
 import { model } from './ai/model.ts'
+import dracula from './books/dracula.ts'
 
 export const DEBUG = true;
 
@@ -32,13 +33,15 @@ export type Controls =
 	setMusicIsPlayingTo: ( setMusicIsPlaying: boolean ) => void,
 	clearGeneratedQuestions: () => void,
 	resetBookProgress: () => void,
-	setBook: ( bookID: string ) => void,
+	setCurrBook: ( bookID: string ) => void,
+	addBookToIndex: ( bookID: string ) => void,
 	getQuestions: () => Promise<void>,
 }
 
 export type AppStates =
 {
-	currBook: string | null,
+	booksIndex: string[],
+	book: Book | null,
 	currChap: number,
 	screen: Screen,
 	prevScreens: Screen[],
@@ -61,12 +64,16 @@ export default function App()
 		musicIsPlaying, setMusicIsPlaying,
 		muteOn, setMuteOn,
 		zoomLevel, setZoomLevel,
-		currBook, setCurrBook,
+		booksIndex, setBooksIndex,
+		book, setBook,
 		currChap, setCurrChap,
 		questions, setQuestions,
 	} = useAppState();
 
-	const book: Book = useMemo(() => getBook(currBook), [currBook]);
+	useEffect(() =>
+	{
+		dracula();
+	}, []);
 
 	useEffect(() =>
 	{
@@ -106,8 +113,13 @@ export default function App()
 
 	useEffect(() =>
 	{
-		localStorage.setItem("currBook", currBook ? currBook : "");
-	}, [currBook]);
+		localStorage.setItem("booksIndex", JSON.stringify(booksIndex));
+	}, [booksIndex]);
+
+	useEffect(() =>
+	{
+		localStorage.setItem("book", JSON.stringify(book));
+	}, [book]);
 
 	useEffect(() =>
 	{
@@ -126,13 +138,13 @@ export default function App()
 		if ( questions[`chapter_${currChap}`] !== undefined )
 			return;
 		if ( !settings.aiQuestionsEnabled )
-			return setQuestions(prev => ({ ...prev, [`chapter_${currChap}`]: book.chapters[currChap - 1].questions }));
+			return setQuestions(prev => ({ ...prev, [`chapter_${currChap}`]: book!.chapters[currChap - 1].questions }));
 
 		function getChapterContent()
 		{
 			if ( DEBUG )
-				return book.chapters[currChap - 1].content.slice(0, 3000);
-			return book.chapters[currChap - 1].content;
+				return book!.chapters[currChap - 1].content.slice(0, 3000);
+			return book!.chapters[currChap - 1].content;
 		}
 
 		const response = await fetch("/api/groq",
@@ -155,7 +167,7 @@ export default function App()
 		if ( !response.ok )
 		{
 			console.error(`GroqError: ${JSON.stringify(data)}`);
-			return setQuestions(prev => ({ ...prev, [`chapter_${currChap}`]: book.chapters[currChap - 1].questions }));
+			return setQuestions(prev => ({ ...prev, [`chapter_${currChap}`]: book!.chapters[currChap - 1].questions }));
 		}
 
 		const text = data.choices[0].message.content;
@@ -171,7 +183,7 @@ export default function App()
 	function handleNextChapter()
 	{
 		window.scrollTo(0, 0);
-		if ( currChap < book.chapters.length - 1 )
+		if ( currChap < book!.chapters.length - 1 )
 			setCurrChap(currChap + 1);
 		setScreen(Screens.reader);
 	}
@@ -262,12 +274,23 @@ export default function App()
 	function resetBookProgress()
 	{
 		setCurrChap(-1);
-		setCurrBook(null);
+		setBook(null);
 	}
 
-	function setBook( bookID: string )
+	function setCurrBook( bookID: string )
 	{
-		setCurrBook(bookID);
+		const stored = localStorage.getItem("books");
+		const books = stored ? JSON.parse(stored) : null;
+
+		if ( !books )
+			setBook(null);
+		else
+			setBook(books[bookID]);
+	}
+
+	function addBookToIndex( bookID: string )
+	{
+		setBooksIndex(prev => [...prev, bookID]);
 	}
 
 	const controls: Controls =
@@ -289,13 +312,15 @@ export default function App()
 		toggleMute: toggleMute,
 		clearGeneratedQuestions: clearGeneratedQuestions,
 		resetBookProgress: resetBookProgress,
-		setBook: setBook,
+		setCurrBook: setCurrBook,
+		addBookToIndex: addBookToIndex,
 		getQuestions: getQuestions,
 	}
 
 	const states: AppStates =
 	{
-		currBook: currBook,
+		booksIndex: booksIndex,
+		book: book,
 		currChap: currChap,
 		screen: screen,
 		prevScreens: prevScreens,

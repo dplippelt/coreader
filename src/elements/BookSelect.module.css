@@ -26,3 +26,16 @@
 	text-decoration: underline;
 	font-family: 'Lora', serif;
 }
+
+/* .fileUpload
+{
+	display: grid;
+	max-width: 18rem;
+	width: fit-content;
+	margin: auto;
+	margin-top: 3rem;
+	grid-template-columns: 2fr 1fr;
+	align-items: center;
+	font-family: 'Lora', serif;
+	font-size: 0.80rem;
+} */

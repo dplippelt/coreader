@@ -5,7 +5,7 @@ import Chapter from "./Chapter"
 
 type BookProps =
 {
-	book: Book,
+	book: Book | null,
 	states: AppStates,
 	controls: Controls,
 }
@@ -13,7 +13,7 @@ type BookProps =
 export default function Book( { book, states, controls } : BookProps )
 {
 	if ( states.currChap === 0 )
-		return <TitlePage titlePage={book.title} controls={controls}/>
+		return <TitlePage titlePage={book!.title} controls={controls}/>
 
-	return <Chapter chapter={book.chapters[states.currChap - 1]}/>
+	return <Chapter chapter={book!.chapters[states.currChap - 1]}/>
 }

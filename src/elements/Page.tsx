@@ -14,7 +14,7 @@ import { useEffect, useRef } from 'react'
 
 type PageProps =
 {
-	book: Bk,
+	book: Bk | null,
 	states: AppStates,
 	controls: Controls,
 }
@@ -57,7 +57,7 @@ function playMusic( chapter: Chap | null, states: AppStates, controls: Controls 
 export default function Page( { book, states, controls} : PageProps )
 {
 	const settings = useSettings();
-	const currChap: Chap | null = !states.currChap ? null : book.chapters[states.currChap - 1];
+	const currChap: Chap | null = states.currChap === -1 ? null : book!.chapters[states.currChap - 1];
 
 	playMusic(currChap, states, controls);
 
@@ -66,9 +66,9 @@ export default function Page( { book, states, controls} : PageProps )
 		case Screens.startMenu:
 			return <StartMenu states={states} controls={controls}/>;
 		case Screens.bookSelectMenu:
-			return <BookSelect controls={controls}/>;
+			return <BookSelect states={states} controls={controls}/>;
 		case Screens.chapSelectMenu:
-			return <ChapterSelect chapters={book.chapters} controls={controls}/>;
+			return <ChapterSelect chapters={book!.chapters} controls={controls}/>;
 		case Screens.settingsMenu:
 			return <Settings controls={controls}/>;
 		case Screens.questions:

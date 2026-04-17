@@ -29,3 +29,7 @@ notes.txt
 # Environment variables
 .env
 .env*.local
+
+# Temp
+src/books/dracula/
+src/books/myDracula.epub
