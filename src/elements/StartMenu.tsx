@@ -15,7 +15,7 @@ type ButtonProps =
 
 function Header()
 {
-	return <div className={styles.appTitle}>My Reader</div>
+	return <div className={styles.appTitle}>CoReader</div>
 }
 
 function Buttons( { states, controls } : ButtonProps )
