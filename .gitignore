@@ -7,12 +7,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-music_backup
 node_modules
 dist
 dist-ssr
 *.local
-notes.txt
 .vercel
 
 # Editor directories and files
@@ -30,3 +28,7 @@ notes.txt
 .env
 .env*.local
 
+# personal
+music_backup
+notes.txt
+.repomixignore
