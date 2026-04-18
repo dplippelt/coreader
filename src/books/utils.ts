@@ -1,6 +1,7 @@
-import qs from './dracula/draculaQuestions.json'
+import draculaQs from './dracula/draculaQuestions.json'
+import frankensteinQs from './frankenstein/frankensteinQuestions.json'
 import music from './dracula/draculaMusic.json'
-import type { Question } from "./types"
+import { BookTypes, type BookType, type Question } from "./types"
 
 export function cleanChapter( rawBook: string, start_chap_idx: number, end_chap_idx: number ) : string
 {
@@ -12,9 +13,21 @@ export function getHeader( header: string ) : string
 	return header.slice(1, -1);
 }
 
-export function getQuestions( chap_num: number ): Question[]
+function getQs( bootType: BookType )
+{
+	switch (bootType)
+	{
+		case BookTypes.dracula:
+			return draculaQs;
+		case BookTypes.frankenstein:
+			return frankensteinQs;
+	}
+}
+
+export function getQuestions( chap_num: number, bookType: BookType ): Question[]
 {
 	const questions: Question[] = [];
+	const qs = getQs(bookType);
 	const key = `chapter_${chap_num}` as string as keyof typeof qs;
 	const chap_qs = qs[key] ?? [];
 

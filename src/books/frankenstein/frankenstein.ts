@@ -1,5 +1,5 @@
 import frankensteinBook from './frankensteinText.ts'
-import type { Chapter, Title, Book } from '../types.ts'
+import { type Chapter, type Title, type Book, BookTypes } from '../types.ts'
 import { cleanChapter, getHeader, getQuestions, getMusicTrack } from '../utils.ts'
 
 function getContent( chap_text: string )
@@ -26,7 +26,7 @@ export default function getFrankenstein(): Book
 		const chap_header = getHeader(rawChapters[i][0]);
 		const chap_title = "";
 		const chap_content = getContent(chap_text);
-		const questions = getQuestions(chap_num);
+		const questions = getQuestions(chap_num, BookTypes.frankenstein);
 		const music = getMusicTrack(chap_num);
 
 		chapters.push({ num: chap_num, header: chap_header, title: chap_title, content: chap_content, questions: questions, music: music });

@@ -1,0 +1,841 @@
+{
+	"chapter_1":
+	[
+		{
+			"type": "true-false",
+			"question": "Walton's letter is addressed to his mother.",
+			"answer": "false"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What natural phenomenon does Walton hope his expedition will help explain?",
+			"options": ["the path of the Gulf Stream", "the secret of the magnet", "the origin of ocean currents", "the cause of the northern lights"],
+			"answer": "the secret of the magnet"
+		},
+		{
+			"type": "text",
+			"question": "What city is Walton writing from in this letter?",
+			"answer": "St. Petersburgh"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What prevented young Walton from pursuing a seafaring life?",
+			"options": ["his uncle's refusal to fund him", "his cousin's urgent pleas", "his father's dying injunction", "his sister's tearful objection"],
+			"answer": "his father's dying injunction"
+		},
+		{
+			"type": "true-false",
+			"question": "Walton hired himself as an under-mate in a Greenland whaling vessel exactly once before the current voyage.",
+			"answer": "false"
+		}
+	],
+	"chapter_2":
+	[
+		{
+			"type": "multiple choice",
+			"question": "How old does Walton say he is in this letter?",
+			"options": ["twenty-four", "thirty-two", "twenty-eight", "twenty-five"],
+			"answer": "twenty-eight"
+		},
+		{
+			"type": "true-false",
+			"question": "The ship's master gave up his own farm and prize-money to help his rival marry the woman he loved.",
+			"answer": "true"
+		},
+		{
+			"type": "multiple choice",
+			"question": "Where did Walton first meet his lieutenant?",
+			"options": ["in Archangel", "in St. Petersburgh", "in London", "on board a whale vessel"],
+			"answer": "on board a whale vessel"
+		},
+		{
+			"type": "true-false",
+			"question": "Walton describes his lieutenant as a formally educated and well-read man.",
+			"answer": "false"
+		},
+		{
+			"type": "text",
+			"question": "What literary work does Walton allude to when he says he will kill no albatross?",
+			"answer": "Ancient Mariner"
+		}
+	],
+	"chapter_3":
+	[
+		{
+			"type": "text",
+			"question": "What type of vessel will carry Walton's letter back to England?",
+			"answer": "merchantman"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What does Walton report about his mood in this letter?",
+			"options": ["deeply anxious about the ice", "frustrated by slow progress", "in good spirits", "weary and homesick"],
+			"answer": "in good spirits"
+		},
+		{
+			"type": "true-false",
+			"question": "Walton reports that the ship suffered significant damage from a severe storm during the voyage.",
+			"answer": "false"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What does Walton mention continually passing the ship, indicating the dangers ahead?",
+			"options": ["dense fog banks", "floating sheets of ice", "massive icebergs", "violent ocean whirlpools"],
+			"answer": "floating sheets of ice"
+		},
+		{
+			"type": "true-false",
+			"question": "At the time of writing, Walton and his crew have already reached a very high latitude.",
+			"answer": "true"
+		}
+	],
+	"chapter_4":
+	[
+		{
+			"type": "multiple choice",
+			"question": "What did the stranger ask before agreeing to board Walton's ship?",
+			"options": ["How many crew members do you have on board?", "Will you have the kindness to inform me whither you are bound?", "Are there any other passengers aboard your vessel?", "Can you tell me how long you have been at sea?"],
+			"answer": "Will you have the kindness to inform me whither you are bound?"
+		},
+		{
+			"type": "true-false",
+			"question": "The first figure seen traveling across the ice appeared to be of normal human size.",
+			"answer": "false"
+		},
+		{
+			"type": "text",
+			"question": "What substance was used to revive the stranger after he fainted on deck?",
+			"answer": "brandy"
+		},
+		{
+			"type": "true-false",
+			"question": "Walton moved the stranger to his own cabin once he showed signs of recovery.",
+			"answer": "true"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What did the stranger tell Walton's lieutenant he was doing so far out on the ice?",
+			"options": ["Searching for a lost ship", "Mapping the northern ice fields", "Seeking one who fled from me", "Fleeing from a crew mutiny"],
+			"answer": "Seeking one who fled from me"
+		}
+	],
+	"chapter_5":
+	[
+		{
+			"type": "true-false",
+			"question": "Beaufort left his home country because he was too proud to live in poverty where he had once been respected.",
+			"answer": "true"
+		},
+		{
+			"type": "text",
+			"question": "In what town did Beaufort and his daughter take refuge after his financial ruin?",
+			"answer": "Lucerne"
+		},
+		{
+			"type": "multiple choice",
+			"question": "How long did it take Victor's father to locate Beaufort's hiding place?",
+			"options": ["three months", "six months", "two years", "ten months"],
+			"answer": "ten months"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What nationality was Elizabeth Lavenza's mother?",
+			"options": ["French", "German", "Italian", "Swiss"],
+			"answer": "German"
+		},
+		{
+			"type": "true-false",
+			"question": "Victor was born in Geneva, the city where his family had long been established.",
+			"answer": "false"
+		}
+	],
+	"chapter_6":
+	[
+		{
+			"type": "multiple choice",
+			"question": "Whose work did Victor first discover at an inn near Thonon when he was thirteen?",
+			"options": ["Paracelsus", "Albertus Magnus", "Cornelius Agrippa", "Sir Isaac Newton"],
+			"answer": "Cornelius Agrippa"
+		},
+		{
+			"type": "true-false",
+			"question": "Henry Clerval was the son of a merchant of Geneva.",
+			"answer": "true"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What event, witnessed when Victor was about fifteen, caused him to abandon his occult studies?",
+			"options": ["a solar eclipse over Lake Geneva", "a thunderstorm that destroyed an oak tree with lightning", "a flood that swept away the family's campagne", "a violent avalanche from the mountains of Jura"],
+			"answer": "a thunderstorm that destroyed an oak tree with lightning"
+		},
+		{
+			"type": "text",
+			"question": "What field of study did Victor turn to after abandoning his occult pursuits?",
+			"answer": "mathematics"
+		},
+		{
+			"type": "true-false",
+			"question": "Elizabeth shared Victor's intense passion for investigating the hidden causes of natural phenomena.",
+			"answer": "false"
+		}
+	],
+	"chapter_7":
+	[
+		{
+			"type": "true-false",
+			"question": "Victor's mother died as a direct result of nursing Elizabeth through her illness.",
+			"answer": "true"
+		},
+		{
+			"type": "multiple choice",
+			"question": "Which university was Victor sent to study at when he was seventeen?",
+			"options": ["the University of Geneva", "the University of Edinburgh", "the University of Ingolstadt", "the University of Heidelberg"],
+			"answer": "the University of Ingolstadt"
+		},
+		{
+			"type": "true-false",
+			"question": "Professor Krempe spoke admiringly of the alchemical authors Victor had studied.",
+			"answer": "false"
+		},
+		{
+			"type": "text",
+			"question": "What subject did Professor Waldman lecture on in his speech that transformed Victor's outlook?",
+			"answer": "chemistry"
+		},
+		{
+			"type": "multiple choice",
+			"question": "Why was Clerval unable to accompany Victor to Ingolstadt?",
+			"options": ["his mother fell ill before his departure", "his father, a narrow-minded trader, refused to allow it", "he lacked the funds to cover university fees", "Elizabeth persuaded him to remain in Geneva"],
+			"answer": "his father, a narrow-minded trader, refused to allow it"
+		}
+	],
+	"chapter_8":
+	[
+		{
+			"type": "multiple choice",
+			"question": "Where did Victor keep his secret workshop during the creation?",
+			"options": ["in the university's anatomy department", "in a solitary chamber at the top of the house", "in a rented cellar beneath the city streets", "in M. Waldman's private laboratory"],
+			"answer": "in a solitary chamber at the top of the house"
+		},
+		{
+			"type": "text",
+			"question": "Approximately how tall did Victor decide to make his creature?",
+			"answer": "eight feet"
+		},
+		{
+			"type": "true-false",
+			"question": "Victor completed his creation within a few weeks of beginning the project.",
+			"answer": "false"
+		},
+		{
+			"type": "multiple choice",
+			"question": "Which branch of natural philosophy drew Victor toward investigating the cause of life?",
+			"options": ["chemistry", "mathematics", "physiology", "astronomy"],
+			"answer": "physiology"
+		},
+		{
+			"type": "true-false",
+			"question": "Victor's father openly reproached him in letters for neglecting his correspondence.",
+			"answer": "false"
+		}
+	],
+	"chapter_9":
+	[
+		{
+			"type": "text",
+			"question": "In what month did Victor's creature first come to life?",
+			"answer": "November"
+		},
+		{
+			"type": "true-false",
+			"question": "When Victor returned to his apartment the morning after the creature's awakening, he found the creature still waiting there.",
+			"answer": "false"
+		},
+		{
+			"type": "multiple choice",
+			"question": "Who arrived in Ingolstadt unexpectedly the morning after the creature's first awakening?",
+			"options": ["Victor's father", "Elizabeth Lavenza", "Professor Waldman", "Henry Clerval"],
+			"answer": "Henry Clerval"
+		},
+		{
+			"type": "true-false",
+			"question": "Clerval fully informed Victor's family about the extent of his nervous illness.",
+			"answer": "false"
+		},
+		{
+			"type": "multiple choice",
+			"question": "Which of the creature's features formed a horrid contrast with its watery eyes and shrivelled complexion?",
+			"options": ["its rough, scarred forehead", "its flowing black hair and pearly white teeth", "its enormous and powerful hands", "its dull yellow skin stretched over muscle"],
+			"answer": "its flowing black hair and pearly white teeth"
+		}
+	],
+	"chapter_10":
+	[
+		{
+			"type": "true-false",
+			"question": "Clerval came to the University of Ingolstadt primarily to study chemistry.",
+			"answer": "false"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What happened during Victor's visit to the professors that caused him distress after his recovery?",
+			"options": ["M. Krempe publicly demanded he repeat his chemistry examinations", "M. Waldman praised Victor's astonishing progress in the sciences", "M. Waldman informed Victor he had lost his laboratory privileges", "M. Krempe accused Victor of abandoning his studies without cause"],
+			"answer": "M. Waldman praised Victor's astonishing progress in the sciences"
+		},
+		{
+			"type": "multiple choice",
+			"question": "Which languages did Clerval come to Ingolstadt to study?",
+			"options": ["Greek, Latin, and Hebrew", "French, Italian, and Spanish", "Persian, Arabic, and Sanskrit", "German, Russian, and Polish"],
+			"answer": "Persian, Arabic, and Sanskrit"
+		},
+		{
+			"type": "true-false",
+			"question": "Justine Moritz entered the Frankenstein household when she was twelve years old.",
+			"answer": "true"
+		},
+		{
+			"type": "text",
+			"question": "What career did Ernest Frankenstein wish to pursue, according to Elizabeth's letter?",
+			"answer": "military"
+		}
+	],
+	"chapter_11":
+	[
+		{
+			"type": "multiple choice",
+			"question": "What object did Victor's father believe had tempted William's murderer?",
+			"options": ["a gold watch William had been given for his birthday", "a miniature portrait of Victor's mother", "a jeweled locket belonging to Elizabeth", "a silk purse filled with coins"],
+			"answer": "a miniature portrait of Victor's mother"
+		},
+		{
+			"type": "true-false",
+			"question": "Victor was able to enter Geneva the same night he arrived after learning of William's death.",
+			"answer": "false"
+		},
+		{
+			"type": "text",
+			"question": "At what village was Victor forced to spend the night when the city gates of Geneva were shut?",
+			"answer": "Secheron"
+		},
+		{
+			"type": "true-false",
+			"question": "Victor decided to immediately report the creature as William's murderer to the authorities.",
+			"answer": "false"
+		},
+		{
+			"type": "multiple choice",
+			"question": "Who had been accused of murdering William by the time Victor arrived home?",
+			"options": ["an unknown vagrant seen near Plainpalais", "Ernest Frankenstein", "Justine Moritz", "a foreign servant recently dismissed from the household"],
+			"answer": "Justine Moritz"
+		}
+	],
+	"chapter_12":
+	[
+		{
+			"type": "true-false",
+			"question": "Justine's confession of guilt at the trial was genuine.",
+			"answer": "false"
+		},
+		{
+			"type": "text",
+			"question": "At what village did Justine say she had spent the evening on the night of the murder?",
+			"answer": "Chêne"
+		},
+		{
+			"type": "multiple choice",
+			"question": "Why did Justine confess to the murder despite being innocent?",
+			"options": ["she hoped to receive a lighter sentence in exchange for her plea", "she was pressured by her confessor who threatened excommunication", "she believed it was her religious duty to accept God's judgement", "she wished to protect the real killer from punishment"],
+			"answer": "she was pressured by her confessor who threatened excommunication"
+		},
+		{
+			"type": "true-false",
+			"question": "Elizabeth spoke in Justine's defense at the trial.",
+			"answer": "true"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What key piece of evidence was used against Justine at trial?",
+			"options": ["William's torn jacket discovered in her bedroom", "a witness who claimed to have seen Justine carry William into the fields", "a miniature portrait of Victor's mother found in her pocket", "a letter Justine had written expressing jealousy of William"],
+			"answer": "a miniature portrait of Victor's mother found in her pocket"
+		}
+	],
+	"chapter_13":
+	[
+		{
+			"type": "multiple choice",
+			"question": "What restrained Victor from giving in to the temptation to drown himself in the lake?",
+			"options": ["his hope of one day confronting the creature", "the thought of Elizabeth and his surviving family", "his fear of being unable to swim to safety", "his father's daily watch over him from the shore"],
+			"answer": "the thought of Elizabeth and his surviving family"
+		},
+		{
+			"type": "multiple choice",
+			"question": "Which valley did Victor travel to in search of relief from his despair?",
+			"options": ["the valley of Arve", "the valley of Servox", "the valley of Chamounix", "the valley of Mont Salêve"],
+			"answer": "the valley of Chamounix"
+		},
+		{
+			"type": "true-false",
+			"question": "Victor had never visited the valley of Chamounix before making this journey.",
+			"answer": "false"
+		},
+		{
+			"type": "text",
+			"question": "What animal did Victor hire for the rugged mountain roads after first traveling on horseback?",
+			"answer": "mule"
+		},
+		{
+			"type": "true-false",
+			"question": "Victor's journey to the Alpine valleys took place approximately two months after Justine's death.",
+			"answer": "true"
+		}
+	],
+	"chapter_14":
+	[
+		{
+			"type": "true-false",
+			"question": "Victor chose to ascend to Montanvert alone, without a guide.",
+			"answer": "true"
+		},
+		{
+			"type": "true-false",
+			"question": "The creature asked Victor to meet him at a hut in the valley below the glacier.",
+			"answer": "false"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What did the creature threaten if Victor refused to hear him out and fulfill his conditions?",
+			"options": ["to reveal the truth about William's murder to the authorities", "to destroy Victor's reputation at the university", "to glut the maw of death with the blood of Victor's remaining friends", "to return to Ingolstadt and destroy Victor's laboratory"],
+			"answer": "to glut the maw of death with the blood of Victor's remaining friends"
+		},
+		{
+			"type": "text",
+			"question": "Where did Victor and the creature take shelter so the creature could begin his tale?",
+			"answer": "hut"
+		},
+		{
+			"type": "true-false",
+			"question": "Victor agreed to hear the creature's tale purely out of curiosity, feeling no sense of duty toward his creation.",
+			"answer": "false"
+		}
+	],
+	"chapter_15":
+	[
+		{
+			"type": "text",
+			"question": "Near what town did the creature first take shelter in a forest after leaving Victor's apartment?",
+			"answer": "Ingolstadt"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What food did the creature eat from the shepherd's hut?",
+			"options": ["porridge, cold meat, and water", "bread, cheese, milk, and wine", "vegetables, dried fish, and cider", "oatcakes, butter, and ale"],
+			"answer": "bread, cheese, milk, and wine"
+		},
+		{
+			"type": "multiple choice",
+			"question": "How did the creature first come to discover fire?",
+			"options": ["he lit one himself using flint stones found in the hut", "he found one left behind by wandering beggars", "he watched a shepherd kindle a fire in his cottage", "he saw lightning ignite a dead tree during a storm"],
+			"answer": "he found one left behind by wandering beggars"
+		},
+		{
+			"type": "true-false",
+			"question": "When the creature entered the first village he came to, the inhabitants welcomed him with curiosity.",
+			"answer": "false"
+		},
+		{
+			"type": "true-false",
+			"question": "The creature found that cooking improved the taste of berries.",
+			"answer": "false"
+		}
+	],
+	"chapter_16":
+	[
+		{
+			"type": "multiple choice",
+			"question": "What did the creature eventually identify as the main cause of the De Lacey family's unhappiness?",
+			"options": ["grief over a recently lost family member", "the old man's blindness and failing health", "poverty", "fear of discovery by the French authorities"],
+			"answer": "poverty"
+		},
+		{
+			"type": "text",
+			"question": "What was the name of the young woman living in the cottage?",
+			"answer": "Agatha"
+		},
+		{
+			"type": "true-false",
+			"question": "When the creature first saw his reflection in a pool, he was pleased by his appearance.",
+			"answer": "false"
+		},
+		{
+			"type": "true-false",
+			"question": "The creature continued stealing food from the cottagers throughout the winter without any guilt.",
+			"answer": "false"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What were the first four words the creature learned from observing the cottagers?",
+			"options": ["fire, milk, bread, and wood", "father, sister, brother, and son", "good, dearest, unhappy, and love", "water, food, cold, and sleep"],
+			"answer": "fire, milk, bread, and wood"
+		}
+	],
+	"chapter_17":
+	[
+		{
+			"type": "text",
+			"question": "By what term did Felix call the newcomer when she first arrived at the cottage?",
+			"answer": "Arabian"
+		},
+		{
+			"type": "true-false",
+			"question": "Safie could speak the De Lacey family's language fluently when she first arrived.",
+			"answer": "false"
+		},
+		{
+			"type": "true-false",
+			"question": "The creature learned the language more quickly than Safie did.",
+			"answer": "true"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What book did Felix use to instruct Safie in the language?",
+			"options": ["The Arabian Nights", "Volney's Ruins of Empires", "The Sorrows of Werter", "Paradise Lost"],
+			"answer": "Volney's Ruins of Empires"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What did the creature learn about his own situation from hearing the lessons on human society?",
+			"options": ["that he could earn respect through courage and bravery", "that he possessed no money, friends, or property and was hideously deformed", "that humans would eventually accept him if he proved his good intentions", "that he was descended from a race more powerful than mankind"],
+			"answer": "that he possessed no money, friends, or property and was hideously deformed"
+		}
+	],
+	"chapter_18":
+	[
+		{
+			"type": "true-false",
+			"question": "The De Lacey family had previously lived in Paris in wealth and prosperity.",
+			"answer": "true"
+		},
+		{
+			"type": "multiple choice",
+			"question": "Why was Safie's father condemned to death by the French government?",
+			"options": ["he was found guilty of espionage against France", "for reasons judged unjust — his religion and wealth were seen as the real cause", "he was caught smuggling goods across the French border", "he had publicly criticized the French justice system"],
+			"answer": "for reasons judged unjust — his religion and wealth were seen as the real cause"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What happened to De Lacey and Agatha when the French government discovered Felix's plot?",
+			"options": ["they were expelled from France without trial", "they were thrown into prison", "they were placed under house arrest in Paris", "they were fined and had their property seized"],
+			"answer": "they were thrown into prison"
+		},
+		{
+			"type": "text",
+			"question": "To what city did Felix travel to surrender himself and try to free his family?",
+			"answer": "Paris"
+		},
+		{
+			"type": "true-false",
+			"question": "Safie's father kept his promise to allow her to marry Felix after being safely freed from prison.",
+			"answer": "false"
+		}
+	],
+	"chapter_19":
+	[
+		{
+			"type": "multiple choice",
+			"question": "What three books did the creature find in the leather portmanteau in the woods?",
+			"options": ["Paradise Lost, Plutarch's Lives, and The Sorrows of Werter", "Robinson Crusoe, The Iliad, and Don Quixote", "The Arabian Nights, Gulliver's Travels, and Paradise Lost", "Volney's Ruins of Empires, Paradise Lost, and Robinson Crusoe"],
+			"answer": "Paradise Lost, Plutarch's Lives, and The Sorrows of Werter"
+		},
+		{
+			"type": "text",
+			"question": "What did the creature find hidden in the pocket of the dress he had taken from Victor's laboratory?",
+			"answer": "journal"
+		},
+		{
+			"type": "multiple choice",
+			"question": "How did the creature plan to win over the De Lacey family?",
+			"options": ["by leaving gifts of food at the cottage door to build trust gradually", "by first approaching the blind old man alone when the others were away", "by writing a letter to Felix explaining his situation", "by approaching Agatha first, as she seemed gentler than Felix"],
+			"answer": "by first approaching the blind old man alone when the others were away"
+		},
+		{
+			"type": "true-false",
+			"question": "The creature found his situation closely mirrored that of Adam in Paradise Lost.",
+			"answer": "false"
+		},
+		{
+			"type": "true-false",
+			"question": "Felix treated the creature with kindness when he found him speaking with his blind father.",
+			"answer": "false"
+		}
+	],
+	"chapter_20":
+	[
+		{
+			"type": "text",
+			"question": "By what means did the creature destroy the De Laceys' cottage before abandoning it?",
+			"answer": "fire"
+		},
+		{
+			"type": "multiple choice",
+			"question": "Why did the creature place the portrait from William's body on the sleeping woman in the barn?",
+			"options": ["he believed she was the same woman pictured in the portrait", "he intended to make her the object of suspicion for the murder", "he wanted to keep the portrait hidden from Victor", "he hoped she would return it to its rightful owner"],
+			"answer": "he intended to make her the object of suspicion for the murder"
+		},
+		{
+			"type": "true-false",
+			"question": "After saving a young girl from drowning near the Swiss border, the creature was rewarded with gratitude.",
+			"answer": "false"
+		},
+		{
+			"type": "true-false",
+			"question": "The boy the creature encountered near Geneva told him that his father's name was Frankenstein.",
+			"answer": "true"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What did the creature find glittering on William's body after killing him?",
+			"options": ["a gold locket containing a letter", "a portrait of a lovely woman", "a silver watch engraved with a family crest", "a miniature of William's father"],
+			"answer": "a portrait of a lovely woman"
+		}
+	],
+	"chapter_21":
+	[
+		{
+			"type": "multiple choice",
+			"question": "What did the creature demand Victor create for him?",
+			"options": ["a house in a remote wilderness where no humans would disturb him", "a female companion of the same species as himself", "a map of the world and the means to travel freely", "a written account of his creation to prove he was made, not born"],
+			"answer": "a female companion of the same species as himself"
+		},
+		{
+			"type": "true-false",
+			"question": "Victor immediately agreed to the creature's demand without any hesitation.",
+			"answer": "false"
+		},
+		{
+			"type": "true-false",
+			"question": "The creature promised that if Victor fulfilled his request, he and his companion would go to South America and never be seen again.",
+			"answer": "true"
+		},
+		{
+			"type": "text",
+			"question": "What continent did Victor demand the creature quit forever as his condition for consenting?",
+			"answer": "Europe"
+		},
+		{
+			"type": "multiple choice",
+			"question": "By what did the creature swear his oath to Victor?",
+			"options": ["by the mountains of ice and the eternal cold", "by the sun and the blue sky of heaven", "by the graves of those he had wronged", "by the creator who gave him life"],
+			"answer": "by the sun and the blue sky of heaven"
+		}
+	],
+	"chapter_22":
+	[
+		{
+			"type": "true-false",
+			"question": "Victor's father arranged for Clerval to accompany Victor on his journey without telling Victor in advance.",
+			"answer": "true"
+		},
+		{
+			"type": "text",
+			"question": "At what city did Victor wait for Clerval to join him at the start of their journey?",
+			"answer": "Strasburgh"
+		},
+		{
+			"type": "true-false",
+			"question": "Victor honestly explained his true reasons for wanting to travel to England when speaking with his father.",
+			"answer": "false"
+		},
+		{
+			"type": "multiple choice",
+			"question": "How did Victor and Clerval travel from Strasburgh to England?",
+			"options": ["overland through France to Calais, then by sea to Dover", "down the Rhine by boat to Rotterdam, then by sea to London", "through the Alps and across France by post-chaise to Paris, then by sea", "by land through Holland and thence by sea from Amsterdam"],
+			"answer": "down the Rhine by boat to Rotterdam, then by sea to London"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What did Victor's father hope would result from Victor's journey to England?",
+			"options": ["that Victor would complete his scientific research and return famous", "that change of scene and varied amusement would restore Victor entirely to himself", "that Victor would find a cure for his mysterious illness abroad", "that Victor would meet Elizabeth's relatives and strengthen their ties"],
+			"answer": "that change of scene and varied amusement would restore Victor entirely to himself"
+		}
+	],
+	"chapter_23":
+	[
+		{
+			"type": "true-false",
+			"question": "Clerval came to London mainly to help Victor gather information for his secret work.",
+			"answer": "false"
+		},
+		{
+			"type": "multiple choice",
+			"question": "Where did Victor resolve to complete his secret work in solitude?",
+			"options": ["in the remote highlands near Edinburgh", "on one of the remotest of the Orkneys", "in an abandoned mill near Perth", "in a rented cottage deep in the Cumberland fells"],
+			"answer": "on one of the remotest of the Orkneys"
+		},
+		{
+			"type": "text",
+			"question": "At what city did Victor and Clerval agree to part ways so Victor could tour Scotland alone?",
+			"answer": "Perth"
+		},
+		{
+			"type": "true-false",
+			"question": "Victor found his second attempt at creation easier and less distressing than his first.",
+			"answer": "false"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What was Clerval's long-term ambition that he hoped to pursue through his contacts in Britain?",
+			"options": ["to write a comprehensive history of Oriental civilizations", "to secure a diplomatic post in Constantinople", "to visit India and assist the progress of European colonization and trade", "to establish a trading company with offices in London and Geneva"],
+			"answer": "to visit India and assist the progress of European colonization and trade"
+		}
+	],
+	"chapter_24":
+	[
+		{
+			"type": "multiple choice",
+			"question": "What caused Victor to destroy the unfinished female creature?",
+			"options": ["he saw the creature watching him through the casement with a malicious grin", "he received a letter from his father warning him to return home", "Clerval arrived unexpectedly and discovered the laboratory", "a violent storm destroyed his laboratory equipment"],
+			"answer": "he saw the creature watching him through the casement with a malicious grin"
+		},
+		{
+			"type": "true-false",
+			"question": "After Victor destroyed the unfinished female creature, the monster calmly accepted his decision.",
+			"answer": "false"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What threat did the creature deliver to Victor before departing from the island?",
+			"options": ["I will destroy every friend you have before the winter is out", "I shall be with you on your wedding-night", "You will find me waiting for you when you reach Geneva", "Before the next moon rises I shall have my revenge"],
+			"answer": "I shall be with you on your wedding-night"
+		},
+		{
+			"type": "text",
+			"question": "What did Victor put in a basket with stones to throw into the sea?",
+			"answer": "remains"
+		},
+		{
+			"type": "true-false",
+			"question": "Victor disposed of the remains of the destroyed female creature by burning them on the beach.",
+			"answer": "false"
+		}
+	],
+	"chapter_25":
+	[
+		{
+			"type": "multiple choice",
+			"question": "Whose body was shown to Victor when he was brought before the magistrate in Ireland?",
+			"options": ["William Frankenstein", "Henry Clerval", "Justine Moritz", "Elizabeth Lavenza"],
+			"answer": "Henry Clerval"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What evidence led to Victor being acquitted at the assizes?",
+			"options": ["A witness saw the creature commit the crime", "Victor was proven to be on the Orkney Islands at the time of the murder", "Mr. Kirwin vouched for Victor's innocence", "The body showed marks inconsistent with human hands"],
+			"answer": "Victor was proven to be on the Orkney Islands at the time of the murder"
+		},
+		{
+			"type": "text",
+			"question": "What drug did Victor take each night to enable sleep after his illness?",
+			"answer": "laudanum"
+		},
+		{
+			"type": "true-false",
+			"question": "Victor's father visited him in prison in Ireland.",
+			"answer": "true"
+		},
+		{
+			"type": "true-false",
+			"question": "Victor was publicly tried before a court that decides on life and death.",
+			"answer": "false"
+		}
+	],
+	"chapter_26":
+	[
+		{
+			"type": "true-false",
+			"question": "Victor and his father stopped in Paris to rest on their journey back to Geneva.",
+			"answer": "true"
+		},
+		{
+			"type": "text",
+			"question": "What was the name of the small estate on the shores of Como that belonged to Elizabeth?",
+			"answer": "Villa Lavenza"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What threat from the creature was recalled in Victor's mind after reading Elizabeth's letter?",
+			"options": ["I will destroy your next creation", "I will be with you on your wedding-night", "I will take revenge on your father first", "I will follow you to the ends of the earth"],
+			"answer": "I will be with you on your wedding-night"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What weapons did Victor carry on his person to defend himself before the wedding?",
+			"options": ["A sword and a knife", "A rifle and a pistol", "Pistols and a dagger", "A crossbow and a blade"],
+			"answer": "Pistols and a dagger"
+		},
+		{
+			"type": "true-false",
+			"question": "After the wedding ceremony, Victor and Elizabeth planned to spend their first night in Geneva.",
+			"answer": "false"
+		}
+	],
+	"chapter_27":
+	[
+		{
+			"type": "text",
+			"question": "In what town did Victor and Elizabeth plan to spend their wedding night?",
+			"answer": "Evian"
+		},
+		{
+			"type": "true-false",
+			"question": "Victor wounded the creature with his pistol after finding Elizabeth dead.",
+			"answer": "false"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What happened to Victor's father after learning of Elizabeth's murder?",
+			"options": ["He fled to Ernest for comfort", "He hired men to pursue the creature", "He fell ill and died within a few days", "He traveled to report the crime to the authorities"],
+			"answer": "He fell ill and died within a few days"
+		},
+		{
+			"type": "multiple choice",
+			"question": "Where did Victor see the creature after finding Elizabeth's body?",
+			"options": ["In the doorway of the inn", "Standing over Elizabeth's bed", "On the shore of the lake", "At the open window of the room"],
+			"answer": "At the open window of the room"
+		},
+		{
+			"type": "true-false",
+			"question": "After Elizabeth's murder, boats and nets were used in an attempt to find the creature in the lake.",
+			"answer": "true"
+		}
+	],
+	"chapter_28":
+	[
+		{
+			"type": "multiple choice",
+			"question": "Where did Victor make his oath of vengeance against the creature at the start of Chapter 24?",
+			"options": ["At the shore of Lake Geneva", "In his destroyed laboratory", "At the cemetery where his family was buried", "In the prison cell where he had been held"],
+			"answer": "At the cemetery where his family was buried"
+		},
+		{
+			"type": "true-false",
+			"question": "During the pursuit through Russia, the creature left written messages on tree bark and stone to guide Victor.",
+			"answer": "true"
+		},
+		{
+			"type": "text",
+			"question": "What vehicle did Victor acquire to traverse the snows as he neared the Arctic?",
+			"answer": "sledge"
+		},
+		{
+			"type": "multiple choice",
+			"question": "What did the creature say he intended to do after Victor's death?",
+			"options": ["Hide in a cave and live forever", "Seek revenge on Walton", "Return to civilisation and live among humans", "Travel to the north and burn himself on a funeral pile"],
+			"answer": "Travel to the north and burn himself on a funeral pile"
+		},
+		{
+			"type": "true-false",
+			"question": "Victor died on Walton's ship before the vessel returned to England.",
+			"answer": "true"
+		}
+	]
+}

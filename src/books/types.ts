@@ -39,4 +39,12 @@ export type MusicTrack =
 	artist: string,
 }
 
+export const BookTypes =
+{
+	dracula: 0,
+	frankenstein: 1,
+} as const
+
+export type BookType = typeof BookTypes[keyof typeof BookTypes];
+
 export const musicUrls = Object.values(music).map(track => track.url);
