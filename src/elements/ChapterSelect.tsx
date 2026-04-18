@@ -9,6 +9,17 @@ type ChapterSelectProps =
 	controls: Controls,
 }
 
+function capitalize( s: string ) : string
+{
+	for ( let i = 0; i < s.length; i++ )
+	{
+		if ( i === 0 || s[i - 1] === " " || ( i === 1 && s[i - 1] === "_") )
+			continue;
+		s = s.substring(0, i) + s[i].toLowerCase() + s.substring(i + 1);
+	}
+	return s;
+}
+
 export default function ChapterSelect( { chapters, controls } : ChapterSelectProps )
 {
 	return (
@@ -22,7 +33,7 @@ export default function ChapterSelect( { chapters, controls } : ChapterSelectPro
 			</div>
 			{chapters.map((chapter, idx) => (
 				<div className={styles.chapter} key={idx} onClick={() => controls.goToChap(chapter.num)}>
-					<Markdown unwrapDisallowed disallowedElements={['p']}>{`${chapter.num}. ${chapter.title}`}</Markdown>
+					<Markdown unwrapDisallowed disallowedElements={['p']}>{`${chapter.num}. ${chapter.header + ( chapter.title.length ? "." : "" )} ${capitalize(chapter.title)}`}</Markdown>
 				</div>
 			))}
 		</>
