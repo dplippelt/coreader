@@ -78,7 +78,7 @@ export default function Page( { book, states, controls} : PageProps )
 				return;
 			}
 
-			const questions = states.questions[`chapter_${states.currChap}`];
+			const questions = states.questions[book!.id][`chapter_${states.currChap}`];
 
 			return <Questions key={states.currChap} header={currChap!.header} questions={questions} controls={controls}/>
 		case Screens.reader:
@@ -87,7 +87,7 @@ export default function Page( { book, states, controls} : PageProps )
 					<Navigation states={states} controls={controls}/>
 					<Book book={book} states={states} controls={controls}/>
 					<Navigation states={states} controls={controls}/>
-					{ settings.musicEnabled ? <MusicPlayer states={states} controls={controls}/> : <></> }
+					{ settings.musicEnabled && states.currChap > 0 ? <MusicPlayer states={states} controls={controls}/> : <></> }
 				</>
 			);
 		default:

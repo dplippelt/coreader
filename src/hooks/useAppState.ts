@@ -26,7 +26,7 @@ export default function useAppState()
 			return currChap;
 		});
 
-	const [questions, setQuestions] = useState<Record<string, Question[]>>(() =>
+	const [questions, setQuestions] = useState<Record<string, Record<string, Question[]>>>(() =>
 		{
 			const stored = localStorage.getItem("questions");
 			const questions = stored ? JSON.parse(stored) : {};

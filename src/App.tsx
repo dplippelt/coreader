@@ -48,7 +48,7 @@ export type AppStates =
 	zoomLevel: number,
 	musicIsPlaying: boolean,
 	muteOn: boolean,
-	questions: Record<string, Question[]>,
+	questions: Record<string, Record<string, Question[]>>,
 }
 
 export default function App()
@@ -134,17 +134,48 @@ export default function App()
 
 	useEffect(() =>
 	{
+		preload(musicUrls);
+	}, [])
+
+	useEffect(() =>
+	{
 		getQuestions();
-	}, [currChap]);
+	}, [currChap, book]);
 
 	async function getQuestions()
 	{
+		function setStaticQuestions()
+		{
+			setQuestions(prev =>
+			({
+				...prev,
+				[book!.id]:
+				{
+					...prev[book!.id],
+					[`chapter_${currChap}`]: book!.chapters[currChap - 1].questions
+				}
+			}));
+		}
+
+		function setAIQuestions( questions: Question[] )
+		{
+			setQuestions(prev =>
+			({
+				...prev,
+				[book!.id]:
+				{
+					...prev[book!.id],
+					[`chapter_${currChap}`]: questions
+				}
+			}));
+		}
+
 		if ( currChap <= 0 )
 			return;
-		if ( questions[`chapter_${currChap}`] !== undefined )
+		if ( questions[book!.id] !== undefined && questions[book!.id][`chapter_${currChap}`] !== undefined )
 			return;
 		if ( !settings.aiQuestionsEnabled )
-			return setQuestions(prev => ({ ...prev, [`chapter_${currChap}`]: book!.chapters[currChap - 1].questions }));
+			return setStaticQuestions();
 
 		function getChapterContent()
 		{
@@ -173,18 +204,13 @@ export default function App()
 		if ( !response.ok )
 		{
 			console.error(`GroqError: ${JSON.stringify(data)}`);
-			return setQuestions(prev => ({ ...prev, [`chapter_${currChap}`]: book!.chapters[currChap - 1].questions }));
+			return setStaticQuestions();
 		}
 
 		const text = data.choices[0].message.content;
 		const parsed = JSON.parse(text);
-		setQuestions(prev => ({ ...prev, [`chapter_${currChap}`]: parsed.questions }));
+		setAIQuestions(parsed.questions);
 	}
-
-	useEffect(() =>
-	{
-		preload(musicUrls);
-	}, [])
 
 	function handleNextChapter()
 	{
@@ -292,6 +318,7 @@ export default function App()
 			setBook(null);
 		else
 			setBook(books[bookID]);
+		setCurrChap(-1);
 	}
 
 	const controls: Controls =
