@@ -67,8 +67,10 @@ export default function MusicPlayer( { states, controls } : MusicPlayerProps )
 
 	return (
 		<div className={musicPlayerStyle(states.zoomLevel)}>
-			<Play onClick={ () => buttonBehavior(ButtonType.play, states, controls, settings) }/>
-			<Pause onClick={ () => buttonBehavior(ButtonType.pause, states, controls, settings) }/>
+			{ states.musicIsPlaying
+				? <Pause onClick={ () => buttonBehavior(ButtonType.pause, states, controls, settings) }/>
+				: <Play onClick={ () => buttonBehavior(ButtonType.play, states, controls, settings) }/>
+			}
 			{ states.muteOn
 				? <SoundOff onClick={ () => buttonBehavior(ButtonType.soundOff, states, controls, settings) }/>
 				: <SoundOn onClick={ () => buttonBehavior(ButtonType.soundOn, states, controls, settings) }/>
