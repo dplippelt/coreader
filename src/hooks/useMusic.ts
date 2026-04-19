@@ -76,12 +76,11 @@ export default function useMusic()
 		}, delay * 1000);
 	}
 
-	function pause()
+	function pause( fadeOutDur: number )
 	{
 		if ( !ctxRef.current || !gainRef.current )
 			return;
 
-		const fadeOutDur = 2;
 		fadeOutEndTime.current = ctxRef.current.currentTime + fadeOutDur;
 
 		gainRef.current.gain.setValueAtTime(gainRef.current.gain.value, ctxRef.current.currentTime);
@@ -89,7 +88,7 @@ export default function useMusic()
 		pauseTimeOutIDRef.current = setTimeout(() => audioRef.current!.pause(), fadeOutDur * 1000);
 	}
 
-	async function resume()
+	async function resume( fadeInDur: number )
 	{
 		if ( !ctxRef.current || !audioRef.current || !gainRef.current )
 			return;
@@ -97,7 +96,6 @@ export default function useMusic()
 		clearTimeout(pauseTimeOutIDRef.current);
 		pauseTimeOutIDRef.current = undefined;
 
-		const fadeInDur = 2;
 		const delay = Math.max(0, fadeOutEndTime.current - ctxRef.current.currentTime);
 		const startTime = ctxRef.current.currentTime + delay;
 
@@ -134,10 +132,18 @@ export default function useMusic()
 
 		gainRef.current.gain.cancelScheduledValues(ctxRef.current.currentTime);
 
+		const fadeOutInDur = 0.2;
+
 		if ( !muteOnRef.current )
-			gainRef.current.gain.setValueAtTime(0, ctxRef.current.currentTime);
+		{
+			gainRef.current.gain.setValueAtTime(gainRef.current.gain.value, ctxRef.current.currentTime);
+			gainRef.current.gain.linearRampToValueAtTime(0, ctxRef.current.currentTime + fadeOutInDur);
+		}
 		else
-			gainRef.current.gain.setValueAtTime(settings.volume, ctxRef.current.currentTime);
+		{
+			gainRef.current.gain.setValueAtTime(0, ctxRef.current.currentTime);
+			gainRef.current.gain.linearRampToValueAtTime(settings.volume, ctxRef.current.currentTime + fadeOutInDur);
+		}
 
 		muteOnRef.current = !muteOnRef.current;
 	}

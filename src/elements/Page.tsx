@@ -33,9 +33,9 @@ function playMusic( chapter: Chap | null, states: AppStates, controls: Controls 
 		const prevScreen = states.prevScreens[states.prevScreens.length - 1];
 
 		if ( !chapter )
-			controls.pause();
+			controls.pause(2);
 		else if ( prevMusicRef.current && !states.musicIsPlaying )
-			controls.pause();
+			controls.pause(2);
 		else if ( currScreen === Screens.reader && prevMusicRef.current !== chapter.music )
 		{
 			controls.stop();
@@ -48,9 +48,9 @@ function playMusic( chapter: Chap | null, states: AppStates, controls: Controls 
 			}
 		}
 		else if ( currScreen === Screens.reader )
-			controls.resume();
+			controls.resume(2);
 		else if ( prevScreen === Screens.reader )
-			controls.pause();
+			controls.pause(2);
 	}, [chapter?.num, states.screen]);
 }
 

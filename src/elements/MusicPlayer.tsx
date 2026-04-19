@@ -27,14 +27,14 @@ function buttonBehavior( type: ButtonType, states: AppStates, controls: Controls
 		case ButtonType.play:
 			if ( settings.musicEnabled && !states.musicIsPlaying )
 			{
-				controls.resume();
+				controls.resume(0.5);
 				controls.setMusicIsPlayingTo(true);
 			}
 			break;
 		case ButtonType.pause:
 			if ( settings.musicEnabled && states.musicIsPlaying )
 			{
-				controls.pause();
+				controls.pause(0.5);
 				controls.setMusicIsPlayingTo(false);
 			}
 			break;
