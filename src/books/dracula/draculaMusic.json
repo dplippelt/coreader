@@ -40,5 +40,11 @@
 		"url": "/music/chapter_2.mp3",
 		"title": "Dark and Mysterious Ambient Music",
 		"artist": "Arondight Studios"
+	},
+	"chapter_18":
+	{
+		"url": "/music/chapter_18.mp3",
+		"title": "Dark Academia Music for Building Empires and Master Plans",
+		"artist": "Villain's Symphony"
 	}
 }
