@@ -38,7 +38,7 @@ For generating the reading comprehension questions I chose to use a free tier of
 
 ### Music
 
-I chose to use the Web Audio API instead of <audio> tags because it allowed me more fine grained control over music playback. Specifically the Web Audio API allowed me to implement audio fade in and out for both a more enjoyable user experience and to avoid audio clipping when the music is stopped.
+I chose to use the Web Audio API instead of `<audio>` tags because it allowed me more fine grained control over music playback. Specifically the Web Audio API allowed me to implement audio fade in and out for both a more enjoyable user experience and to avoid audio clipping when the music is stopped.
 
 ### Styling
 
@@ -47,7 +47,7 @@ I prefer to keep my CSS styling in separate files instead of inline with the com
 
 ## Setup
 
-To run the app locally clone the repository and run 'vercel dev' from the root directory of the project:
+To run the app locally clone the repository and run `vercel dev` from the root directory of the project:
 
 ```
 git clone https://github.com/dplippelt/reader.git
@@ -56,7 +56,7 @@ npm install
 vercel dev
 ```
 
-By default it will always fall back to static questions. If you want to make use of AI generated questions locally you will need to add your own Groq API key to the app's environment variables. To do this create a file named .env.local in the root directory of the repository and add the following to the file:
+By default it will always fall back to static comprehension questions. If you want to make use of AI generated questions locally you will need to add your own Groq API key to the app's environment variables. To do this create a file named .env.local in the root directory of the repository and add the following to the file:
 GROQ_API_KEY="pasteYourAPIKeyHere"
 
 Alternatively the app is hosted by Vercel and reachable at: https://coreader-mesca.vercel.app/
