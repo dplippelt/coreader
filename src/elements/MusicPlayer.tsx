@@ -25,7 +25,8 @@ function buttonBehavior( type: ButtonType, states: AppStates, controls: Controls
 		case ButtonType.play:
 			if ( settings.musicEnabled && !states.musicIsPlaying )
 			{
-				controls.resume(0.5);
+				const chapter = states.book!.chapters[states.currChap - 1];
+				controls.play(chapter.music, 0.5);
 				controls.setMusicIsPlayingTo(true);
 			}
 			break;

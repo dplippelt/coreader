@@ -22,14 +22,14 @@ export default function useMusic()
 		}
 	}
 
-	async function play( url: string )
+	function play( url: string, resumeFadeInDur: number )
 	{
 		if ( !ctxRef.current )
 			ctxRef.current = new AudioContext;
 
 		// In case context gets suspended by browser due to e.g. inactivity -> resume
 		if ( ctxRef.current.state === "suspended" )
-			await ctxRef.current.resume();
+			ctxRef.current.resume();
 
 		// If required audio element was not cached yet, create it and add it to the cache
 		if ( !audioCacheRef.current[url] )
@@ -40,18 +40,28 @@ export default function useMusic()
 		clearTimeout(pauseTimeOutIDRef.current);
 		pauseTimeOutIDRef.current = undefined;
 
-		const fadeInDur = 4;
+		const sameTrack: boolean = audioRef.current === audioCacheRef.current[url];
+		const playFadeInDur = 4;
 		const delay = Math.max(0, fadeOutEndTime.current - ctxRef.current.currentTime);
 		const startTime = ctxRef.current.currentTime + delay;
 
-		setTimeout(async () => {
+		function initPlay()
+		{
+			audioCacheRef.current[url].play();
+			audioCacheRef.current[url].pause();
+		}
+
+		function startPlayback()
+		{
 
 			// Reset and pause track that was previously playing
-			if ( audioRef.current )
+			if ( audioRef.current && !sameTrack )
 			{
 				audioRef.current.currentTime = 0;
 				audioRef.current.pause();
 			}
+			else if ( audioRef.current )
+				return resume(resumeFadeInDur);
 
 			audioRef.current = audioCacheRef.current[url];
 
@@ -64,16 +74,25 @@ export default function useMusic()
 				gainRef.current.connect(ctxRef.current!.destination);
 			}
 
+			if ( muteOnRef.current )
+				gainRef.current!.gain.setValueAtTime(0, ctxRef.current!.currentTime);
 			if ( !muteOnRef.current )
 			{
 				gainRef.current!.gain.setValueAtTime(0, ctxRef.current!.currentTime);
-				gainRef.current!.gain.linearRampToValueAtTime(settings.volume, startTime + fadeInDur);
+				gainRef.current!.gain.linearRampToValueAtTime(settings.volume, startTime + playFadeInDur);
 			}
 
 			audioRef.current!.loop = true;
 			audioRef.current!.play();
+		}
 
-		}, delay * 1000);
+		if ( !sameTrack )
+			initPlay();
+
+		if ( delay )
+			setTimeout(startPlayback, delay * 1000);
+		else
+			startPlayback();
 	}
 
 	function pause( fadeOutDur: number )
@@ -88,7 +107,7 @@ export default function useMusic()
 		pauseTimeOutIDRef.current = setTimeout(() => audioRef.current!.pause(), fadeOutDur * 1000);
 	}
 
-	async function resume( fadeInDur: number )
+	function resume( fadeInDur: number )
 	{
 		if ( !ctxRef.current || !audioRef.current || !gainRef.current )
 			return;
@@ -99,7 +118,7 @@ export default function useMusic()
 		const delay = Math.max(0, fadeOutEndTime.current - ctxRef.current.currentTime);
 		const startTime = ctxRef.current.currentTime + delay;
 
-		setTimeout(async () => {
+		setTimeout(() => {
 
 			if ( !muteOnRef.current )
 			{
@@ -148,5 +167,5 @@ export default function useMusic()
 		muteOnRef.current = !muteOnRef.current;
 	}
 
-	return { preload, play, pause, resume, stop, mute };
+	return { preload, play, pause, stop, mute };
 }

@@ -24,9 +24,8 @@ export type Controls =
 	goToChap: ( chapNum: number ) => void,
 	goToQuestions: () => void,
 	goToPrevScreen: () => void,
-	play: ( url: string ) => Promise<void>,
+	play: ( url: string, resumeFadeInDur: number ) => void,
 	pause: ( fadeOutDur: number ) => void,
-	resume: ( fadeInDur: number ) => void,
 	stop: () => void,
 	toggleMute: () => void,
 	setMusicIsPlayingTo: ( setMusicIsPlaying: boolean ) => void,
@@ -44,6 +43,7 @@ export type AppStates =
 	prevScreens: Screen[],
 	navWidth: number,
 	zoomLevel: number,
+	prevMusic: string | null,
 	musicIsPlaying: boolean,
 	muteOn: boolean,
 	questions: Record<string, Record<string, Question[]>>,
@@ -52,7 +52,7 @@ export type AppStates =
 export default function App()
 {
 	const settings = useSettings();
-	const { preload, play, pause, resume, stop, mute } = useMusic();
+	const { preload, play, pause, stop, mute } = useMusic();
 	const
 	{
 		screen, setScreen,
@@ -61,6 +61,7 @@ export default function App()
 		musicIsPlaying, setMusicIsPlaying,
 		muteOn, setMuteOn,
 		zoomLevel, setZoomLevel,
+		prevMusic, setPrevMusic,
 		book, setBook,
 		currChap, setCurrChap,
 		questions, setQuestions,
@@ -210,11 +211,32 @@ export default function App()
 		setAIQuestions(parsed.questions);
 	}
 
+	function startPlay( chapNum: number )
+	{
+		if ( chapNum === -1 || !settings.musicEnabled )
+			return;
+
+		const chapter = book!.chapters[chapNum];
+
+		stop();
+		if ( musicIsPlaying && chapter.music )
+		{
+			play(chapter.music, 2);
+			setMusicIsPlayingTo(true);
+			setPrevMusic(chapter.music);
+		}
+		else
+			setPrevMusic(chapter.music ?? null);
+	}
+
 	function handleNextChapter()
 	{
 		window.scrollTo(0, 0);
 		if ( currChap < book!.chapters.length - 1 )
+		{
+			startPlay(currChap);
 			setCurrChap(currChap + 1);
+		}
 		setScreen(Screen.reader);
 	}
 
@@ -222,7 +244,10 @@ export default function App()
 	{
 		window.scrollTo(0, 0);
 		if ( currChap !== 0 )
+		{
+			startPlay(currChap - 2);
 			setCurrChap(currChap - 1);
+		}
 		setScreen(Screen.reader);
 	}
 
@@ -257,6 +282,7 @@ export default function App()
 	function goToChapter( chapNum: number )
 	{
 		window.scrollTo(0, 0);
+		startPlay(chapNum - 1);
 		setCurrChap(chapNum);
 		setPrevScreens([...prevScreens, screen]);
 		setScreen(Screen.reader);
@@ -332,7 +358,6 @@ export default function App()
 		goToPrevScreen: goToPrevScreen,
 		play: play,
 		pause: pause,
-		resume: resume,
 		stop: stop,
 		setMusicIsPlayingTo: setMusicIsPlayingTo,
 		toggleMute: toggleMute,
@@ -350,6 +375,7 @@ export default function App()
 		prevScreens: prevScreens,
 		navWidth: navWidth,
 		zoomLevel: zoomLevel,
+		prevMusic: prevMusic,
 		musicIsPlaying: musicIsPlaying,
 		muteOn: muteOn,
 		questions: questions,

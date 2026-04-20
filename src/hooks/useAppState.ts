@@ -7,9 +7,10 @@ export default function useAppState()
 	const [screen, setScreen] = useState<Screen>(Screen.startMenu);
 	const [prevScreens, setPrevScreens] = useState<Screen[]>([]);
 	const [navWidth, setNavWidth] = useState<number>(0);
-	const [musicIsPlaying, setMusicIsPlaying] = useState<boolean>(false);
+	const [musicIsPlaying, setMusicIsPlaying] = useState<boolean>(true);
 	const [muteOn, setMuteOn] = useState<boolean>(false);
 	const [zoomLevel, setZoomLevel] = useState<number>(1);
+	const [prevMusic, setPrevMusic] = useState<string | null>(null);
 
 	const [book, setBook] = useState<Book | null>(() =>
 		{
@@ -39,6 +40,7 @@ export default function useAppState()
 				musicIsPlaying, setMusicIsPlaying,
 				muteOn, setMuteOn,
 				zoomLevel, setZoomLevel,
+				prevMusic, setPrevMusic,
 				book, setBook,
 				currChap, setCurrChap,
 				questions, setQuestions,

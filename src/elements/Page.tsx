@@ -10,7 +10,7 @@ import Settings from "./Settings"
 import Questions from "./Questions"
 import MusicPlayer from "./MusicPlayer"
 import { useSettings } from "./SettingsContext"
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 
 type PageProps =
 {
@@ -19,9 +19,8 @@ type PageProps =
 	controls: Controls,
 }
 
-function playMusic( chapter: Chap | null, states: AppStates, controls: Controls )
+export function usePauseMusic( chapter: Chap | null, states: AppStates, controls: Controls )
 {
-	const prevMusicRef = useRef<string | null>(null);
 	const settings = useSettings();
 
 	useEffect(() =>
@@ -29,26 +28,12 @@ function playMusic( chapter: Chap | null, states: AppStates, controls: Controls 
 		if ( !settings.musicEnabled )
 			return;
 
-		const currScreen = states.screen;
 		const prevScreen = states.prevScreens[states.prevScreens.length - 1];
 
 		if ( !chapter )
 			controls.pause(2);
-		else if ( prevMusicRef.current && !states.musicIsPlaying )
+		else if ( states.prevMusic && !states.musicIsPlaying )
 			controls.pause(2);
-		else if ( currScreen === Screen.reader && prevMusicRef.current !== chapter.music )
-		{
-			controls.stop();
-			prevMusicRef.current = null;
-			if ( currScreen === Screen.reader && chapter.music )
-			{
-				controls.play(chapter.music);
-				controls.setMusicIsPlayingTo(true);
-				prevMusicRef.current = chapter.music;
-			}
-		}
-		else if ( currScreen === Screen.reader )
-			controls.resume(2);
 		else if ( prevScreen === Screen.reader )
 			controls.pause(2);
 	}, [chapter?.num, states.screen]);
@@ -59,7 +44,7 @@ export default function Page( { book, states, controls} : PageProps )
 	const settings = useSettings();
 	const currChap: Chap | null = states.currChap === -1 ? null : book!.chapters[states.currChap - 1];
 
-	playMusic(currChap, states, controls);
+	usePauseMusic(currChap, states, controls);
 
 	switch (states.screen)
 	{
