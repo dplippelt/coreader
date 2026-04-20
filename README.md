@@ -66,4 +66,4 @@ Alternatively the app is hosted by Vercel and reachable at: https://coreader-mes
 
 ## Future plans
 
-In the future I plan to expand the current app by adding an option to switch between songs, a notepad so the user can make notes while reading, and explore support for user-uploaded books and music.
+In the future I plan to expand the current app by adding an option to switch between songs, a notepad so the user can make notes while reading, explore support for user-uploaded books and music, and expand the current music coverage (only a subset of chapters currently have unique music tracks assigned).
