@@ -10,15 +10,13 @@ type MusicPlayerProps =
 	controls: Controls
 }
 
-const ButtonType =
+enum ButtonType
 {
-	play: "play",
-	pause: "pause",
-	soundOn: "soundOn",
-	soundOff: "soundOff",
-} as const;
-
-type ButtonType = typeof ButtonType[keyof typeof ButtonType];
+	play,
+	pause,
+	soundOn,
+	soundOff,
+}
 
 function buttonBehavior( type: ButtonType, states: AppStates, controls: Controls, settings: SettingsContextType )
 {

@@ -1,6 +1,6 @@
 import type { Controls, AppStates } from "../App"
 import type { Book as Bk, Chapter as Chap } from "../books/types"
-import { Screens } from "../util/utils"
+import { Screen } from "../util/utils"
 import StartMenu from "./StartMenu"
 import Book from "./Book"
 import Navigation from "./Navigation"
@@ -36,20 +36,20 @@ function playMusic( chapter: Chap | null, states: AppStates, controls: Controls 
 			controls.pause(2);
 		else if ( prevMusicRef.current && !states.musicIsPlaying )
 			controls.pause(2);
-		else if ( currScreen === Screens.reader && prevMusicRef.current !== chapter.music )
+		else if ( currScreen === Screen.reader && prevMusicRef.current !== chapter.music )
 		{
 			controls.stop();
 			prevMusicRef.current = null;
-			if ( currScreen === Screens.reader && chapter.music )
+			if ( currScreen === Screen.reader && chapter.music )
 			{
 				controls.play(chapter.music);
 				controls.setMusicIsPlayingTo(true);
 				prevMusicRef.current = chapter.music;
 			}
 		}
-		else if ( currScreen === Screens.reader )
+		else if ( currScreen === Screen.reader )
 			controls.resume(2);
-		else if ( prevScreen === Screens.reader )
+		else if ( prevScreen === Screen.reader )
 			controls.pause(2);
 	}, [chapter?.num, states.screen]);
 }
@@ -63,15 +63,15 @@ export default function Page( { book, states, controls} : PageProps )
 
 	switch (states.screen)
 	{
-		case Screens.startMenu:
+		case Screen.startMenu:
 			return <StartMenu states={states} controls={controls}/>;
-		case Screens.bookSelectMenu:
+		case Screen.bookSelectMenu:
 			return <BookSelect controls={controls}/>;
-		case Screens.chapSelectMenu:
+		case Screen.chapSelectMenu:
 			return <ChapterSelect chapters={book!.chapters} controls={controls}/>;
-		case Screens.settingsMenu:
+		case Screen.settingsMenu:
 			return <Settings controls={controls}/>;
-		case Screens.questions:
+		case Screen.questions:
 			if ( !settings.questionsEnabled )
 			{
 				controls.next();
@@ -81,7 +81,7 @@ export default function Page( { book, states, controls} : PageProps )
 			const questions = states.questions[book!.id][`chapter_${states.currChap}`];
 
 			return <Questions key={states.currChap} header={currChap!.header} questions={questions} controls={controls}/>
-		case Screens.reader:
+		case Screen.reader:
 			return (
 				<>
 					<Navigation states={states} controls={controls}/>

@@ -46,12 +46,4 @@ export enum BookID
 	frankenstein,
 }
 
-// export const BookIDs =
-// {
-// 	dracula: "dracula",
-// 	frankenstein: "frankenstein",
-// } as const
-
-// export type BookID = typeof BookIDs[keyof typeof BookIDs];
-
 export const musicUrls = Object.values(music).map(track => track.url);

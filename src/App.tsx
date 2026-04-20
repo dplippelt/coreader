@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import type { Book, Question } from './books/types'
 import { musicUrls } from './books/types'
-import { Screens } from './util/utils.ts'
+import { Screen } from './util/utils.ts'
 import Page from './elements/Page.tsx'
 import { useSettings } from './elements/SettingsContext.tsx'
 import useMusic from './hooks/useMusic.ts'
@@ -12,8 +12,6 @@ import dracula from './books/dracula/dracula.ts'
 import frankstein from './books/frankenstein/frankenstein.ts'
 
 export const DEBUG = true;
-
-export type Screen = typeof Screens[keyof typeof Screens];
 
 export type Controls =
 {
@@ -217,7 +215,7 @@ export default function App()
 		window.scrollTo(0, 0);
 		if ( currChap < book!.chapters.length - 1 )
 			setCurrChap(currChap + 1);
-		setScreen(Screens.reader);
+		setScreen(Screen.reader);
 	}
 
 	function handlePrevChapter()
@@ -225,35 +223,35 @@ export default function App()
 		window.scrollTo(0, 0);
 		if ( currChap !== 0 )
 			setCurrChap(currChap - 1);
-		setScreen(Screens.reader);
+		setScreen(Screen.reader);
 	}
 
 	function goToStart()
 	{
 		window.scrollTo(0, 0);
 		setPrevScreens([...prevScreens, screen]);
-		setScreen(Screens.startMenu);
+		setScreen(Screen.startMenu);
 	}
 
 	function goToBookSelect()
 	{
 		window.scrollTo(0, 0);
 		setPrevScreens([...prevScreens, screen]);
-		setScreen(Screens.bookSelectMenu);
+		setScreen(Screen.bookSelectMenu);
 	}
 
 	function goToChapterSelect()
 	{
 		window.scrollTo(0, 0);
 		setPrevScreens([...prevScreens, screen]);
-		setScreen(Screens.chapSelectMenu);
+		setScreen(Screen.chapSelectMenu);
 	}
 
 	function goToSettings()
 	{
 		window.scrollTo(0, 0);
 		setPrevScreens([...prevScreens, screen]);
-		setScreen(Screens.settingsMenu);
+		setScreen(Screen.settingsMenu);
 	}
 
 	function goToChapter( chapNum: number )
@@ -261,14 +259,14 @@ export default function App()
 		window.scrollTo(0, 0);
 		setCurrChap(chapNum);
 		setPrevScreens([...prevScreens, screen]);
-		setScreen(Screens.reader);
+		setScreen(Screen.reader);
 	}
 
 	function goToQuestions()
 	{
 		window.scrollTo(0, 0);
 		setPrevScreens([...prevScreens, screen]);
-		setScreen(Screens.questions);
+		setScreen(Screen.questions);
 	}
 
 	function goToPrevScreen()
@@ -280,7 +278,7 @@ export default function App()
 
 		const copy = prevScreens.slice();
 		let prev = copy.pop()!;
-		if ( prev === Screens.questions && !settings.questionsEnabled )
+		if ( prev === Screen.questions && !settings.questionsEnabled )
 			prev = copy.pop()!;
 
 		setScreen(prev);

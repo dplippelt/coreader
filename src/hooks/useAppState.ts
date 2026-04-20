@@ -1,11 +1,10 @@
-import { useState } from "react";
-import { Screens } from "../util/utils";
-import type { Screen } from "../App";
-import type { Book, Question } from "../books/types";
+import { useState } from "react"
+import { Screen } from "../util/utils"
+import type { Book, Question } from "../books/types"
 
 export default function useAppState()
 {
-	const [screen, setScreen] = useState<Screen>(Screens.startMenu);
+	const [screen, setScreen] = useState<Screen>(Screen.startMenu);
 	const [prevScreens, setPrevScreens] = useState<Screen[]>([]);
 	const [navWidth, setNavWidth] = useState<number>(0);
 	const [musicIsPlaying, setMusicIsPlaying] = useState<boolean>(false);
