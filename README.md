@@ -56,8 +56,8 @@ npm install
 vercel dev
 ```
 
-By default it will always fall back to static comprehension questions. If you want to make use of AI generated questions locally you will need to add your own Groq API key to the app's environment variables. To do this create a file named .env.local in the root directory of the repository and add the following to the file:
-GROQ_API_KEY="pasteYourAPIKeyHere"
+By default it will always fall back to static comprehension questions. If you want to make use of AI generated questions locally you will need to add your own Groq API key to the app's environment variables. To do this create a file named `.env.local` in the root directory of the repository and add the following to the file:
+`GROQ_API_KEY="pasteYourAPIKeyHere"`
 
 Alternatively the app is hosted by Vercel and reachable at: https://coreader-mesca.vercel.app/
 
