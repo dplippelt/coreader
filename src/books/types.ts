@@ -28,7 +28,7 @@ export type Title =
 
 export type Book =
 {
-	id: string,
+	id: BookID,
 	title: Title,
 	chapters: Chapter[],
 }
@@ -40,12 +40,18 @@ export type MusicTrack =
 	artist: string,
 }
 
-export const BookIDs =
+export enum BookID
 {
-	dracula: "dracula",
-	frankenstein: "frankenstein",
-} as const
+	dracula,
+	frankenstein,
+}
 
-export type BookID = typeof BookIDs[keyof typeof BookIDs];
+// export const BookIDs =
+// {
+// 	dracula: "dracula",
+// 	frankenstein: "frankenstein",
+// } as const
+
+// export type BookID = typeof BookIDs[keyof typeof BookIDs];
 
 export const musicUrls = Object.values(music).map(track => track.url);

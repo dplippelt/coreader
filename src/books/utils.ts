@@ -1,15 +1,15 @@
 import draculaQs from './dracula/draculaQuestions.json'
 import frankensteinQs from './frankenstein/frankensteinQuestions.json'
 import music from './dracula/draculaMusic.json'
-import { BookIDs, type BookID, type Chapter, type Question } from "./types"
+import { BookID, type Chapter, type Question } from "./types"
 
 function getEndIdx( bookID: BookID )
 {
 	switch (bookID)
 	{
-		case BookIDs.dracula:
+		case BookID.dracula:
 			return 200;
-		case BookIDs.frankenstein:
+		case BookID.frankenstein:
 			return 0;
 	}
 }
@@ -18,9 +18,9 @@ function getMatchIdx( bookID: BookID )
 {
 	switch (bookID)
 	{
-		case BookIDs.dracula:
+		case BookID.dracula:
 			return 1;
-		case BookIDs.frankenstein:
+		case BookID.frankenstein:
 			return 0;
 	}
 }
@@ -29,9 +29,9 @@ function getQs( bookID: BookID )
 {
 	switch (bookID)
 	{
-		case BookIDs.dracula:
+		case BookID.dracula:
 			return draculaQs;
-		case BookIDs.frankenstein:
+		case BookID.frankenstein:
 			return frankensteinQs;
 	}
 }
