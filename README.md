@@ -49,10 +49,12 @@ I prefer to keep my CSS styling in separate files instead of inline with the com
 
 To run the app locally clone the repository and run 'vercel dev' from the root directory of the project:
 
+```
 git clone https://github.com/dplippelt/reader.git
 cd reader
 npm install
 vercel dev
+```
 
 By default it will always fall back to static questions. If you want to make use of AI generated questions locally you will need to add your own Groq API key to the app's environment variables. To do this create a file named .env.local in the root directory of the repository and add the following to the file:
 GROQ_API_KEY="pasteYourAPIKeyHere"
