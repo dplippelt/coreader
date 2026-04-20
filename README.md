@@ -1,12 +1,12 @@
 # CoReader
 
-A prototype e-reader app for practicing reading comprehension with immersive background music.
+An e-reader prototype for practicing reading comprehension with immersive background music.
 
 
 ## Summary
 
-CoReader is an app I designed after hearing that reading comprehension skills are dropping in young adults. The app currently contains two public domain books obtained through the Gutenberg Project: Dracula by Bram Stoker and Frankenstein by Mary Wollstonecraft Shelley. After each chapter the user is presented with 5 comprehension questions that test their understanding of the chapter they just read. The user can choose to use a set of pre-generated questions or have an LLM generate a new set of questions for each new chapter.
-Additionally, each chapter is accompanied by matching background music to increase reading immersion and enjoyment. NB: this part is a work in progress as not all chapters have been matched with a specific music track yet. For those chapters is currently defaults to the music used for chapter 1. Furthermore, Frankenstein currently uses the same music per chapter as Dracula.
+CoReader is an e-reader app for practicing reading comprehension with immersive background music. The app currently contains two public domain books obtained through the Gutenberg Project: Dracula by Bram Stoker and Frankenstein by Mary Wollstonecraft Shelley. After each chapter the user is presented with 5 comprehension questions that test their understanding of the chapter they just read. The user can choose to use a set of pre-generated questions or have an LLM generate a new set of questions for each new chapter.
+Additionally, each chapter is accompanied by matching background music to increase reading immersion and enjoyment.
 
 
 ## Features
@@ -15,25 +15,18 @@ Additionally, each chapter is accompanied by matching background music to increa
 - Chapter navigation menu
 - Reading comprehension questions (pick between static and dynamically generated questions)
 - Option to clear previously generated questions to receive a new set of questions
-- Immersive background music with music controls
+- Immersive background music with music controls (music coverage is a work in progress)
 - Customizable font size
 - Questions and music can be toggled on and off in the app's settings
 
 
 ## Tech stack
 
-I used React with TypeScript as my frontend framework and Vite to host the app. I chose React as my frontend framework because it ... [easy to build using their components and hooks approach, is a much used industry standard, allows writing code programmatically / more similar to functional programming, great control and flexibility, was great entrypoint for me into frontend coding, I also looked at Svelte but preferred React as Svelte's approach hides more of the functionality and feels like 'magic' / too much blackbox stuff]. I combined it with TypeScript [as typing makes code easier to read, debug and less prone to errors and bugs slipping in unnoticed].
-For hosting the site I chose Vite because .. [I have no clue.. it's just easy to use and set up, deployment is synced with my github pushes.. nice and easy, and free hosting, perfect for a dev project].
+I used React with TypeScript as my frontend framework and Vercel to host the app. I chose React because its component and hook model maps well to how I naturally think about building UIs, composable pieces with explicit state. It's also an industry standard, which made it a practical choice for a portfolio project. I briefly considered Svelte, but found its abstractions too opaque. React gives you more direct control over what's actually happening. I combined it with TypeScript because explicit types make code easier to read and debug, and catch entire classes of bugs before they reach runtime.
+I chose Vercel for hosting because it deploys automatically on every push to GitHub, requires minimal configuration to get started, and is free for personal projects.
 
 
 ## App Architecture
-
-Why localStorage over a backend (for now)
-Why Supabase when you do add a backend
-Why Groq/Llama for AI questions instead of a paid API
-Why static preprocessed book data instead of parsing at runtime
-Why Web Audio API instead of <audio> tags
-Why context for settings but props for controls/states
 
 ### Local storage
 
@@ -50,3 +43,23 @@ I chose to use the Web Audio API instead of <audio> tags because it allowed me m
 ### Styling
 
 I prefer to keep my CSS styling in separate files instead of inline with the component logic. However, I quickly ran into naming collisions between similar elements across different files. By using CSS Modules, class names are scoped to their accompanying files automatically without having to worry about accidental overlap in class names.
+
+
+## Setup
+
+To run the app locally clone the repository and run 'vercel dev' from the root directory of the project:
+
+git clone https://github.com/dplippelt/reader.git
+cd reader
+npm install
+vercel dev
+
+By default it will always fall back to static questions. If you want to make use of AI generated questions locally you will need to add your own Groq API key to the app's environment variables. To do this create a file named .env.local in the root directory of the repository and add the following to the file:
+GROQ_API_KEY="pasteYourAPIKeyHere"
+
+Alternatively the app is hosted by Vercel and reachable at: https://coreader-mesca.vercel.app/
+
+
+## Future plans
+
+In the future I plan to expand the current app by adding an option to switch between songs, a notepad so the user can make notes while reading, and explore support for user-uploaded books and music.
