@@ -28,7 +28,7 @@ function ButtonMenu( { controls } : ButtonMenu )
 
 function Header()
 {
-	return <div className={styles.menuHeader}>Books</div>;
+	return <div className={styles.header}>Books</div>;
 }
 
 function Books( { controls } : BooksProps )
