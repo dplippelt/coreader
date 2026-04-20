@@ -113,7 +113,7 @@ export default function Settings( { controls } : SettingsProps )
 			<div className={styles.buttonMenu}>
 				<button onClick={() => controls.goToPrevScreen()}>Back</button>
 			</div>
-			<div className={styles.menuHeader}>Settings</div>
+			<div className={styles.header}>Settings</div>
 			<div className={styles.settings}>
 
 				<Checkbok
