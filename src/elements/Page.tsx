@@ -19,7 +19,7 @@ type PageProps =
 	controls: Controls,
 }
 
-export function usePauseMusic( chapter: Chap | null, states: AppStates, controls: Controls )
+function usePauseMusic( chapter: Chap | null, states: AppStates, controls: Controls )
 {
 	const settings = useSettings();
 
