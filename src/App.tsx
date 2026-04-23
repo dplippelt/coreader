@@ -26,7 +26,7 @@ export type Controls =
 	goToPrevScreen: () => void,
 	play: ( url: string, resumeFadeInDur: number ) => void,
 	pause: ( fadeOutDur: number ) => void,
-	stop: () => void,
+	stop: ( fadeOutDur: number ) => void,
 	toggleMute: () => void,
 	setMusicIsPlayingTo: ( setMusicIsPlaying: boolean ) => void,
 	clearGeneratedQuestions: () => void,
@@ -218,11 +218,9 @@ export default function App()
 
 		const chapter = book!.chapters[chapNum];
 
-		stop();
 		if ( musicIsPlaying && chapter.music )
 		{
 			play(chapter.music, 2);
-			setMusicIsPlayingTo(true);
 			setPrevMusic(chapter.music);
 		}
 		else
@@ -242,7 +240,10 @@ export default function App()
 
 	function handlePrevChapter()
 	{
+		console.log(`currChap: ${currChap}`);
 		window.scrollTo(0, 0);
+		if ( currChap === 1 )
+			pause(2);
 		if ( currChap !== 0 )
 		{
 			startPlay(currChap - 2);
@@ -254,6 +255,7 @@ export default function App()
 	function goToStart()
 	{
 		window.scrollTo(0, 0);
+		pause(2);
 		setPrevScreens([...prevScreens, screen]);
 		setScreen(Screen.startMenu);
 	}
@@ -268,6 +270,7 @@ export default function App()
 	function goToChapterSelect()
 	{
 		window.scrollTo(0, 0);
+		pause(2);
 		setPrevScreens([...prevScreens, screen]);
 		setScreen(Screen.chapSelectMenu);
 	}
@@ -291,6 +294,7 @@ export default function App()
 	function goToQuestions()
 	{
 		window.scrollTo(0, 0);
+		pause(2);
 		setPrevScreens([...prevScreens, screen]);
 		setScreen(Screen.questions);
 	}

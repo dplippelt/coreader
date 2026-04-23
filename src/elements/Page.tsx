@@ -10,7 +10,6 @@ import Settings from "./Settings"
 import Questions from "./Questions"
 import MusicPlayer from "./MusicPlayer"
 import { useSettings } from "./SettingsContext"
-import { useEffect } from 'react'
 
 type PageProps =
 {
@@ -19,32 +18,10 @@ type PageProps =
 	controls: Controls,
 }
 
-function usePauseMusic( chapter: Chap | null, states: AppStates, controls: Controls )
-{
-	const settings = useSettings();
-
-	useEffect(() =>
-	{
-		if ( !settings.musicEnabled )
-			return;
-
-		const prevScreen = states.prevScreens[states.prevScreens.length - 1];
-
-		if ( !chapter )
-			controls.pause(2);
-		else if ( states.prevMusic && !states.musicIsPlaying )
-			controls.pause(2);
-		else if ( prevScreen === Screen.reader )
-			controls.pause(2);
-	}, [chapter?.num, states.screen]);
-}
-
 export default function Page( { book, states, controls} : PageProps )
 {
 	const settings = useSettings();
 	const currChap: Chap | null = states.currChap === -1 ? null : book!.chapters[states.currChap - 1];
-
-	usePauseMusic(currChap, states, controls);
 
 	switch (states.screen)
 	{
