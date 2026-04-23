@@ -44,6 +44,7 @@ export type AppStates =
 	navWidth: number,
 	zoomLevel: number,
 	prevMusic: string | null,
+	error: Error | null,
 	musicIsPlaying: boolean,
 	muteOn: boolean,
 	questions: Record<string, Record<string, Question[]>>,
@@ -62,6 +63,7 @@ export default function App()
 		muteOn, setMuteOn,
 		zoomLevel, setZoomLevel,
 		prevMusic, setPrevMusic,
+		error, setError,
 		book, setBook,
 		currChap, setCurrChap,
 		questions, setQuestions,
@@ -74,10 +76,19 @@ export default function App()
 			const stored = localStorage.getItem("books");
 			const books = stored ? JSON.parse(stored) : {};
 
-			if ( !books["dracula"] )
-				books["dracula"] = dracula();
-			if ( !books["frankenstein"] )
-				books["frankenstein"] = frankstein();
+			try
+			{
+				if ( !books["dracula"] )
+					books["dracula"] = dracula();
+				if ( !books["frankenstein"] )
+					books["frankenstein"] = frankstein();
+			}
+			catch ( e )
+			{
+				console.error(e);
+				setError(e);
+				setScreen(Screen.error);
+			}
 
 			localStorage.setItem("books", JSON.stringify(books));
 		}
@@ -229,27 +240,12 @@ export default function App()
 
 	function handleNextChapter()
 	{
-		window.scrollTo(0, 0);
-		if ( currChap < book!.chapters.length - 1 )
-		{
-			startPlay(currChap);
-			setCurrChap(currChap + 1);
-		}
-		setScreen(Screen.reader);
+		goToChapter(currChap + 1);
 	}
 
 	function handlePrevChapter()
 	{
-		console.log(`currChap: ${currChap}`);
-		window.scrollTo(0, 0);
-		if ( currChap === 1 )
-			pause(2);
-		if ( currChap !== 0 )
-		{
-			startPlay(currChap - 2);
-			setCurrChap(currChap - 1);
-		}
-		setScreen(Screen.reader);
+		goToChapter(currChap - 1);
 	}
 
 	function goToStart()
@@ -285,7 +281,12 @@ export default function App()
 	function goToChapter( chapNum: number )
 	{
 		window.scrollTo(0, 0);
-		startPlay(chapNum - 1);
+
+		if ( chapNum === 0 )
+			pause(2);
+		else
+			startPlay(chapNum - 1);
+
 		setCurrChap(chapNum);
 		setPrevScreens([...prevScreens, screen]);
 		setScreen(Screen.reader);
@@ -380,6 +381,7 @@ export default function App()
 		navWidth: navWidth,
 		zoomLevel: zoomLevel,
 		prevMusic: prevMusic,
+		error: error,
 		musicIsPlaying: musicIsPlaying,
 		muteOn: muteOn,
 		questions: questions,

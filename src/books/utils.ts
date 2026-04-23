@@ -1,7 +1,8 @@
 import draculaQs from './dracula/draculaQuestions.json'
 import frankensteinQs from './frankenstein/frankensteinQuestions.json'
-import music from './dracula/draculaMusic.json'
-import { BookID, type Chapter, type Question } from "./types"
+import draculaMusic from './dracula/draculaMusic.json'
+import frankensteinMusic from './frankenstein/frankensteinMusic.json'
+import { BookID, type Chapter, type Question, type BookMusic } from "./types"
 
 function getEndIdx( bookID: BookID )
 {
@@ -11,6 +12,8 @@ function getEndIdx( bookID: BookID )
 			return 200;
 		case BookID.frankenstein:
 			return 0;
+		default:
+			throw new Error(`Unknown book ID: ${bookID}`);
 	}
 }
 
@@ -22,6 +25,8 @@ function getMatchIdx( bookID: BookID )
 			return 1;
 		case BookID.frankenstein:
 			return 0;
+		default:
+			throw new Error(`Unknown book ID: ${bookID}`);
 	}
 }
 
@@ -33,6 +38,8 @@ function getQs( bookID: BookID )
 			return draculaQs;
 		case BookID.frankenstein:
 			return frankensteinQs;
+		default:
+			throw new Error(`Unknown book ID: ${bookID}`);
 	}
 }
 
@@ -85,13 +92,28 @@ function getQuestions( chap_num: number, bookID: BookID ): Question[]
 	return questions;
 }
 
-function getMusicTrack( chap_num: number ) : string
+function getMusicTrack( chap_num: number , bookID: BookID) : string
 {
-	const key = `chapter_${chap_num}` as keyof typeof music;
+	let bookMusic: BookMusic;
 
-	if ( music[key] )
-		return music[key].url;
-	return music[`chapter_1`].url;
+	switch (bookID)
+	{
+		case BookID.dracula:
+			bookMusic = draculaMusic;
+			break;
+		case BookID.frankenstein:
+			bookMusic = frankensteinMusic;
+			break;
+		default:
+			throw new Error(`Unknown book ID: ${bookID}`);
+	}
+
+	const key = `chapter_${chap_num}` as keyof typeof bookMusic;
+
+
+	if ( bookMusic[key] )
+		return bookMusic[key].url;
+	return bookMusic[`chapter_1`].url;
 }
 
 export default function getChapters( rawBook: string, rawChapters: RegExpExecArray[], bookID: BookID )
@@ -108,7 +130,7 @@ export default function getChapters( rawBook: string, rawChapters: RegExpExecArr
 		const chap_title = getTitle(chap_text, bookID);;
 		const chap_content = getContent(chap_text, bookID);
 		const questions = getQuestions(chap_num, bookID);
-		const music = getMusicTrack(chap_num);
+		const music = getMusicTrack(chap_num, bookID);
 
 		chapters.push({ num: chap_num, header: chap_header, title: chap_title, content: chap_content, questions: questions, music: music });
 	}

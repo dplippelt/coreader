@@ -11,6 +11,7 @@ export default function useAppState()
 	const [muteOn, setMuteOn] = useState<boolean>(false);
 	const [zoomLevel, setZoomLevel] = useState<number>(1);
 	const [prevMusic, setPrevMusic] = useState<string | null>(null);
+	const [error, setError] = useState<any>(null);
 
 	const [book, setBook] = useState<Book | null>(() =>
 		{
@@ -41,6 +42,7 @@ export default function useAppState()
 				muteOn, setMuteOn,
 				zoomLevel, setZoomLevel,
 				prevMusic, setPrevMusic,
+				error, setError,
 				book, setBook,
 				currChap, setCurrChap,
 				questions, setQuestions,

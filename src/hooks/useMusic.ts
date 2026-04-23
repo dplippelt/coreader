@@ -128,8 +128,6 @@ export default function useMusic()
 
 	function stop( fadeOutDur: number )
 	{
-		console.log('stop() called, audioRef:', audioRef.current?.src);
-
 		if ( !ctxRef.current || !audioRef.current || !gainRef.current )
 			return;
 
@@ -153,7 +151,6 @@ export default function useMusic()
 
 	function mute()
 	{
-		console.log(`volume: ${settings.volume}`);
 		if ( !ctxRef.current || !gainRef.current )
 			return;
 

@@ -9,6 +9,7 @@ import BookSelect from "./BookSelect"
 import Settings from "./Settings"
 import Questions from "./Questions"
 import MusicPlayer from "./MusicPlayer"
+import Error from "./Error"
 import { useSettings } from "./SettingsContext"
 
 type PageProps =
@@ -53,6 +54,6 @@ export default function Page( { book, states, controls} : PageProps )
 				</>
 			);
 		default:
-			return;
+			return <Error states={states}/>;
 	}
 }

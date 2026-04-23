@@ -3,20 +3,22 @@
 	position: fixed;
 	top: 35%;
 	left: 50%;
-	width: 75vw;
+	width: 70vw;
 	transform: translateX(-50%);
 }
 
-.title
+.error
 {
 	position: relative;
 	text-align: center;
-	font-size: 5rem;
+	font-size: 3rem;
 	top: 0rem;
 	left: 0rem;
+	font-family: 'Playfair Display', serif;
+	font-weight: bold;
 }
 
-.author
+.errorDetails
 {
 	position: relative;
 	text-align: center;

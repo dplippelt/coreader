@@ -6,4 +6,5 @@ export enum Screen
 	settingsMenu,
 	reader,
 	questions,
+	error,
 }

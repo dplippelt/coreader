@@ -1,4 +1,5 @@
-import music from './dracula/draculaMusic.json'
+import draculaMusic from './dracula/draculaMusic.json'
+import frankensteinMusic from './frankenstein/frankensteinMusic.json'
 
 export type Question =
 {
@@ -33,6 +34,8 @@ export type Book =
 	chapters: Chapter[],
 }
 
+export type BookMusic = Record<string, MusicTrack>
+
 export type MusicTrack =
 {
 	url: string,
@@ -44,6 +47,7 @@ export enum BookID
 {
 	dracula,
 	frankenstein,
+	error,
 }
 
-export const musicUrls = Object.values(music).map(track => track.url);
+export const musicUrls = Object.values(draculaMusic).map(track => track.url);
