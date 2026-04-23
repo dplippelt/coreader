@@ -7,6 +7,7 @@ import Navigation from "./Navigation"
 import ChapterSelect from "./ChapterSelect"
 import BookSelect from "./BookSelect"
 import Settings from "./Settings"
+import Credits from "./Credits"
 import Questions from "./Questions"
 import MusicPlayer from "./MusicPlayer"
 import Error from "./Error"
@@ -34,6 +35,8 @@ export default function Page( { book, states, controls} : PageProps )
 			return <ChapterSelect chapters={book!.chapters} controls={controls}/>;
 		case Screen.settingsMenu:
 			return <Settings controls={controls}/>;
+		case Screen.credits:
+			return <Credits controls={controls}/>;
 		case Screen.questions:
 			if ( !settings.questionsEnabled )
 			{

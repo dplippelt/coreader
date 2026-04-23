@@ -1,0 +1,33 @@
+.buttonMenu
+{
+	text-align: center;
+}
+
+.header
+{
+	max-width: 90vw;
+	width: fit-content;
+	margin: auto;
+	margin-top: 0rem;
+	margin-bottom: 2rem;
+	font-size: 2rem;
+	font-family: 'Lora', serif;
+	font-weight: bold;
+}
+
+.credits
+{
+	max-width: 80vw;
+	width: fit-content;
+	margin: auto;
+}
+
+.credit
+{
+	display: flex;
+	flex-direction: column;
+	gap: 0.4rem;
+	align-items: center;
+	margin-bottom: 2.5rem;
+	font-family: 'Lora', serif;
+}

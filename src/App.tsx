@@ -20,6 +20,7 @@ export type Controls =
 	goToStart: () => void,
 	goToChapSelect: () => void,
 	goToBookSelect: () => void,
+	goToCredits: () => void,
 	goToSettings: () => void,
 	goToChap: ( chapNum: number ) => void,
 	goToQuestions: () => void,
@@ -278,6 +279,13 @@ export default function App()
 		setScreen(Screen.settingsMenu);
 	}
 
+	function goToCredits()
+	{
+		window.scrollTo(0, 0);
+		setPrevScreens([...prevScreens, screen]);
+		setScreen(Screen.credits);
+	}
+
 	function goToChapter( chapNum: number )
 	{
 		window.scrollTo(0, 0);
@@ -358,6 +366,7 @@ export default function App()
 		goToChapSelect: goToChapterSelect,
 		goToBookSelect: goToBookSelect,
 		goToSettings: goToSettings,
+		goToCredits: goToCredits,
 		goToChap: goToChapter,
 		goToQuestions: goToQuestions,
 		goToPrevScreen: goToPrevScreen,
