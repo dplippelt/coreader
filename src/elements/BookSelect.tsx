@@ -36,7 +36,7 @@ function Books( { controls } : BooksProps )
 	return (
 		<>
 			{books.map((book, idx) => (
-				<div key={idx} className={styles.book} onClick={() => { controls.setCurrBook(book.toLowerCase()); controls.goToChapSelect() }}>{book}</div>
+				<div key={idx} className={styles.book} onClick={() => { controls.setCurrBook(book); controls.goToChapSelect() }}>{book}</div>
 			))}
 		</>
 	);
