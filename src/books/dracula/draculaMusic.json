@@ -1,49 +1,55 @@
 {
 	"chapter_1":
 	{
-		"url": "/music/chapter_1.mp3",
+		"url": "/music/track_1.mp3",
 		"title": "Quiet Winter in an Old European Riverside Village P1",
 		"artist": "Nostalgic Dark Academia"
 	},
 	"chapter_2":
 	{
-		"url": "/music/chapter_2.mp3",
+		"url": "/music/track_2.mp3",
 		"title": "Dark and Mysterious Ambient Music",
 		"artist": "Arondight Studios"
 	},
 	"chapter_3":
 	{
-		"url": "/music/chapter_3.mp3",
+		"url": "/music/track_3.mp3",
 		"title": "The Fallen Vampire Prince",
 		"artist": "Mortis Academia"
 	},
 	"chapter_4":
 	{
-		"url": "/music/chapter_4.mp3",
+		"url": "/music/track_4.mp3",
 		"title": "Dark Ambient Horror Music To Unlock Your Deepest Nightmares",
 		"artist": "Arondight Studios"
 	},
 	"chapter_5":
 	{
-		"url": "/music/chapter_1.mp3",
+		"url": "/music/track_1.mp3",
 		"title": "Quiet Winter in an Old European Riverside Village P1",
 		"artist": "Nostalgic Dark Academia"
 	},
 	"chapter_6":
 	{
-		"url": "/music/chapter_1.mp3",
+		"url": "/music/track_1.mp3",
 		"title": "Quiet Winter in an Old European Riverside Village P1",
 		"artist": "Nostalgic Dark Academia"
 	},
 	"chapter_7":
 	{
-		"url": "/music/chapter_2.mp3",
+		"url": "/music/track_2.mp3",
 		"title": "Dark and Mysterious Ambient Music",
 		"artist": "Arondight Studios"
 	},
+	"chapter_8":
+	{
+		"url": "/music/track_6.mp3",
+		"title": "Dark Ambient/Drone Music - The Monastery",
+		"artist": "Soundscapes & Ambience"
+	},
 	"chapter_18":
 	{
-		"url": "/music/chapter_18.mp3",
+		"url": "/music/track_5.mp3",
 		"title": "Dark Academia Music for Building Empires and Master Plans",
 		"artist": "Villain's Symphony"
 	}
