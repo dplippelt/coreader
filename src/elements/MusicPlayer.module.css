@@ -7,6 +7,7 @@
 	opacity: 15%;
 	transition: opacity 0.2s ease;
 	padding: 15px;
+	background-color: #FFF0;
 }
 
 .musicPlayerZoomed
