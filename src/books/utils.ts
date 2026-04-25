@@ -4,7 +4,7 @@ import draculaMusic from './dracula/draculaMusic.json'
 import frankensteinMusic from './frankenstein/frankensteinMusic.json'
 import { BookID, type Chapter, type Question, type BookMusic } from "./types"
 
-function getEndIdx( bookID: BookID )
+function getEndIdx( bookID: BookID ) : number
 {
 	switch (bookID)
 	{
@@ -17,7 +17,7 @@ function getEndIdx( bookID: BookID )
 	}
 }
 
-function getMatchIdx( bookID: BookID )
+function getMatchIdx( bookID: BookID ) : number
 {
 	switch (bookID)
 	{
@@ -38,6 +38,19 @@ function getQs( bookID: BookID )
 			return draculaQs;
 		case BookID.frankenstein:
 			return frankensteinQs;
+		default:
+			throw new Error(`Unknown book ID: ${bookID}`);
+	}
+}
+
+export function getBookMusic( bookID: BookID ) : BookMusic
+{
+	switch (bookID)
+	{
+		case BookID.dracula:
+			return draculaMusic;
+		case BookID.frankenstein:
+			return frankensteinMusic;
 		default:
 			throw new Error(`Unknown book ID: ${bookID}`);
 	}
@@ -94,22 +107,9 @@ function getQuestions( chap_num: number, bookID: BookID ): Question[]
 
 function getMusicTrack( chap_num: number , bookID: BookID) : string
 {
-	let bookMusic: BookMusic;
-
-	switch (bookID)
-	{
-		case BookID.dracula:
-			bookMusic = draculaMusic;
-			break;
-		case BookID.frankenstein:
-			bookMusic = frankensteinMusic;
-			break;
-		default:
-			throw new Error(`Unknown book ID: ${bookID}`);
-	}
+	const bookMusic: BookMusic = getBookMusic(bookID);
 
 	const key = `chapter_${chap_num}` as keyof typeof bookMusic;
-
 
 	if ( bookMusic[key] )
 		return bookMusic[key].url;

@@ -1,15 +1,13 @@
 import { useEffect } from 'react'
 import type { Book, Question } from './books/types'
 import { musicUrls } from './books/types'
-import { Screen } from './util/utils.ts'
+import { Screen, updateBooks } from './util/utils.ts'
 import Page from './elements/Page.tsx'
 import { useSettings } from './elements/SettingsContext.tsx'
 import useMusic from './hooks/useMusic.ts'
 import useAppState from './hooks/useAppState.ts'
 import { systemPrompt, userPrompt } from './ai/promptInfo.ts'
 import { model } from './ai/model.ts'
-import dracula from './books/dracula/dracula.ts'
-import frankstein from './books/frankenstein/frankenstein.ts'
 
 export const DEBUG = true;
 
@@ -79,10 +77,9 @@ export default function App()
 
 			try
 			{
-				if ( !books["dracula"] )
-					books["dracula"] = dracula();
-				if ( !books["frankenstein"] )
-					books["frankenstein"] = frankstein();
+				const bookUpdated = updateBooks(books);
+				if ( bookUpdated && book )
+					setCurrBook(book.id);
 			}
 			catch ( e )
 			{
