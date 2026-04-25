@@ -45,9 +45,9 @@ export type MusicTrack =
 
 export enum BookID
 {
-	dracula,
-	frankenstein,
-	error,
+	dracula = "Dracula",
+	frankenstein = "Frankenstein",
+	error = "error",
 }
 
 function getMusicUrls() : string[]
