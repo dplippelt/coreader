@@ -4,10 +4,11 @@ import { useSettings } from "../elements/SettingsContext"
 export default function useMusic()
 {
 	const audioRef = useRef<HTMLAudioElement | null>(null);
-	const audioCacheRef = useRef<Record<string, HTMLAudioElement>>({});
+	const currentUrlRef = useRef<string | null>(null);
 	const pauseTimeOutIDRef = useRef<NodeJS.Timeout | undefined>(undefined);
 	const stopTimeOutIDRef = useRef<NodeJS.Timeout | undefined>(undefined);
 	const startPlaybackTimeOutIDRef = useRef<NodeJS.Timeout | undefined>(undefined);
+	const initPlayTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 	const fadeInIntervalRef = useRef<NodeJS.Timeout | undefined>(undefined);
 	const fadeOutIntervalRef = useRef<NodeJS.Timeout | undefined>(undefined);
 	const fadeOutEndTime = useRef<number>(0);
@@ -44,30 +45,18 @@ export default function useMusic()
 			}, interval);
 	}
 
-	function preload( urls: string[] )
-	{
-		for ( const url of urls )
-		{
-			audioCacheRef.current[url] = new Audio(url);
-			audioCacheRef.current[url].preload = 'auto';
-		}
-	}
-
 	function play( url: string, resumeFadeInDur: number )
 	{
-		// If required audio element was not cached yet, create it and add it to the cache
-		if ( !audioCacheRef.current[url] )
-		{
-			audioCacheRef.current[url] = new Audio(url);
-			audioCacheRef.current[url].preload = 'auto';
-		}
+		// Fetch chapter audio and hint browser to buffer aggressively
+		const chapterAudio = new Audio(url);
+		chapterAudio.preload = 'auto';
 
 		// Clear pending pause() calls so the audio track does not get paused after the current one starts playing
 		clearTimeout(pauseTimeOutIDRef.current);
 		pauseTimeOutIDRef.current = undefined;
 
 		// need to check if same chapter instead of same track..!!!
-		const sameTrack: boolean = audioRef.current === audioCacheRef.current[url];
+		const sameTrack: boolean = currentUrlRef.current === url;
 
 		// Stop the track that was previously playing if it's not the same one we want to start playing
 		// Or resume if it if it is the same one.
@@ -80,14 +69,16 @@ export default function useMusic()
 
 		function initPlay()
 		{
-			audioCacheRef.current[url].play();
-			audioCacheRef.current[url].pause();
+			chapterAudio.play();
+			initPlayTimeoutRef.current = setTimeout(() => chapterAudio.pause(), 10);
+			// chapterAudio.pause();
 		}
 
 		function startPlayback()
 		{
 			// set the new track as the current track
-			audioRef.current = audioCacheRef.current[url];
+			audioRef.current = chapterAudio;
+			currentUrlRef.current = url;
 
 			// Set starting volume to 0 and if mute is off let the music fade in.
 			audioRef.current.volume = 0;
@@ -96,11 +87,15 @@ export default function useMusic()
 
 			// Let the audio track loop, and start playback
 			audioRef.current!.loop = true;
+			console.log('readyState:', audioRef.current.readyState, 'paused:', audioRef.current.paused);
+
+			clearTimeout(initPlayTimeoutRef.current);
+
 			audioRef.current!.play();
 		}
 
 		// If we are switching tracks 'initialize' the new track playing and pausing it straight away (to get around autoplay blocking)
-		if ( !sameTrack )
+		if ( !sameTrack || delay > 0 )
 			initPlay();
 
 		// Abort previous pending startPlayback to avoid multiple audio tracks playing simultaneously
@@ -179,5 +174,5 @@ export default function useMusic()
 		muteOnRef.current = !muteOnRef.current;
 	}
 
-	return { preload, play, pause, stop, mute };
+	return { play, pause, stop, mute };
 }

@@ -3,13 +3,11 @@ import type { AppStates, Controls, SetAppStates } from "../App"
 import { updateBooks } from "../util/utils"
 import { Screen } from "../util/utils"
 import { useSettings } from "../elements/SettingsContext"
-import useMusic from "./useMusic"
 import { musicUrls } from "../books/types"
 
 export default function useAppEffects( states: AppStates, setStates: SetAppStates, controls: Controls )
 {
 	const settings = useSettings();
-	const { preload } = useMusic();
 
 	useEffect(() =>
 	{
@@ -85,11 +83,6 @@ export default function useAppEffects( states: AppStates, setStates: SetAppState
 	{
 		localStorage.setItem("currChap", states.currChap.toString());
 	}, [states.currChap]);
-
-	useEffect(() =>
-	{
-		preload(musicUrls);
-	}, [])
 
 	useEffect(() =>
 	{
