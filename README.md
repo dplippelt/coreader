@@ -38,7 +38,7 @@ For generating the reading comprehension questions I chose to use a free tier of
 
 ### Music
 
-I chose to use the Web Audio API instead of `<audio>` tags because it allowed me more fine grained control over music playback. Specifically the Web Audio API allowed me to implement audio fade in and out for both a more enjoyable user experience and to avoid audio clipping when the music is stopped.
+I initially implemented music playback using the Web Audio API for its `GainNode`-based fade control, but switched to `HTMLAudioElement` with a `setInterval`-based fade implementation after finding it simpler and equally effective.
 
 ### Styling
 
