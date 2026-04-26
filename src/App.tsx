@@ -1,13 +1,12 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import type { Book, Question } from './books/types'
 import { musicUrls } from './books/types'
-import { Screen, updateBooks } from './util/utils.ts'
-import Page from './elements/Page.tsx'
-import { useSettings } from './elements/SettingsContext.tsx'
-import useMusic from './hooks/useMusic.ts'
-import useAppState from './hooks/useAppState.ts'
-import { systemPrompt, userPrompt } from './ai/promptInfo.ts'
-import { model } from './ai/model.ts'
+import { Screen, updateBooks } from './util/utils'
+import Page from './elements/Page'
+import { useSettings } from './elements/SettingsContext'
+import useMusic from './hooks/useMusic'
+import useAppState from './hooks/useAppState'
+import useAppControls from './hooks/useAppControls'
 
 export const DEBUG = true;
 
@@ -49,10 +48,25 @@ export type AppStates =
 	questions: Record<string, Record<string, Question[]>>,
 }
 
+export type SetAppStates =
+{
+	setBook: React.Dispatch<React.SetStateAction<Book | null>>,
+	setCurrChap: React.Dispatch<React.SetStateAction<number>>,
+	setScreen: React.Dispatch<React.SetStateAction<Screen>>,
+	setPrevScreens: React.Dispatch<React.SetStateAction<Screen[]>>,
+	setNavWidth: React.Dispatch<React.SetStateAction<number>>,
+	setZoomLevel: React.Dispatch<React.SetStateAction<number>>,
+	setPrevMusic: React.Dispatch<React.SetStateAction<string | null>>,
+	setError: React.Dispatch<React.SetStateAction<Error | null>>,
+	setMusicIsPlaying: React.Dispatch<React.SetStateAction<boolean>>,
+	setMuteOn: React.Dispatch<React.SetStateAction<boolean>>,
+	setQuestions: React.Dispatch<React.SetStateAction<Record<string, Record<string, Question[]>>>>,
+}
+
 export default function App()
 {
 	const settings = useSettings();
-	const { preload, play, pause, stop, mute } = useMusic();
+	const { preload } = useMusic();
 	const
 	{
 		screen, setScreen,
@@ -84,7 +98,10 @@ export default function App()
 			catch ( e )
 			{
 				console.error(e);
-				setError(e);
+				if ( e instanceof Error )
+					setError(e);
+				else
+					setError(new Error(String(e)));
 				setScreen(Screen.error);
 			}
 
@@ -150,210 +167,58 @@ export default function App()
 		getQuestions();
 	}, [currChap, book]);
 
-	async function getQuestions()
+	const states: AppStates =
 	{
-		function setStaticQuestions()
-		{
-			setQuestions(prev =>
-			({
-				...prev,
-				[book!.id]:
-				{
-					...prev[book!.id],
-					[`chapter_${currChap}`]: book!.chapters[currChap - 1].questions
-				}
-			}));
-		}
-
-		function setAIQuestions( questions: Question[] )
-		{
-			setQuestions(prev =>
-			({
-				...prev,
-				[book!.id]:
-				{
-					...prev[book!.id],
-					[`chapter_${currChap}`]: questions
-				}
-			}));
-		}
-
-		if ( currChap <= 0 )
-			return;
-		if ( questions[book!.id] !== undefined && questions[book!.id][`chapter_${currChap}`] !== undefined )
-			return;
-		if ( !settings.aiQuestionsEnabled )
-			return setStaticQuestions();
-
-		function getChapterContent()
-		{
-			if ( DEBUG )
-				return book!.chapters[currChap - 1].content.slice(0, 3000);
-			return book!.chapters[currChap - 1].content;
-		}
-
-		const response = await fetch("/api/groq",
-			{
-				method: "POST",
-				headers:
-				{
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(
-				{
-					model: model,
-					systemPrompt: systemPrompt,
-					userPrompt: userPrompt(currChap, getChapterContent(), 5),
-				})
-			}
-		);
-
-		const data = await response.json();
-		if ( !response.ok )
-		{
-			console.error(`GroqError: ${JSON.stringify(data)}`);
-			return setStaticQuestions();
-		}
-
-		const text = data.choices[0].message.content;
-		const parsed = JSON.parse(text);
-		setAIQuestions(parsed.questions);
+		book: book,
+		currChap: currChap,
+		screen: screen,
+		prevScreens: prevScreens,
+		navWidth: navWidth,
+		zoomLevel: zoomLevel,
+		prevMusic: prevMusic,
+		error: error,
+		musicIsPlaying: musicIsPlaying,
+		muteOn: muteOn,
+		questions: questions,
 	}
 
-	function startPlay( chapNum: number )
+	const setStates :SetAppStates =
 	{
-		if ( chapNum === -1 || !settings.musicEnabled )
-			return;
-
-		const chapter = book!.chapters[chapNum];
-
-		if ( musicIsPlaying && chapter.music )
-		{
-			play(chapter.music, 2);
-			setPrevMusic(chapter.music);
-		}
-		else
-			setPrevMusic(chapter.music ?? null);
+		setBook: setBook,
+		setCurrChap: setCurrChap,
+		setScreen: setScreen,
+		setPrevScreens: setPrevScreens,
+		setNavWidth: setNavWidth,
+		setZoomLevel: setZoomLevel,
+		setPrevMusic: setPrevMusic,
+		setError: setError,
+		setMusicIsPlaying: setMusicIsPlaying,
+		setMuteOn: setMuteOn,
+		setQuestions: setQuestions,
 	}
 
-	function handleNextChapter()
+	const
 	{
-		goToChapter(currChap + 1);
-	}
-
-	function handlePrevChapter()
-	{
-		goToChapter(currChap - 1);
-	}
-
-	function goToStart()
-	{
-		window.scrollTo(0, 0);
-		pause(2);
-		setPrevScreens([...prevScreens, screen]);
-		setScreen(Screen.startMenu);
-	}
-
-	function goToBookSelect()
-	{
-		window.scrollTo(0, 0);
-		setPrevScreens([...prevScreens, screen]);
-		setScreen(Screen.bookSelectMenu);
-	}
-
-	function goToChapterSelect()
-	{
-		window.scrollTo(0, 0);
-		pause(2);
-		setPrevScreens([...prevScreens, screen]);
-		setScreen(Screen.chapSelectMenu);
-	}
-
-	function goToSettings()
-	{
-		window.scrollTo(0, 0);
-		setPrevScreens([...prevScreens, screen]);
-		setScreen(Screen.settingsMenu);
-	}
-
-	function goToCredits()
-	{
-		window.scrollTo(0, 0);
-		setPrevScreens([...prevScreens, screen]);
-		setScreen(Screen.credits);
-	}
-
-	function goToChapter( chapNum: number )
-	{
-		window.scrollTo(0, 0);
-
-		if ( chapNum === 0 )
-			pause(2);
-		else
-			startPlay(chapNum - 1);
-
-		setCurrChap(chapNum);
-		setPrevScreens([...prevScreens, screen]);
-		setScreen(Screen.reader);
-	}
-
-	function goToQuestions()
-	{
-		window.scrollTo(0, 0);
-		pause(2);
-		setPrevScreens([...prevScreens, screen]);
-		setScreen(Screen.questions);
-	}
-
-	function goToPrevScreen()
-	{
-		if ( prevScreens.length === 0 )
-			return;
-
-		window.scrollTo(0, 0);
-
-		const copy = prevScreens.slice();
-		let prev = copy.pop()!;
-		if ( prev === Screen.questions && !settings.questionsEnabled )
-			prev = copy.pop()!;
-
-		setScreen(prev);
-		setPrevScreens(copy);
-	}
-
-	function setMusicIsPlayingTo( musicIsPlaying: boolean )
-	{
-		setMusicIsPlaying(musicIsPlaying);
-	}
-
-	function toggleMute()
-	{
-		mute();
-		setMuteOn(!muteOn);
-	}
-
-	function clearGeneratedQuestions()
-	{
-		setQuestions({});
-	}
-
-	function resetBookProgress()
-	{
-		setCurrChap(-1);
-		setBook(null);
-	}
-
-	function setCurrBook( bookID: string )
-	{
-		const stored = localStorage.getItem("books");
-		const books = stored ? JSON.parse(stored) : null;
-
-		if ( !books )
-			setBook(null);
-		else
-			setBook(books[bookID]);
-		setCurrChap(-1);
-	}
+		handleNextChapter,
+		handlePrevChapter,
+		goToStart,
+		goToChapterSelect,
+		goToBookSelect,
+		goToCredits,
+		goToSettings,
+		goToChapter,
+		goToQuestions,
+		goToPrevScreen,
+		play,
+		pause,
+		stop,
+		toggleMute,
+		setMusicIsPlayingTo,
+		clearGeneratedQuestions,
+		resetBookProgress,
+		setCurrBook,
+		getQuestions,
+	} = useAppControls(states, setStates);
 
 	const controls: Controls =
 	{
@@ -376,21 +241,6 @@ export default function App()
 		resetBookProgress: resetBookProgress,
 		setCurrBook: setCurrBook,
 		getQuestions: getQuestions,
-	}
-
-	const states: AppStates =
-	{
-		book: book,
-		currChap: currChap,
-		screen: screen,
-		prevScreens: prevScreens,
-		navWidth: navWidth,
-		zoomLevel: zoomLevel,
-		prevMusic: prevMusic,
-		error: error,
-		musicIsPlaying: musicIsPlaying,
-		muteOn: muteOn,
-		questions: questions,
 	}
 
 	return <Page book={book} states={states} controls={controls}/>
