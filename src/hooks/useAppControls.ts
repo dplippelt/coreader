@@ -91,7 +91,7 @@ export default function useAppControls( states: AppStates, setStates: SetAppStat
 
 		if ( states.musicIsPlaying && chapter.music )
 		{
-			play(chapter.music, 2);
+			play(chapter.music, chapNum, 2);
 			setStates.setPrevMusic(chapter.music);
 		}
 		else

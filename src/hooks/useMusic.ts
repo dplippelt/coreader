@@ -4,7 +4,7 @@ import { useSettings } from "../elements/SettingsContext"
 export default function useMusic()
 {
 	const audioRef = useRef<HTMLAudioElement | null>(null);
-	const currentUrlRef = useRef<string | null>(null);
+	const currentChap = useRef<number | null>(null);
 	const pauseTimeOutIDRef = useRef<NodeJS.Timeout | undefined>(undefined);
 	const stopTimeOutIDRef = useRef<NodeJS.Timeout | undefined>(undefined);
 	const startPlaybackTimeOutIDRef = useRef<NodeJS.Timeout | undefined>(undefined);
@@ -45,22 +45,20 @@ export default function useMusic()
 			}, interval);
 	}
 
-	function play( url: string, resumeFadeInDur: number )
+	function play( url: string, chapNum: number, resumeFadeInDur: number )
 	{
 		// Fetch chapter audio and hint browser to buffer aggressively
 		const chapterAudio = new Audio(url);
+		const sameChap: boolean = currentChap.current === chapNum;
 		chapterAudio.preload = 'auto';
 
 		// Clear pending pause() calls so the audio track does not get paused after the current one starts playing
 		clearTimeout(pauseTimeOutIDRef.current);
 		pauseTimeOutIDRef.current = undefined;
 
-		// need to check if same chapter instead of same track..!!!
-		const sameTrack: boolean = currentUrlRef.current === url;
-
 		// Stop the track that was previously playing if it's not the same one we want to start playing
 		// Or resume if it if it is the same one.
-		if ( audioRef.current && !sameTrack )
+		if ( audioRef.current && !sameChap )
 			stop(4);
 		else if ( audioRef.current )
 			return resume(resumeFadeInDur);
@@ -78,7 +76,7 @@ export default function useMusic()
 		{
 			// set the new track as the current track
 			audioRef.current = chapterAudio;
-			currentUrlRef.current = url;
+			currentChap.current = chapNum;
 
 			// Set starting volume to 0 and if mute is off let the music fade in.
 			audioRef.current.volume = 0;
@@ -87,7 +85,6 @@ export default function useMusic()
 
 			// Let the audio track loop, and start playback
 			audioRef.current!.loop = true;
-			console.log('readyState:', audioRef.current.readyState, 'paused:', audioRef.current.paused);
 
 			clearTimeout(initPlayTimeoutRef.current);
 
@@ -95,7 +92,7 @@ export default function useMusic()
 		}
 
 		// If we are switching tracks 'initialize' the new track playing and pausing it straight away (to get around autoplay blocking)
-		if ( !sameTrack || delay > 0 )
+		if ( !sameChap || delay > 0 )
 			initPlay();
 
 		// Abort previous pending startPlayback to avoid multiple audio tracks playing simultaneously
