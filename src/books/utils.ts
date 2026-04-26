@@ -138,7 +138,6 @@ export default function getChapters( rawBook: string, rawChapters: RegExpExecArr
 		const chap_num = i + 1;
 		const start_chap_idx = rawChapters[i].index + 1;
 		const end_chap_idx = i + 1 < rawChapters.length ? rawChapters[i + 1].index : getEndOfBookIdx(rawBook, bookID);
-		console.log(`start_chap_idx: ${start_chap_idx}, end_chap_idx: ${end_chap_idx}`);
 		const chap_text = cleanChapter(rawBook, start_chap_idx, end_chap_idx);
 		const chap_header = getHeader(rawChapters[i][0]);
 		const chap_title = getTitle(chap_text, bookID);;

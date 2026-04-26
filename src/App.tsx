@@ -6,7 +6,7 @@ import useAppState from './hooks/useAppState'
 import useAppControls from './hooks/useAppControls'
 import useAppEffects from './hooks/useAppEffects'
 
-export const DEBUG = true;
+export const DEBUG = false;
 
 export type AppStates =
 {
