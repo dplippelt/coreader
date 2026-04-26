@@ -3,43 +3,78 @@ import { useSettings } from "../elements/SettingsContext"
 
 export default function useMusic()
 {
-	const ctxRef = useRef<AudioContext | null>(null);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
-	const srcRef = useRef<MediaElementAudioSourceNode | null>(null);
-	const gainRef = useRef<GainNode | null>(null);
 	const audioCacheRef = useRef<Record<string, HTMLAudioElement>>({});
 	const pauseTimeOutIDRef = useRef<NodeJS.Timeout | undefined>(undefined);
 	const stopTimeOutIDRef = useRef<NodeJS.Timeout | undefined>(undefined);
 	const startPlaybackTimeOutIDRef = useRef<NodeJS.Timeout | undefined>(undefined);
+	const fadeInIntervalRef = useRef<NodeJS.Timeout | undefined>(undefined);
+	const fadeOutIntervalRef = useRef<NodeJS.Timeout | undefined>(undefined);
 	const fadeOutEndTime = useRef<number>(0);
 	const muteOnRef = useRef<boolean>(false);
 	const settings = useSettings();
+
+	function debug( audio: any )
+	{
+		setInterval(() =>
+		{
+			if ( !audio || audio.buffered.length === 0 )
+				return;
+			const buffered = audio.buffered.end(0);
+			const duration = audio.duration;
+			console.log(`buffered: ${buffered.toFixed(1)}s / ${duration.toFixed(1)}s | currentTime: ${audio.currentTime.toFixed(1)}s | paused: ${audio.paused}`);
+		}, 1000);
+	}
+
+	function fadeOut( audio: HTMLAudioElement, duration: number )
+	{
+		clearInterval(fadeOutIntervalRef.current);
+		clearInterval(fadeInIntervalRef.current);
+		const startVolume = audio.volume;
+		const interval = 10;
+		const steps = duration * 1000 / interval;
+		const decr = startVolume / steps;
+		fadeOutIntervalRef.current = setInterval(() =>
+			{
+				audio.volume = Math.max(0, audio.volume - decr);
+				if ( audio.volume === 0 )
+					clearInterval(fadeOutIntervalRef.current);
+			}, interval);
+	}
+
+	function fadeIn( audio: HTMLAudioElement, duration: number )
+	{
+		clearInterval(fadeOutIntervalRef.current);
+		clearInterval(fadeInIntervalRef.current);
+		const targetVolume = settings.volume;
+		const interval = 10;
+		const steps = duration * 1000 / interval;
+		const incr = (targetVolume - audio.volume) / steps;
+		fadeInIntervalRef.current = setInterval(() =>
+			{
+				audio.volume = Math.min(targetVolume, audio.volume + incr);
+				if ( audio.volume === targetVolume )
+					clearInterval(fadeInIntervalRef.current);
+			}, interval);
+	}
 
 	function preload( urls: string[] )
 	{
 		for ( const url of urls )
 		{
 			audioCacheRef.current[url] = new Audio(url);
+			audioCacheRef.current[url].preload = 'auto';
 		}
 	}
 
 	function play( url: string, resumeFadeInDur: number )
 	{
-		// If no audio context yet exists create one and an accompanying gain node for fine grained volume control
-		if ( !ctxRef.current )
-		{
-			ctxRef.current = new AudioContext;
-			gainRef.current = ctxRef.current!.createGain();
-			gainRef.current.connect(ctxRef.current!.destination);
-		}
-
-		// In case context gets suspended by browser due to e.g. inactivity -> resume
-		if ( ctxRef.current.state === "suspended" )
-			ctxRef.current.resume();
-
 		// If required audio element was not cached yet, create it and add it to the cache
 		if ( !audioCacheRef.current[url] )
+		{
 			audioCacheRef.current[url] = new Audio(url);
+			audioCacheRef.current[url].preload = 'auto';
+		}
 
 		// Clear pending pause() calls so the audio track does not get paused after the current one starts playing
 		clearTimeout(pauseTimeOutIDRef.current);
@@ -55,9 +90,7 @@ export default function useMusic()
 		else if ( audioRef.current )
 			return resume(resumeFadeInDur);
 
-		const playFadeInDur = 4;
-		const delay = Math.max(0, fadeOutEndTime.current - ctxRef.current.currentTime);
-		const startTime = ctxRef.current.currentTime + delay;
+		const delay = Math.max(0, fadeOutEndTime.current - Date.now() / 1000);
 
 		function initPlay()
 		{
@@ -70,17 +103,12 @@ export default function useMusic()
 			// set the new track as the current track
 			audioRef.current = audioCacheRef.current[url];
 
-			// Create source node ("Speakers") for the audio element and connect the gain node (volume control) to it.
-			if ( !srcRef.current || srcRef.current.mediaElement !== audioRef.current )
-			{
-				srcRef.current = ctxRef.current!.createMediaElementSource(audioRef.current);
-				srcRef.current.connect(gainRef.current!);
-			}
+			debug(audioRef.current);
 
 			// Set starting volume to 0 and if mute is off let the music fade in.
-			gainRef.current!.gain.setValueAtTime(0, ctxRef.current!.currentTime);
+			audioRef.current.volume = 0;
 			if ( !muteOnRef.current )
-				gainRef.current!.gain.linearRampToValueAtTime(settings.volume, startTime + playFadeInDur);
+				fadeIn(audioRef.current, 4);
 
 			// Let the audio track loop, and start playback
 			audioRef.current!.loop = true;
@@ -103,45 +131,40 @@ export default function useMusic()
 
 	function pause( fadeOutDur: number )
 	{
-		if ( !ctxRef.current || !gainRef.current )
+		if ( !audioRef.current )
 			return;
 
-		fadeOutEndTime.current = ctxRef.current.currentTime + fadeOutDur;
+		fadeOut(audioRef.current, fadeOutDur);
 
-		gainRef.current.gain.setValueAtTime(gainRef.current.gain.value, ctxRef.current.currentTime);
-		gainRef.current.gain.linearRampToValueAtTime(0, fadeOutEndTime.current);
-		pauseTimeOutIDRef.current = setTimeout(() => audioRef.current!.pause(), fadeOutDur * 1000);
+		pauseTimeOutIDRef.current = setTimeout(() =>
+			audioRef.current!.pause(), fadeOutDur * 1000);
 	}
 
 	function resume( fadeInDur: number )
 	{
-		if ( !ctxRef.current || !audioRef.current || !gainRef.current )
+		if ( !audioRef.current )
 			return;
 
 		clearTimeout(pauseTimeOutIDRef.current);
 		pauseTimeOutIDRef.current = undefined;
 
-		gainRef.current!.gain.setValueAtTime(gainRef.current.gain.value, ctxRef.current.currentTime);
-		gainRef.current!.gain.linearRampToValueAtTime(settings.volume, ctxRef.current.currentTime + fadeInDur);
+		fadeIn(audioRef.current, fadeInDur);
+
 		audioRef.current!.play();
 	}
 
 	function stop( fadeOutDur: number )
 	{
-		if ( !ctxRef.current || !audioRef.current || !gainRef.current )
+		if ( !audioRef.current )
 			return;
 
 		if ( pauseTimeOutIDRef.current !== undefined )
 		{
 			clearTimeout(pauseTimeOutIDRef.current);
 			pauseTimeOutIDRef.current = undefined;
-			gainRef.current.gain.cancelScheduledValues(ctxRef.current.currentTime);
 		}
 
-		fadeOutEndTime.current = ctxRef.current.currentTime + fadeOutDur;
-
-		gainRef.current.gain.setValueAtTime(gainRef.current.gain.value, ctxRef.current.currentTime);
-		gainRef.current.gain.linearRampToValueAtTime(0, fadeOutEndTime.current);
+		fadeOut(audioRef.current, fadeOutDur);
 
 		stopTimeOutIDRef.current = setTimeout(() => {
 			audioRef.current!.currentTime = 0;
@@ -151,23 +174,15 @@ export default function useMusic()
 
 	function mute()
 	{
-		if ( !ctxRef.current || !gainRef.current )
+		if ( !audioRef.current )
 			return;
 
-		gainRef.current.gain.cancelScheduledValues(ctxRef.current.currentTime);
-
-		const fadeOutInDur = 0.2;
+		const fadeDur = 0.2;
 
 		if ( !muteOnRef.current )
-		{
-			gainRef.current.gain.setValueAtTime(gainRef.current.gain.value, ctxRef.current.currentTime);
-			gainRef.current.gain.linearRampToValueAtTime(0, ctxRef.current.currentTime + fadeOutInDur);
-		}
+			fadeOut(audioRef.current, fadeDur);
 		else
-		{
-			gainRef.current.gain.setValueAtTime(0, ctxRef.current.currentTime);
-			gainRef.current.gain.linearRampToValueAtTime(settings.volume, ctxRef.current.currentTime + fadeOutInDur);
-		}
+			fadeIn(audioRef.current, fadeDur);
 
 		muteOnRef.current = !muteOnRef.current;
 	}
