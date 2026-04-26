@@ -49,16 +49,3 @@ export enum BookID
 	frankenstein = "Frankenstein",
 	error = "error",
 }
-
-function getMusicUrls() : string[]
-{
-	const draculaUrls = Object.values(draculaMusic).map(track => track.url);
-	const frankensteinUrls = Object.values(frankensteinMusic).map(track => track.url);
-
-	const allUrls = [...draculaUrls, ...frankensteinUrls];
-	const uniqueUrls = new Set(allUrls);
-
-	return [...uniqueUrls];
-}
-
-export const musicUrls = getMusicUrls();
