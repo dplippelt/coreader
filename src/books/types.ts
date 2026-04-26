@@ -1,6 +1,3 @@
-import draculaMusic from './dracula/draculaMusic.json'
-import frankensteinMusic from './frankenstein/frankensteinMusic.json'
-
 export type Question =
 {
 	chapter: number,
