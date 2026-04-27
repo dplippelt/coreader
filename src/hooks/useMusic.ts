@@ -11,6 +11,7 @@ export default function useMusic()
 	const initPlayTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 	const fadeInIntervalRef = useRef<NodeJS.Timeout | undefined>(undefined);
 	const fadeOutIntervalRef = useRef<NodeJS.Timeout | undefined>(undefined);
+	const fadeInAudio = useRef<HTMLAudioElement | null>(null);
 	const fadeOutEndTime = useRef<number>(0);
 	const muteOnRef = useRef<boolean>(false);
 	const settings = useSettings();
@@ -32,6 +33,10 @@ export default function useMusic()
 
 	function fadeIn( audio: HTMLAudioElement, duration: number )
 	{
+		if ( fadeInAudio.current )
+			fadeOut(fadeInAudio.current, 1.5);
+		fadeInAudio.current = audio;
+
 		clearInterval(fadeInIntervalRef.current);
 		const targetVolume = settings.volume;
 		const interval = 10;
@@ -41,7 +46,10 @@ export default function useMusic()
 			{
 				audio.volume = Math.min(targetVolume, audio.volume + incr);
 				if ( audio.volume === targetVolume )
+				{
 					clearInterval(fadeInIntervalRef.current);
+					fadeInAudio.current = null;
+				}
 			}, interval);
 	}
 
@@ -69,7 +77,6 @@ export default function useMusic()
 		{
 			chapterAudio.play();
 			initPlayTimeoutRef.current = setTimeout(() => chapterAudio.pause(), 10);
-			// chapterAudio.pause();
 		}
 
 		function startPlayback()
@@ -89,6 +96,7 @@ export default function useMusic()
 			clearTimeout(initPlayTimeoutRef.current);
 
 			audioRef.current!.play();
+			fadeOutEndTime.current = 0;
 		}
 
 		// If we are switching tracks 'initialize' the new track playing and pausing it straight away (to get around autoplay blocking)
@@ -144,8 +152,11 @@ export default function useMusic()
 			pauseTimeOutIDRef.current = undefined;
 		}
 
-		fadeOut(audio, fadeOutDur);
-		fadeOutEndTime.current = Date.now() / 1000 + fadeOutDur;
+		if ( fadeOutEndTime.current === 0 )
+		{
+			fadeOut(audio, fadeOutDur);
+			fadeOutEndTime.current = Date.now() / 1000 + fadeOutDur;
+		}
 
 		stopTimeOutIDRef.current = setTimeout(() => {
 			audio!.currentTime = 0;
