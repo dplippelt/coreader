@@ -1,18 +1,20 @@
 import { model } from "../ai/model"
 import { systemPrompt, userPrompt } from "../ai/promptInfo"
 import type { AppStates, SetAppStates } from "../App"
-import type { Question } from "../books/types"
+import { BookID, type Book, type Question } from "../books/types"
 import { useSettings } from "../elements/SettingsContext"
 import { Screen } from "../util/utils"
 import { DEBUG } from "../App"
 import useMusic from "./useMusic"
+import booksJSON from "../data/books.json"
+const books = booksJSON as Record<string, Book>
 
 export default function useAppControls( states: AppStates, setStates: SetAppStates )
 {
 	const settings = useSettings();
 	const { play, pause, stop, mute } = useMusic();
 
-	async function getQuestions()
+	async function getQuestions( questionsReset: boolean )
 	{
 		function setStaticQuestions()
 		{
@@ -42,7 +44,7 @@ export default function useAppControls( states: AppStates, setStates: SetAppStat
 
 		if ( states.currChap <= 0 )
 			return;
-		if ( states.questions[states.book!.id] !== undefined && states.questions[states.book!.id][`chapter_${states.currChap}`] !== undefined )
+		if ( !questionsReset && states.questions[states.book!.id] !== undefined && states.questions[states.book!.id][`chapter_${states.currChap}`] !== undefined )
 			return;
 		if ( !settings.aiQuestionsEnabled )
 			return setStaticQuestions();
@@ -73,7 +75,7 @@ export default function useAppControls( states: AppStates, setStates: SetAppStat
 		const data = await response.json();
 		if ( !response.ok )
 		{
-			console.error(`GroqError: ${JSON.stringify(data)}`);
+			console.warn(`Groq: ${JSON.stringify(data)}`);
 			return setStaticQuestions();
 		}
 
@@ -197,23 +199,21 @@ export default function useAppControls( states: AppStates, setStates: SetAppStat
 	function clearGeneratedQuestions()
 	{
 		setStates.setQuestions({});
+		if ( states.currChap !== -1 )
+			getQuestions(true);
 	}
 
 	function resetBookProgress()
 	{
 		setStates.setCurrChap(-1);
 		setStates.setBook(null);
+		setStates.setCurrBook(BookID.none);
 	}
 
-	function setCurrBook( bookID: string )
+	function changeCurrBook( bookID: string )
 	{
-		const stored = localStorage.getItem("books");
-		const books = stored ? JSON.parse(stored) : null;
-
-		if ( !books )
-			setStates.setBook(null);
-		else
-			setStates.setBook(books[bookID]);
+		setStates.setBook(books[bookID]);
+		setStates.setCurrBook(bookID as BookID);
 		setStates.setCurrChap(-1);
 	}
 
@@ -235,7 +235,7 @@ export default function useAppControls( states: AppStates, setStates: SetAppStat
 		setMusicIsPlayingTo,
 		clearGeneratedQuestions,
 		resetBookProgress,
-		setCurrBook,
+		changeCurrBook,
 		getQuestions,
 	}
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import type { Book, Question } from './books/types'
+import type { Book, BookID, Question } from './books/types'
 import { Screen } from './util/utils'
 import Page from './elements/Page'
 import useAppState from './hooks/useAppState'
@@ -11,6 +11,7 @@ export const DEBUG = false;
 export type AppStates =
 {
 	book: Book | null,
+	currBook: BookID,
 	currChap: number,
 	screen: Screen,
 	prevScreens: Screen[],
@@ -26,6 +27,7 @@ export type AppStates =
 export type SetAppStates =
 {
 	setBook: React.Dispatch<React.SetStateAction<Book | null>>,
+	setCurrBook: React.Dispatch<React.SetStateAction<BookID>>,
 	setCurrChap: React.Dispatch<React.SetStateAction<number>>,
 	setScreen: React.Dispatch<React.SetStateAction<Screen>>,
 	setPrevScreens: React.Dispatch<React.SetStateAction<Screen[]>>,
@@ -57,8 +59,8 @@ export type Controls =
 	setMusicIsPlayingTo: ( setMusicIsPlaying: boolean ) => void,
 	clearGeneratedQuestions: () => void,
 	resetBookProgress: () => void,
-	setCurrBook: ( bookID: string ) => void,
-	getQuestions: () => Promise<void>,
+	changeCurrBook: ( bookID: string ) => void,
+	getQuestions: ( questionsReset: boolean ) => Promise<void>,
 }
 
 export default function App()
@@ -74,6 +76,7 @@ export default function App()
 		prevMusic, setPrevMusic,
 		error, setError,
 		book, setBook,
+		currBook, setCurrBook,
 		currChap, setCurrChap,
 		questions, setQuestions,
 	} = useAppState();
@@ -81,6 +84,7 @@ export default function App()
 	const states: AppStates =
 	{
 		book: book,
+		currBook: currBook,
 		currChap: currChap,
 		screen: screen,
 		prevScreens: prevScreens,
@@ -93,9 +97,10 @@ export default function App()
 		questions: questions,
 	}
 
-	const setStates :SetAppStates =
+	const setStates: SetAppStates =
 	{
 		setBook: setBook,
+		setCurrBook: setCurrBook,
 		setCurrChap: setCurrChap,
 		setScreen: setScreen,
 		setPrevScreens: setPrevScreens,
@@ -127,7 +132,7 @@ export default function App()
 		setMusicIsPlayingTo,
 		clearGeneratedQuestions,
 		resetBookProgress,
-		setCurrBook,
+		changeCurrBook,
 		getQuestions,
 	} = useAppControls(states, setStates);
 
@@ -150,7 +155,7 @@ export default function App()
 		toggleMute: toggleMute,
 		clearGeneratedQuestions: clearGeneratedQuestions,
 		resetBookProgress: resetBookProgress,
-		setCurrBook: setCurrBook,
+		changeCurrBook: changeCurrBook,
 		getQuestions: getQuestions,
 	}
 

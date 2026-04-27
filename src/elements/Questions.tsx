@@ -17,7 +17,7 @@ type HeaderProps =
 type QuestionsProps =
 {
 	header: string,
-	questions: Question[],
+	questions: Question[] | undefined,
 	controls: Controls,
 }
 
@@ -143,9 +143,6 @@ function LoadingScreen()
 
 export default function Questions( { header, questions, controls } : QuestionsProps )
 {
-	if ( questions === undefined )
-		controls.getQuestions();
-
 	return (
 		<>
 			<Buttons controls={controls}/>

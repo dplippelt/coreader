@@ -1,41 +1,10 @@
 import { useEffect } from "react"
 import type { AppStates, Controls, SetAppStates } from "../App"
-import { updateBooks } from "../util/utils"
-import { Screen } from "../util/utils"
 import { useSettings } from "../elements/SettingsContext"
 
 export default function useAppEffects( states: AppStates, setStates: SetAppStates, controls: Controls )
 {
 	const settings = useSettings();
-
-	useEffect(() =>
-	{
-		function initBooks()
-		{
-			const stored = localStorage.getItem("books");
-			const books = stored ? JSON.parse(stored) : {};
-
-			try
-			{
-				const bookUpdated = updateBooks(books);
-				if ( bookUpdated && states.book )
-					controls.setCurrBook(states.book.id);
-			}
-			catch ( e )
-			{
-				console.error(e);
-				if ( e instanceof Error )
-					setStates.setError(e);
-				else
-					setStates.setError(new Error(String(e)));
-				setStates.setScreen(Screen.error);
-			}
-
-			localStorage.setItem("books", JSON.stringify(books));
-		}
-
-		initBooks();
-	}, []);
 
 	useEffect(() =>
 	{
@@ -75,16 +44,23 @@ export default function useAppEffects( states: AppStates, setStates: SetAppState
 
 	useEffect(() =>
 	{
-		localStorage.setItem("book", JSON.stringify(states.book));
-	}, [states.book]);
-
-	useEffect(() =>
-	{
 		localStorage.setItem("currChap", states.currChap.toString());
 	}, [states.currChap]);
 
 	useEffect(() =>
 	{
-		controls.getQuestions();
-	}, [states.currChap, states.book]);
+		localStorage.setItem("currBook", states.currBook);
+	}, [states.currBook]);
+
+	useEffect(() =>
+	{
+		controls.getQuestions(false);
+	}, [states.currChap, states.currBook]);
+
+	// temporary effect to clear old local storage items
+	useEffect(() =>
+	{
+		localStorage.removeItem("book");
+		localStorage.removeItem("books");
+	}, []);
 }

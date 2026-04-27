@@ -44,5 +44,5 @@ export enum BookID
 {
 	dracula = "Dracula",
 	frankenstein = "Frankenstein",
-	error = "error",
+	none = "none",
 }

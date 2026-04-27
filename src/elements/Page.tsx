@@ -1,5 +1,5 @@
 import type { Controls, AppStates } from "../App"
-import type { Book as Bk, Chapter as Chap } from "../books/types"
+import type { Book as Bk , Chapter as Chap } from "../books/types"
 import { Screen } from "../util/utils"
 import StartMenu from "./StartMenu"
 import Book from "./Book"
@@ -23,7 +23,7 @@ type PageProps =
 export default function Page( { book, states, controls} : PageProps )
 {
 	const settings = useSettings();
-	const currChap: Chap | null = states.currChap === -1 ? null : book!.chapters[states.currChap - 1];
+	const currChap: Chap | null = states.currChap === -1 || !book ? null : book!.chapters[states.currChap - 1];
 
 	switch (states.screen)
 	{
@@ -44,7 +44,7 @@ export default function Page( { book, states, controls} : PageProps )
 				return;
 			}
 
-			const questions = states.questions[book!.id][`chapter_${states.currChap}`];
+			const questions = states.questions[states.currBook] !== undefined ? states.questions[states.currBook][`chapter_${states.currChap}`] : undefined;
 
 			return <Questions key={states.currChap} header={currChap!.header} questions={questions} controls={controls}/>
 		case Screen.reader:
