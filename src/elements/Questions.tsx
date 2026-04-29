@@ -72,8 +72,8 @@ function ResponseField( { question, idx } : { question: Question, idx: number } 
 		case "text":
 			return (
 				<div>
-					<label className={styles.response}>Answer: </label>
-					<input type="text" name={`q${idx}`} defaultValue={""}/>
+					<label className={styles.textInputLabel}>Answer: </label>
+					<input className={styles.textInputBox} type="text" name={`q${idx}`} defaultValue={""}/>
 				</div>
 			);
 		default:
@@ -146,7 +146,7 @@ function LoadingScreen()
 export default function Questions( { book, states, controls } : QuestionsProps )
 {
 	const settings = useSettings();
-	
+
 	if ( !settings.questionsEnabled )
 	{
 		controls.next();

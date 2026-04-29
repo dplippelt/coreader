@@ -35,9 +35,14 @@
 	font-family: 'Lora', serif;
 }
 
-.response
+.textInputLabel
 {
 	margin-left: 0.5rem;
+}
+
+.textInputBox
+{
+	background-color: #f5f5f5;
 }
 
 .feedback
