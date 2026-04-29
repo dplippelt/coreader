@@ -1,6 +1,6 @@
 import styles from './Questions.module.css'
-import type { Controls } from '../App'
-import type { Question } from '../books/types'
+import type { AppStates, Controls } from '../App'
+import type { Book, Question } from '../books/types'
 import { useSettings } from './SettingsContext'
 import { useState } from 'react'
 
@@ -16,8 +16,10 @@ type HeaderProps =
 
 type QuestionsProps =
 {
-	header: string,
-	questions: Question[] | undefined,
+	// header: string,
+	// questions: Question[] | undefined,
+	book: Book | null,
+	states: AppStates,
 	controls: Controls,
 }
 
@@ -141,8 +143,19 @@ function LoadingScreen()
 	return <div className={styles.loading}>Loading questions...</div>
 }
 
-export default function Questions( { header, questions, controls } : QuestionsProps )
+export default function Questions( { book, states, controls } : QuestionsProps )
 {
+	const settings = useSettings();
+	
+	if ( !settings.questionsEnabled )
+	{
+		controls.next();
+		return;
+	}
+
+	const header: string = book!.chapters[states.currChap - 1].header;
+	const questions = states.questions[states.currBook] !== undefined ? states.questions[states.currBook][`chapter_${states.currChap}`] : undefined;
+
 	return (
 		<>
 			<Buttons controls={controls}/>
