@@ -217,6 +217,11 @@ export default function useAppControls( states: AppStates, setStates: SetAppStat
 		setStates.setCurrChap(-1);
 	}
 
+	function toggleNotepad()
+	{
+		setStates.setNotepadVis(prev => !prev);
+	}
+
 	return {
 		handleNextChapter,
 		handlePrevChapter,
@@ -237,5 +242,6 @@ export default function useAppControls( states: AppStates, setStates: SetAppStat
 		resetBookProgress,
 		changeCurrBook,
 		getQuestions,
+		toggleNotepad,
 	}
 }

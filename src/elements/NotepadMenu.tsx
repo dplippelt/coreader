@@ -1,9 +1,20 @@
+import type { Controls } from "../App"
 import styles from "./NotepadMenu.module.css"
 
-function NotepadButton()
+type NotepadButtonProps =
+{
+	onClick: () => void,
+}
+
+type NotepadMenuProps =
+{
+	controls: Controls
+}
+
+function NotepadButton( { onClick } : NotepadButtonProps )
 {
 	return (
-		<svg className="roundButton" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+		<svg className="roundButton" onClick={onClick} viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
 			<circle className="roundButtonCircle" cx="75" cy="75" r="73"/>
 			<g transform="translate(27, 27) scale(4)">
 				<path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/>
@@ -17,11 +28,11 @@ function NotepadButton()
 	);
 }
 
-export default function NotepadMenu()
+export default function NotepadMenu( { controls } : NotepadMenuProps )
 {
 	return (
 		<div className={styles.notepadButtonMenu}>
-			<NotepadButton/>
+			<NotepadButton onClick={controls.toggleNotepad}/>
 		</div>
 	);
 }

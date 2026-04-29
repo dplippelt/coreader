@@ -19,6 +19,7 @@ export type AppStates =
 	zoomLevel: number,
 	prevMusic: string | null,
 	error: Error | null,
+	notepadVis: boolean,
 	musicIsPlaying: boolean,
 	muteOn: boolean,
 	questions: Record<string, Record<string, Question[]>>,
@@ -35,6 +36,7 @@ export type SetAppStates =
 	setZoomLevel: React.Dispatch<React.SetStateAction<number>>,
 	setPrevMusic: React.Dispatch<React.SetStateAction<string | null>>,
 	setError: React.Dispatch<React.SetStateAction<Error | null>>,
+	setNotepadVis: React.Dispatch<React.SetStateAction<boolean>>,
 	setMusicIsPlaying: React.Dispatch<React.SetStateAction<boolean>>,
 	setMuteOn: React.Dispatch<React.SetStateAction<boolean>>,
 	setQuestions: React.Dispatch<React.SetStateAction<Record<string, Record<string, Question[]>>>>,
@@ -61,6 +63,7 @@ export type Controls =
 	resetBookProgress: () => void,
 	changeCurrBook: ( bookID: string ) => void,
 	getQuestions: ( questionsReset: boolean ) => Promise<void>,
+	toggleNotepad: () => void,
 }
 
 export default function App()
@@ -75,6 +78,7 @@ export default function App()
 		zoomLevel, setZoomLevel,
 		prevMusic, setPrevMusic,
 		error, setError,
+		notepadVis, setNotepadVis,
 		book, setBook,
 		currBook, setCurrBook,
 		currChap, setCurrChap,
@@ -92,6 +96,7 @@ export default function App()
 		zoomLevel: zoomLevel,
 		prevMusic: prevMusic,
 		error: error,
+		notepadVis: notepadVis,
 		musicIsPlaying: musicIsPlaying,
 		muteOn: muteOn,
 		questions: questions,
@@ -108,6 +113,7 @@ export default function App()
 		setZoomLevel: setZoomLevel,
 		setPrevMusic: setPrevMusic,
 		setError: setError,
+		setNotepadVis: setNotepadVis,
 		setMusicIsPlaying: setMusicIsPlaying,
 		setMuteOn: setMuteOn,
 		setQuestions: setQuestions,
@@ -134,6 +140,7 @@ export default function App()
 		resetBookProgress,
 		changeCurrBook,
 		getQuestions,
+		toggleNotepad,
 	} = useAppControls(states, setStates);
 
 	const controls: Controls =
@@ -157,6 +164,7 @@ export default function App()
 		resetBookProgress: resetBookProgress,
 		changeCurrBook: changeCurrBook,
 		getQuestions: getQuestions,
+		toggleNotepad: toggleNotepad,
 	}
 
 	useAppEffects(states, setStates, controls);

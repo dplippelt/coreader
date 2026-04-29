@@ -4,6 +4,7 @@ import Book from "./Book"
 import Navigation from "./Navigation"
 import MusicPlayer from "./MusicPlayer"
 import NotepadMenu from "./NotepadMenu"
+import Notepad from "./Notepad"
 import type { AppStates, Controls } from "../App"
 
 type ReaderProps =
@@ -23,7 +24,8 @@ export default function Reader( { book, states, controls } : ReaderProps )
 			<Book book={book} states={states} controls={controls}/>
 			<Navigation states={states} controls={controls}/>
 			{ settings.musicEnabled && states.currChap > 0 ? <MusicPlayer states={states} controls={controls}/> : <></> }
-			<NotepadMenu/>
+			<NotepadMenu controls={controls}/>
+			{ states.notepadVis ? <Notepad controls={controls}/> : <></> }
 		</>
 	);
 }
