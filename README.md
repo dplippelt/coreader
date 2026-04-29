@@ -18,6 +18,7 @@ Additionally, each chapter is accompanied by matching background music to increa
 - Immersive background music with music controls (music coverage is a work in progress)
 - Customizable font size
 - Questions and music can be toggled on and off in the app's settings
+- Built-in notepad for taking notes while reading - supports saving and loading multiple files
 
 
 ## Tech stack
@@ -66,4 +67,4 @@ Alternatively the app is hosted by Vercel and reachable at: https://coreader-mes
 
 ## Future plans
 
-In the future I plan to expand the current app by adding an option to switch between songs, a notepad so the user can make notes while reading, explore support for user-uploaded books and music, and expand the current music coverage (only a subset of chapters currently have unique music tracks assigned).
+In the future I plan to expand the current app by adding an option to switch between songs, explore support for user-uploaded books and music, and expand the current music coverage (only a subset of chapters currently have unique music tracks assigned).
