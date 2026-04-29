@@ -180,6 +180,8 @@ export default function useAppControls( states: AppStates, setStates: SetAppStat
 		let prev = copy.pop()!;
 		if ( prev === Screen.questions && !settings.questionsEnabled )
 			prev = copy.pop()!;
+		if ( prev === Screen.reader )
+			startPlay(states.currChap - 1);
 
 		setStates.setScreen(prev);
 		setStates.setPrevScreens(copy);
