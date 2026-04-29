@@ -1,0 +1,16 @@
+.notepadButtonMenu
+{
+	position: fixed;
+	display: flex;
+	top: 4%;
+	left: 4%;
+	opacity: 15%;
+	transition: opacity 0.2s ease;
+	padding: 15px;
+	background-color: #FFF0;
+}
+
+.notepadButtonMenu:hover
+{
+	opacity: 100%;
+}
