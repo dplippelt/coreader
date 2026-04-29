@@ -17,7 +17,6 @@
 	height: 80vh;
 	min-width: 30vw;
 	max-width: 90vw;
-	color: #f5f5f5;
 	outline-style: solid;
 	outline-color: #7b4d2e;
 	outline-width: 7px;
@@ -48,4 +47,62 @@
 	outline-width: 2px;
 	font-size: 1rem;
 	font-family: 'Lato', sans-serif;
+	background-color: #f3ede4;
+}
+
+.queryBackground
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0);
+}
+
+.queryWindow
+{
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 40ch;
+	height: fit-content;
+	outline-style: solid;
+	outline-color: #7b4d2e;
+	outline-width: 4px;
+	border-radius: 2px;
+	font-family: 'Lato', sans-serif;
+	background-color: #eae1d0;
+}
+
+.query
+{
+	margin-top: 1.2rem;
+	margin-bottom: 1rem;
+	background-color: #eae1d0;
+}
+
+.queryButtonMenu
+{
+	display: flex;
+	flex-direction: row;
+	background-color: #eae1d0;
+}
+
+.queryButton
+{
+	width: 6rem;
+	margin: 1.3rem;
+}
+
+.querySelect
+{
+	width: 10rem;
+}
+
+.querySelectMultiple
+{
+	width: 10rem;
+	height: 4rem;
 }
