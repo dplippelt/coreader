@@ -1,3 +1,4 @@
+import { useRef } from "react"
 import type { Controls } from "../App"
 import styles from "./Notepad.module.css"
 
@@ -27,8 +28,36 @@ function Menu( { controls } : MenuProps )
 
 function TextArea()
 {
+	const notepadContent = localStorage.getItem("notepadTemp") ?? "";
+	const timeOutRef = useRef<NodeJS.Timeout | undefined>(undefined);
+
+	function handleChange( e: React.ChangeEvent<HTMLTextAreaElement> )
+	{
+		clearTimeout(timeOutRef.current);
+		timeOutRef.current = setTimeout(() => localStorage.setItem("notepadTemp", e.target.value), 500);
+	}
+
+	function handleTab( e: React.KeyboardEvent<HTMLTextAreaElement> )
+	{
+		if ( e.key === "Tab" )
+		{
+			e.preventDefault();
+			const target = e.target as HTMLTextAreaElement;
+			const startIdx = target.selectionStart;
+			const endIdx = target.selectionEnd;
+			target.value = target.value.substring(0, startIdx) + "\t" + target.value.substring(endIdx);
+			target.selectionStart = startIdx + 1;
+			target.selectionEnd = target.selectionStart;
+		}
+	}
+
 	return (
-		<textarea className={styles.textArea} onChange={(e) => console.log(e.target.value)}></textarea>
+		<textarea
+			className={styles.textArea}
+			defaultValue={notepadContent}
+			onChange={(e) => handleChange(e)}
+			onKeyDown={(e) => handleTab(e)}>
+		</textarea>
 	)
 }
 
