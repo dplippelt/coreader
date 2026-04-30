@@ -7,8 +7,9 @@ export function userPrompt( chapNum: number, chapContent: string, numQuestions: 
 
 Questions can be of one of 3 types: questions with short text answers, multiple choice questions, or true-false questions.
 
-- Short text answers: answers must be 1-2 words maximum. Prefer proper nouns — character names, place names, objects — since these are unambiguous and easy to check programmatically. If the answer is a number, write it in digits (e.g. "50", not "fifty").
+- Short text answers: answers must be 1-2 words maximum. Prefer proper nouns — place names, object names, specific terms — since these are unambiguous and easy to check programmatically. Avoid people's names as answers, since variations in formatting (initials, punctuation, first name only) make them unreliable to match. If the answer is a number, write it in digits (e.g. "50", not "fifty").
 - Multiple choice: use exactly 4 options per question. Wrong options must be plausible — drawn from the actual chapter context — not obviously wrong or absurd.
+- Multiple choice answers: the answer field must be an exact string match to one of the entries in options — character-for-character identical, including punctuation and capitalisation.
 - True/false quality: statements must be definitively and unambiguously true or false based solely on the chapter text.
 - Cross-chapter knowledge: questions must be answerable from the current chapter only.
 - Question variety: mix — who said a specific line, where a specific event took place, what something was called, what a character did or decided. Vary the shape of the questions, not just the type.
