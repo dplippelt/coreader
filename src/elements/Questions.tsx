@@ -3,6 +3,8 @@ import type { AppStates, Controls } from '../App'
 import type { Book, Question } from '../books/types'
 import { useSettings } from './SettingsContext'
 import { useState } from 'react'
+import NotepadMenu from './NotepadMenu'
+import Notepad from './Notepad'
 
 type ButtonProps =
 {
@@ -165,6 +167,8 @@ export default function Questions( { book, states, controls } : QuestionsProps )
 				? <LoadingScreen/>
 				: <Qs questions={questions} controls={controls}/>
 			}
+			<NotepadMenu controls={controls}/>
+			{ states.notepadVis ? <Notepad controls={controls}/> : <></> }
 		</>
 	)
 }
