@@ -67,7 +67,7 @@ export default function useAppControls( states: AppStates, setStates: SetAppStat
 				{
 					model: model,
 					systemPrompt: systemPrompt,
-					userPrompt: userPrompt(states.currChap, getChapterContent(), 5),
+					userPrompt: userPrompt(states.currChap, getChapterContent(), 5, books[states.currBook].title.title, books[states.currBook].title.author),
 				})
 			}
 		);

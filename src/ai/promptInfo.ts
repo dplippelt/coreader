@@ -1,13 +1,13 @@
 export const systemPrompt: string = "You are a text comprehension questions generator";
 
-export function userPrompt( chapNum: number, chapContent: string, numQuestions: number )
+export function userPrompt( chapNum: number, chapContent: string, numQuestions: number, title: string, author: string )
 {
 	return (
-`Please generate ${numQuestions} question that tests the comprehension of chapter ${chapNum} of the book Dracula by Bram Stoker.
+`Please generate ${numQuestions} question that tests the comprehension of chapter ${chapNum} of the book ${title} by ${author}.
 
 Questions can be of one of 3 types: questions with short text answers, multiple choice questions, or true-false questions.
 
-- Short text answers: answers must be 1-2 words maximum. Prefer proper nouns — character names, place names, objects — since these are unambiguous and easy to check programmatically.
+- Short text answers: answers must be 1-2 words maximum. Prefer proper nouns — character names, place names, objects — since these are unambiguous and easy to check programmatically. If the answer is a number, write it in digits (e.g. "50", not "fifty").
 - Multiple choice: use exactly 4 options per question. Wrong options must be plausible — drawn from the actual chapter context — not obviously wrong or absurd.
 - True/false quality: statements must be definitively and unambiguously true or false based solely on the chapter text.
 - Cross-chapter knowledge: questions must be answerable from the current chapter only.

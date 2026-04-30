@@ -104,7 +104,7 @@
 		},
 		{
 			"type": "true-false",
-			"question": "After the Szgany handed over Jonathan's intercepted letters, the Count burned both of them in the lamp flame.",
+			"question": "Jonathan wrote his letters to Mr. Hawkins and Mina in shorthand, hoping the Count would not be able to read them.",
 			"answer": "false"
 		},
 		{
@@ -142,7 +142,7 @@
 		{
 			"type": "text",
 			"question": "In the old ruined chapel beneath the castle, Jonathan found the Count lying in one of many large wooden boxes. How many of these boxes were there in total?",
-			"answer": "fifty"
+			"answer": "50"
 		},
 		{
 			"type": "true-false",
