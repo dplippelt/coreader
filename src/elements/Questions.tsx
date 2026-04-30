@@ -18,8 +18,6 @@ type HeaderProps =
 
 type QuestionsProps =
 {
-	// header: string,
-	// questions: Question[] | undefined,
 	book: Book | null,
 	states: AppStates,
 	controls: Controls,
@@ -123,8 +121,8 @@ function Qs( { questions, controls } : QsProps )
 	return (
 		<form>
 			{questions.map((question, idx) => (
-				<div key={idx} style={{fontSize: `${settings.fontSize}px`, ...(feedback[idx] === false ? {color: "red"} : {})}}>
-					<div className={styles.question}>{question.question}</div>
+				<div key={idx} style={{fontSize: `${settings.fontSize}px`}}>
+					<div className={`${styles.question} ${feedback[idx] === false ? styles.incorrect : ""}`}>{question.question}</div>
 					<div className={styles.responseBox}>
 						<ResponseField question={question} idx={idx}/>
 					</div>

@@ -67,3 +67,8 @@
 	margin-left: 0.5rem;
 	font-family: 'Lora', serif;
 }
+
+.incorrect
+{
+	color: red;
+}
