@@ -54,6 +54,7 @@ To run the app locally clone the repository and run `vercel dev` from the root d
 git clone https://github.com/dplippelt/reader.git
 cd reader
 npm install
+npx tsx scripts/preprocessBooks.ts
 vercel dev
 ```
 
