@@ -1,9 +1,9 @@
 import getDracula from "../src/books/dracula/dracula.ts"
 import getFrankenstein from "../src/books/frankenstein/frankenstein.ts"
-import type { Book, BookMusic } from "../src/books/types.ts"
+import type { Book, BookMusic, Question } from "../src/books/types.ts"
 import { BookID  } from "../src/books/types.ts"
 import booksIndex from "../src/books/index.ts"
-import { getBookMusic } from "../src/books/utils.ts"
+import { getBookMusic, getQs } from "../src/books/utils.ts"
 import fs from "fs"
 
 function getBook( bookID: BookID ) : Book
@@ -19,23 +19,21 @@ function getBook( bookID: BookID ) : Book
 	}
 }
 
-function updateMusic( book: Book, bookID: BookID ) : boolean
+function updateMusicAndQuestions( book: Book, bookID: BookID )
 {
 	const bookMusic: BookMusic = getBookMusic(bookID);
-	let musicUpdated: boolean = false;
+	const bookQuestions = getQs(bookID);
 
 	for ( const chap of book.chapters )
 	{
-		const key = `chapter_${chap.num}` as keyof typeof bookMusic;
+		const musicKey = `chapter_${chap.num}` as keyof typeof bookMusic;
+		const questionsKey = `chapter_${chap.num}` as keyof typeof bookQuestions;
 
-		if ( bookMusic[key] && bookMusic[key].url !== book.chapters[chap.num - 1].music )
-		{
-			book.chapters[chap.num - 1].music = bookMusic[key].url;
-			musicUpdated = true;
-		}
+		if ( bookMusic[musicKey] )
+			book.chapters[chap.num - 1].music = bookMusic[musicKey].url;
+		if ( bookQuestions[questionsKey] )
+			book.chapters[chap.num - 1].questions = bookQuestions[questionsKey] as Question[];
 	}
-
-	return musicUpdated;
 }
 
 function updateBooks()
@@ -51,7 +49,7 @@ function updateBooks()
 		if ( !books[bookID] )
 			books[bookID] = getBook(bookID);
 		else
-			updateMusic(books[bookID], bookID);
+			updateMusicAndQuestions(books[bookID], bookID);
 	}
 
 	fs.mkdirSync("src/data", { recursive: true });

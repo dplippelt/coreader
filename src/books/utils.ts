@@ -43,7 +43,7 @@ function getMatchIdx( bookID: BookID ) : number
 	}
 }
 
-function getQs( bookID: BookID )
+export function getQs( bookID: BookID )
 {
 	switch (bookID)
 	{
@@ -107,7 +107,6 @@ function getQuestions( chap_num: number, bookID: BookID ): Question[]
 	{
 		questions.push(
 		{
-			chapter: chap_num,
 			type: q.type as Question['type'],
 			question: q.question,
 			options: q.options,

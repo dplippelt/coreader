@@ -1,6 +1,5 @@
 export type Question =
 {
-	chapter: number,
 	type: 'multiple choice' | 'true-false' | 'text',
 	question: string,
 	options?: string[],
