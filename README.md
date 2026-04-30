@@ -51,7 +51,7 @@ I prefer to keep my CSS styling in separate files instead of inline with the com
 To run the app locally clone the repository and run `vercel dev` from the root directory of the project:
 
 ```
-git clone https://github.com/dplippelt/reader.git
+git clone https://github.com/dplippelt/coreader.git
 cd reader
 npm install
 npx tsx scripts/preprocessBooks.ts
