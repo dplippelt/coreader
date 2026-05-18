@@ -30,7 +30,10 @@ function updateMusicAndQuestions( book: Book, bookID: BookID )
 		const questionsKey = `chapter_${chap.num}` as keyof typeof bookQuestions;
 
 		if ( bookMusic[musicKey] )
-			book.chapters[chap.num - 1].music = bookMusic[musicKey].url;
+			book.chapters[chap.num - 1].music = bookMusic[musicKey];
+		else
+			book.chapters[chap.num - 1].music = bookMusic[`chapter_1`];
+
 		if ( bookQuestions[questionsKey] )
 			book.chapters[chap.num - 1].questions = bookQuestions[questionsKey] as Question[];
 	}

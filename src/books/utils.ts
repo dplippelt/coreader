@@ -2,7 +2,7 @@ import draculaQs from './dracula/draculaQuestions.json'
 import frankensteinQs from './frankenstein/frankensteinQuestions.json'
 import draculaMusic from './dracula/draculaMusic.json'
 import frankensteinMusic from './frankenstein/frankensteinMusic.json'
-import { BookID, type Chapter, type Question, type BookMusic } from "./types"
+import { BookID, type Chapter, type Question, type BookMusic, type MusicTrack } from "./types"
 
 function getEndIdx( bookID: BookID ) : number
 {
@@ -117,15 +117,15 @@ function getQuestions( chap_num: number, bookID: BookID ): Question[]
 	return questions;
 }
 
-function getMusicTrack( chap_num: number , bookID: BookID) : string
+function getMusicTrack( chap_num: number , bookID: BookID) : MusicTrack
 {
 	const bookMusic: BookMusic = getBookMusic(bookID);
 
 	const key = `chapter_${chap_num}` as keyof typeof bookMusic;
 
 	if ( bookMusic[key] )
-		return bookMusic[key].url;
-	return bookMusic[`chapter_1`].url;
+		return bookMusic[key];
+	return bookMusic[`chapter_1`];
 }
 
 export default function getChapters( rawBook: string, rawChapters: RegExpExecArray[], bookID: BookID )

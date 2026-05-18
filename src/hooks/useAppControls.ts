@@ -93,11 +93,11 @@ export default function useAppControls( states: AppStates, setStates: SetAppStat
 
 		if ( states.musicIsPlaying && chapter.music )
 		{
-			play(chapter.music, chapNum, 2);
-			setStates.setPrevMusic(chapter.music);
+			play(chapter.music.url, chapNum, 2);
+			setStates.setPrevMusic(chapter.music.url);
 		}
 		else
-			setStates.setPrevMusic(chapter.music ?? null);
+			setStates.setPrevMusic(chapter.music.url ?? null);
 	}
 
 	function handleNextChapter()

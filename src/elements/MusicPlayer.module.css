@@ -1,18 +1,27 @@
 .musicPlayer
 {
 	position: fixed;
-	display: flex;
 	top: 4%;
 	right: 4%;
 	opacity: 15%;
 	transition: opacity 0.2s ease;
+}
+
+.musicPlayerButtons
+{
+	display: flex;
 	padding: 15px;
+	padding-bottom: 25px;
 	background-color: #FFF0;
+}
+
+.musicPlayerButtonsZoomed
+{
+	flex-direction: column;
 }
 
 .musicPlayerZoomed
 {
-	flex-direction: column;
 	top: 15%;
 	right: 2%;
 }
@@ -23,7 +32,49 @@
 	right: 0%;
 }
 
+.nowPlaying
+{
+	position: absolute;
+	top: 85%;
+	opacity: 0%;
+	overflow: hidden;
+	white-space: nowrap;
+	transition: opacity 0.6s ease;
+	user-select: none;
+	font-size: 0.85rem;
+	font-family: 'Lora', serif;
+	margin-top: -10px;
+}
+
+.nowPlayingZoomed
+{
+	top: 90%;
+}
+
+.nowPlaying span
+{
+	display: inline-block; /* needed because translateX only works for inline block elements */
+}
+
 .musicPlayer:hover
 {
 	opacity: 100%;
+}
+
+.musicPlayer:hover .nowPlaying
+{
+	opacity: 100%;
+}
+
+.musicPlayer:hover .nowPlaying span
+{
+	animation: marquee var(--scroll-duration, 8s) linear;
+}
+
+@keyframes marquee
+{
+	0% { transform: translateX(0%); }
+	10% { transform: translateX(0%); }
+	75% { transform: translateX(var(--scroll-distance, -100%)); }
+	100% { transform: translateX(var(--scroll-distance, -100%)); }
 }

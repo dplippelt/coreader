@@ -13,7 +13,7 @@ export type Chapter =
 	title: string,
 	content: string,
 	questions: Question[],
-	music: string,
+	music: MusicTrack,
 }
 
 export type Title =

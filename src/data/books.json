@@ -51,7 +51,11 @@
             "answer": "paprika hendl"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 2,
@@ -97,7 +101,11 @@
             "answer": "true"
           }
         ],
-        "music": "/music/track_2.mp3"
+        "music": {
+          "url": "/music/track_2.mp3",
+          "title": "Dark and Mysterious Ambient Music",
+          "artist": "Arondight Studios"
+        }
       },
       {
         "num": 3,
@@ -143,7 +151,11 @@
             "answer": "\"This man belongs to me!\""
           }
         ],
-        "music": "/music/track_3.mp3"
+        "music": {
+          "url": "/music/track_3.mp3",
+          "title": "The Fallen Vampire Prince",
+          "artist": "Mortis Academia"
+        }
       },
       {
         "num": 4,
@@ -189,7 +201,11 @@
             "answer": "false"
           }
         ],
-        "music": "/music/track_4.mp3"
+        "music": {
+          "url": "/music/track_4.mp3",
+          "title": "Dark Ambient Horror Music To Unlock Your Deepest Nightmares",
+          "artist": "Arondight Studios"
+        }
       },
       {
         "num": 5,
@@ -235,7 +251,11 @@
             "answer": "Dr. Seward, then Quincey Morris, then Arthur Holmwood"
           }
         ],
-        "music": "/music/track_8.mp3"
+        "music": {
+          "url": "/music/track_8.mp3",
+          "title": "Dreamy Reading Nook under the Sunset",
+          "artist": "Dark Academia"
+        }
       },
       {
         "num": 6,
@@ -281,7 +301,11 @@
             "answer": "Masses of figures, single numbers added up in batches"
           }
         ],
-        "music": "/music/track_7.mp3"
+        "music": {
+          "url": "/music/track_7.mp3",
+          "title": "Dark Academia at the Ocean's Edge",
+          "artist": "Gothic Dark Ambient"
+        }
       },
       {
         "num": 7,
@@ -327,7 +351,11 @@
             "answer": "Tate Hill Pier"
           }
         ],
-        "music": "/music/track_9.mp3"
+        "music": {
+          "url": "/music/track_9.mp3",
+          "title": "Haunted Ghost Ship Ambience",
+          "artist": "Arondight Studios"
+        }
       },
       {
         "num": 8,
@@ -373,7 +401,11 @@
             "answer": "false"
           }
         ],
-        "music": "/music/track_6.mp3"
+        "music": {
+          "url": "/music/track_6.mp3",
+          "title": "The Monastery",
+          "artist": "Soundscapes & Ambience"
+        }
       },
       {
         "num": 9,
@@ -419,7 +451,11 @@
             "answer": "true"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 10,
@@ -465,7 +501,11 @@
             "answer": "false"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 11,
@@ -511,7 +551,11 @@
             "answer": "She clutched Lucy's garlic wreath, tore it off, then collapsed and died"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 12,
@@ -557,7 +601,11 @@
             "answer": "\"Not so; alas! not so. It is only the beginning!\""
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 13,
@@ -603,7 +651,11 @@
             "answer": "\"It is the man himself!\""
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 14,
@@ -649,7 +701,11 @@
             "answer": "false"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 15,
@@ -695,7 +751,11 @@
             "answer": "false"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 16,
@@ -741,7 +801,11 @@
             "answer": "true"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 17,
@@ -787,7 +851,11 @@
             "answer": "Carter Paterson"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 18,
@@ -833,7 +901,11 @@
             "answer": "true"
           }
         ],
-        "music": "/music/track_5.mp3"
+        "music": {
+          "url": "/music/track_5.mp3",
+          "title": "Dark Academia Music for Building Empires and Master Plans",
+          "artist": "Villain's Symphony"
+        }
       },
       {
         "num": 19,
@@ -879,7 +951,11 @@
             "answer": "Going to Whitby, which led to Lucy's sleepwalking there at night"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 20,
@@ -925,7 +1001,11 @@
             "answer": "true"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 21,
@@ -971,7 +1051,11 @@
             "answer": "false"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 22,
@@ -1017,7 +1101,11 @@
             "answer": "true"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 23,
@@ -1063,7 +1151,11 @@
             "answer": "false"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 24,
@@ -1109,7 +1201,11 @@
             "answer": "true"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 25,
@@ -1155,7 +1251,11 @@
             "answer": "He had used Mina's trance to learn they were waiting at Varna and changed his route to evade them"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 26,
@@ -1201,7 +1301,11 @@
             "answer": "true"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 27,
@@ -1247,7 +1351,11 @@
             "answer": "Quincey"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       }
     ]
   },
@@ -1303,7 +1411,11 @@
             "answer": "false"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 2,
@@ -1349,7 +1461,11 @@
             "answer": "Ancient Mariner"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 3,
@@ -1395,7 +1511,11 @@
             "answer": "true"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 4,
@@ -1441,7 +1561,11 @@
             "answer": "Seeking one who fled from me"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 5,
@@ -1487,7 +1611,11 @@
             "answer": "false"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 6,
@@ -1533,7 +1661,11 @@
             "answer": "false"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 7,
@@ -1579,7 +1711,11 @@
             "answer": "his father, a narrow-minded trader, refused to allow it"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 8,
@@ -1625,7 +1761,11 @@
             "answer": "false"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 9,
@@ -1671,7 +1811,11 @@
             "answer": "its flowing black hair and pearly white teeth"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 10,
@@ -1717,7 +1861,11 @@
             "answer": "military"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 11,
@@ -1763,7 +1911,11 @@
             "answer": "Justine Moritz"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 12,
@@ -1809,7 +1961,11 @@
             "answer": "a miniature portrait of Victor's mother found in her pocket"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 13,
@@ -1855,7 +2011,11 @@
             "answer": "true"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 14,
@@ -1895,7 +2055,11 @@
             "answer": "false"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 15,
@@ -1941,7 +2105,11 @@
             "answer": "false"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 16,
@@ -1987,7 +2155,11 @@
             "answer": "fire, milk, bread, and wood"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 17,
@@ -2033,7 +2205,11 @@
             "answer": "that he possessed no money, friends, or property and was hideously deformed"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 18,
@@ -2079,7 +2255,11 @@
             "answer": "false"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 19,
@@ -2125,7 +2305,11 @@
             "answer": "false"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 20,
@@ -2171,7 +2355,11 @@
             "answer": "a portrait of a lovely woman"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 21,
@@ -2217,7 +2405,11 @@
             "answer": "by the sun and the blue sky of heaven"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 22,
@@ -2263,7 +2455,11 @@
             "answer": "that change of scene and varied amusement would restore Victor entirely to himself"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 23,
@@ -2309,7 +2505,11 @@
             "answer": "to visit India and assist the progress of European colonization and trade"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 24,
@@ -2355,7 +2555,11 @@
             "answer": "false"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 25,
@@ -2401,7 +2605,11 @@
             "answer": "false"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 26,
@@ -2447,7 +2655,11 @@
             "answer": "false"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 27,
@@ -2493,7 +2705,11 @@
             "answer": "true"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       },
       {
         "num": 28,
@@ -2539,7 +2755,11 @@
             "answer": "true"
           }
         ],
-        "music": "/music/track_1.mp3"
+        "music": {
+          "url": "/music/track_1.mp3",
+          "title": "Quiet Winter in an Old European Riverside Village P1",
+          "artist": "Nostalgic Dark Academia"
+        }
       }
     ]
   }
