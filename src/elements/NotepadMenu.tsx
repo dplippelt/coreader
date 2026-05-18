@@ -1,4 +1,4 @@
-import type { Controls } from "../App"
+import type { AppStates, Controls } from "../App"
 import styles from "./NotepadMenu.module.css"
 
 type NotepadButtonProps =
@@ -8,6 +8,7 @@ type NotepadButtonProps =
 
 type NotepadMenuProps =
 {
+	states: AppStates,
 	controls: Controls
 }
 
@@ -28,10 +29,22 @@ function NotepadButton( { onClick } : NotepadButtonProps )
 	);
 }
 
-export default function NotepadMenu( { controls } : NotepadMenuProps )
+function notepadMenuStyle( zoomLevel: number ) : string
+{
+	let style = styles.notepadButtonMenu;
+
+	if ( zoomLevel >= 1.5 )
+		style = style.concat(` ${styles.notepadButtonMenuZoomed}`);
+	if ( zoomLevel >= 2.22 )
+		style = style.concat(` ${styles.notepadButtonMenuZoomedMore}`);
+
+	return style;
+}
+
+export default function NotepadMenu( { states, controls } : NotepadMenuProps )
 {
 	return (
-		<div className={styles.notepadButtonMenu}>
+		<div className={notepadMenuStyle(states.zoomLevel)}>
 			<NotepadButton onClick={controls.toggleNotepad}/>
 		</div>
 	);

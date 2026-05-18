@@ -10,6 +10,19 @@
 	background-color: #FFF0;
 }
 
+.notepadButtonMenuZoomed
+{
+	flex-direction: column;
+	top: 15%;
+	left: 2%;
+}
+
+.notepadButtonMenuZoomedMore
+{
+	top: 20%;
+	left: 0%;
+}
+
 .notepadButtonMenu:hover
 {
 	opacity: 100%;

@@ -165,7 +165,7 @@ export default function Questions( { book, states, controls } : QuestionsProps )
 				? <LoadingScreen/>
 				: <Qs questions={questions} controls={controls}/>
 			}
-			<NotepadMenu controls={controls}/>
+			<NotepadMenu states={states} controls={controls}/>
 			{ states.notepadVis ? <Notepad controls={controls}/> : <></> }
 		</>
 	)

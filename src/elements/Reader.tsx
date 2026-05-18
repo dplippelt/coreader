@@ -24,7 +24,7 @@ export default function Reader( { book, states, controls } : ReaderProps )
 			<Book book={book} states={states} controls={controls}/>
 			<Navigation states={states} controls={controls}/>
 			{ settings.musicEnabled && states.currChap > 0 ? <MusicPlayer states={states} controls={controls}/> : <></> }
-			<NotepadMenu controls={controls}/>
+			<NotepadMenu states={states} controls={controls}/>
 			{ states.notepadVis ? <Notepad controls={controls}/> : <></> }
 		</>
 	);
