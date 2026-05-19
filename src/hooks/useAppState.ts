@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Screen } from "../util/utils"
-import { BookID, type Book, type Question } from "../books/types"
+import { BookID, type MusicTrack, type Book, type Question } from "../books/types"
 import booksJSON from "../data/books.json"
 const books = booksJSON as Record<string, Book>
 
@@ -12,9 +12,16 @@ export default function useAppState()
 	const [musicIsPlaying, setMusicIsPlaying] = useState<boolean>(true);
 	const [muteOn, setMuteOn] = useState<boolean>(false);
 	const [zoomLevel, setZoomLevel] = useState<number>(1);
-	const [prevMusic, setPrevMusic] = useState<string | null>(null);
 	const [error, setError] = useState<Error | null>(null);
 	const [notepadVis, setNotepadVis] = useState<boolean>(false);
+	const [trackSelectVis, setTrackSelectVis] = useState<boolean>(false);
+
+	const [currTrack, setCurrTrack] = useState<MusicTrack>(() =>
+		{
+			const stored = localStorage.getItem("currTrack");
+			const currTrack = stored ? JSON.parse(stored) : {};
+			return currTrack;
+		});
 
 	const [currBook, setCurrBook] = useState<BookID>(() =>
 		{
@@ -48,9 +55,10 @@ export default function useAppState()
 				musicIsPlaying, setMusicIsPlaying,
 				muteOn, setMuteOn,
 				zoomLevel, setZoomLevel,
-				prevMusic, setPrevMusic,
 				error, setError,
 				notepadVis, setNotepadVis,
+				trackSelectVis, setTrackSelectVis,
+				currTrack, setCurrTrack,
 				book, setBook,
 				currBook, setCurrBook,
 				currChap, setCurrChap,

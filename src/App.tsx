@@ -1,5 +1,5 @@
 import React from 'react'
-import type { Book, BookID, Question } from './books/types'
+import type { Book, BookID, MusicTrack, Question } from './books/types'
 import { Screen } from './util/utils'
 import Page from './elements/Page'
 import useAppState from './hooks/useAppState'
@@ -13,13 +13,14 @@ export type AppStates =
 	book: Book | null,
 	currBook: BookID,
 	currChap: number,
+	currTrack: MusicTrack,
 	screen: Screen,
 	prevScreens: Screen[],
 	navWidth: number,
 	zoomLevel: number,
-	prevMusic: string | null,
 	error: Error | null,
 	notepadVis: boolean,
+	trackSelectVis: boolean,
 	musicIsPlaying: boolean,
 	muteOn: boolean,
 	questions: Record<string, Record<string, Question[]>>,
@@ -30,13 +31,14 @@ export type SetAppStates =
 	setBook: React.Dispatch<React.SetStateAction<Book | null>>,
 	setCurrBook: React.Dispatch<React.SetStateAction<BookID>>,
 	setCurrChap: React.Dispatch<React.SetStateAction<number>>,
+	setCurrTrack: React.Dispatch<React.SetStateAction<MusicTrack>>,
 	setScreen: React.Dispatch<React.SetStateAction<Screen>>,
 	setPrevScreens: React.Dispatch<React.SetStateAction<Screen[]>>,
 	setNavWidth: React.Dispatch<React.SetStateAction<number>>,
 	setZoomLevel: React.Dispatch<React.SetStateAction<number>>,
-	setPrevMusic: React.Dispatch<React.SetStateAction<string | null>>,
 	setError: React.Dispatch<React.SetStateAction<Error | null>>,
 	setNotepadVis: React.Dispatch<React.SetStateAction<boolean>>,
+	setTrackSelectVis: React.Dispatch<React.SetStateAction<boolean>>,
 	setMusicIsPlaying: React.Dispatch<React.SetStateAction<boolean>>,
 	setMuteOn: React.Dispatch<React.SetStateAction<boolean>>,
 	setQuestions: React.Dispatch<React.SetStateAction<Record<string, Record<string, Question[]>>>>,
@@ -54,7 +56,8 @@ export type Controls =
 	goToChap: ( chapNum: number ) => void,
 	goToQuestions: () => void,
 	goToPrevScreen: () => void,
-	play: ( url: string, chapNum: number, resumeFadeInDur: number ) => void,
+	playChapterAudio: ( url: string, chapNum: number, resumeFadeInDur: number ) => void,
+	play: ( url: string, resumeFadeInDur: number ) => void,
 	pause: ( fadeOutDur: number ) => void,
 	stop: ( fadeOutDur: number ) => void,
 	toggleMute: () => void,
@@ -64,6 +67,9 @@ export type Controls =
 	changeCurrBook: ( bookID: string ) => void,
 	getQuestions: ( questionsReset: boolean ) => Promise<void>,
 	toggleNotepad: () => void,
+	toggleTrackSelect: () => void,
+	changeCurrTrack: ( track: MusicTrack ) => void,
+	continueReading: ( currTrack: MusicTrack ) => void,
 }
 
 export default function App()
@@ -76,9 +82,10 @@ export default function App()
 		musicIsPlaying, setMusicIsPlaying,
 		muteOn, setMuteOn,
 		zoomLevel, setZoomLevel,
-		prevMusic, setPrevMusic,
 		error, setError,
 		notepadVis, setNotepadVis,
+		trackSelectVis, setTrackSelectVis,
+		currTrack, setCurrTrack,
 		book, setBook,
 		currBook, setCurrBook,
 		currChap, setCurrChap,
@@ -94,9 +101,10 @@ export default function App()
 		prevScreens: prevScreens,
 		navWidth: navWidth,
 		zoomLevel: zoomLevel,
-		prevMusic: prevMusic,
 		error: error,
 		notepadVis: notepadVis,
+		trackSelectVis: trackSelectVis,
+		currTrack: currTrack,
 		musicIsPlaying: musicIsPlaying,
 		muteOn: muteOn,
 		questions: questions,
@@ -111,9 +119,10 @@ export default function App()
 		setPrevScreens: setPrevScreens,
 		setNavWidth: setNavWidth,
 		setZoomLevel: setZoomLevel,
-		setPrevMusic: setPrevMusic,
 		setError: setError,
 		setNotepadVis: setNotepadVis,
+		setTrackSelectVis: setTrackSelectVis,
+		setCurrTrack: setCurrTrack,
 		setMusicIsPlaying: setMusicIsPlaying,
 		setMuteOn: setMuteOn,
 		setQuestions: setQuestions,
@@ -131,6 +140,7 @@ export default function App()
 		goToChapter,
 		goToQuestions,
 		goToPrevScreen,
+		playChapterAudio,
 		play,
 		pause,
 		stop,
@@ -141,6 +151,9 @@ export default function App()
 		changeCurrBook,
 		getQuestions,
 		toggleNotepad,
+		toggleTrackSelect,
+		changeCurrTrack,
+		continueReading,
 	} = useAppControls(states, setStates);
 
 	const controls: Controls =
@@ -155,6 +168,7 @@ export default function App()
 		goToChap: goToChapter,
 		goToQuestions: goToQuestions,
 		goToPrevScreen: goToPrevScreen,
+		playChapterAudio: playChapterAudio,
 		play: play,
 		pause: pause,
 		stop: stop,
@@ -165,6 +179,9 @@ export default function App()
 		changeCurrBook: changeCurrBook,
 		getQuestions: getQuestions,
 		toggleNotepad: toggleNotepad,
+		toggleTrackSelect: toggleTrackSelect,
+		changeCurrTrack: changeCurrTrack,
+		continueReading: continueReading,
 	}
 
 	useAppEffects(states, setStates, controls);

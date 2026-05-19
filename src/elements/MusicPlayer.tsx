@@ -1,14 +1,28 @@
-import { Play, Pause, SoundOn, SoundOff } from "./MusicButtons"
+import { Play, Pause, SoundOn, SoundOff, TrackSelect } from "./MusicButtons"
 import styles from "./MusicPlayer.module.css"
 import type { AppStates, Controls } from "../App"
 import type { SettingsContextType } from "./SettingsContext"
 import { useSettings } from "./SettingsContext"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, type Ref } from "react"
 
 type MusicPlayerProps =
 {
 	states: AppStates,
 	controls: Controls
+}
+
+type MusicPlayerButtonsProps =
+{
+	states: AppStates,
+	controls: Controls
+	musicPlayerButtonRef: Ref<HTMLDivElement>,
+}
+
+type NowPlayingProps =
+{
+	states: AppStates,
+	nowPlayingRef: Ref<HTMLDivElement>,
+	nowPlayingSpanRef: Ref<HTMLSpanElement>,
 }
 
 enum ButtonType
@@ -17,6 +31,7 @@ enum ButtonType
 	pause,
 	soundOn,
 	soundOff,
+	trackSelect,
 }
 
 function buttonBehavior( type: ButtonType, states: AppStates, controls: Controls, settings: SettingsContextType )
@@ -26,8 +41,7 @@ function buttonBehavior( type: ButtonType, states: AppStates, controls: Controls
 		case ButtonType.play:
 			if ( settings.musicEnabled && !states.musicIsPlaying )
 			{
-				const chapter = states.book!.chapters[states.currChap - 1];
-				controls.play(chapter.music.url, states.currChap, 0.5);
+				controls.play(states.currTrack.url, 0.5);
 				controls.setMusicIsPlayingTo(true);
 			}
 			break;
@@ -44,16 +58,12 @@ function buttonBehavior( type: ButtonType, states: AppStates, controls: Controls
 		case ButtonType.soundOff:
 			controls.toggleMute();
 			break;
+		case ButtonType.trackSelect:
+			controls.toggleTrackSelect();
+			break;
 		default:
 			return;
 	}
-}
-
-function getNowPlaying( states: AppStates ) : string
-{
-	const music = states.book!.chapters[states.currChap - 1].music;
-
-	return `${music.artist} - ${music.title}`;
 }
 
 function musicPlayerStyle( zoomLevel: number ) : string
@@ -88,9 +98,36 @@ function nowPlayingStyle( zoomLevel: number ) : string
 	return style;
 }
 
-export default function MusicPlayer( { states, controls } : MusicPlayerProps )
+function MusicPlayerButtons( { states, controls, musicPlayerButtonRef } : MusicPlayerButtonsProps )
 {
 	const settings = useSettings();
+
+	return (
+		<div className={musicPlayerButtonStyle(states.zoomLevel)} ref={musicPlayerButtonRef}>
+			{ states.musicIsPlaying
+				? <Pause onClick={ () => buttonBehavior(ButtonType.pause, states, controls, settings) }/>
+				: <Play onClick={ () => buttonBehavior(ButtonType.play, states, controls, settings) }/>
+			}
+			{ states.muteOn
+				? <SoundOff onClick={ () => buttonBehavior(ButtonType.soundOff, states, controls, settings) }/>
+				: <SoundOn onClick={ () => buttonBehavior(ButtonType.soundOn, states, controls, settings) }/>
+			}
+			<TrackSelect onClick={ () => buttonBehavior(ButtonType.trackSelect, states, controls, settings) }/>
+		</div>
+	);
+}
+
+function NowPlaying( { states, nowPlayingRef, nowPlayingSpanRef } : NowPlayingProps )
+{
+	return (
+		<div className={nowPlayingStyle(states.zoomLevel)} ref={nowPlayingRef}>
+			<span ref={nowPlayingSpanRef}>{ `${states.currTrack.artist} - ${states.currTrack.title}` }</span>
+		</div>
+	);
+}
+
+export default function MusicPlayer( { states, controls } : MusicPlayerProps )
+{
 	const musicPlayerButtonRef = useRef<HTMLDivElement>(null);
 	const nowPlayingRef = useRef<HTMLDivElement>(null);
 	const nowPlayingSpanRef = useRef<HTMLSpanElement>(null);
@@ -122,20 +159,8 @@ export default function MusicPlayer( { states, controls } : MusicPlayerProps )
 
 	return (
 		<div className={musicPlayerStyle(states.zoomLevel)}>
-			<div className={musicPlayerButtonStyle(states.zoomLevel)} ref={musicPlayerButtonRef}>
-				{ states.musicIsPlaying
-					? <Pause onClick={ () => buttonBehavior(ButtonType.pause, states, controls, settings) }/>
-					: <Play onClick={ () => buttonBehavior(ButtonType.play, states, controls, settings) }/>
-				}
-				{ states.muteOn
-					? <SoundOff onClick={ () => buttonBehavior(ButtonType.soundOff, states, controls, settings) }/>
-					: <SoundOn onClick={ () => buttonBehavior(ButtonType.soundOn, states, controls, settings) }/>
-				}
-			</div>
-			<div className={nowPlayingStyle(states.zoomLevel)} ref={nowPlayingRef}>
-				<span ref={nowPlayingSpanRef}>{ getNowPlaying(states) }</span>
-			</div>
+			<MusicPlayerButtons states={states} controls={controls} musicPlayerButtonRef={musicPlayerButtonRef}/>
+			<NowPlaying states={states} nowPlayingRef={nowPlayingRef} nowPlayingSpanRef={nowPlayingSpanRef}/>
 		</div>
-
 	);
 }

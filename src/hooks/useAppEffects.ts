@@ -57,6 +57,11 @@ export default function useAppEffects( states: AppStates, setStates: SetAppState
 		controls.getQuestions(false);
 	}, [states.currChap, states.currBook]);
 
+	useEffect(() =>
+	{
+		localStorage.setItem("currTrack", JSON.stringify(states.currTrack));
+	}, [states.currTrack])
+
 	// temporary effect to clear old local storage items
 	useEffect(() =>
 	{

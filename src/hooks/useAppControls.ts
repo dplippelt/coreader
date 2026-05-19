@@ -1,7 +1,7 @@
 import { model } from "../ai/model"
 import { systemPrompt, userPrompt } from "../ai/promptInfo"
 import type { AppStates, SetAppStates } from "../App"
-import { BookID, type Book, type Question } from "../books/types"
+import { BookID, type Book, type MusicTrack, type Question } from "../books/types"
 import { useSettings } from "../elements/SettingsContext"
 import { Screen } from "../util/utils"
 import { DEBUG } from "../App"
@@ -12,7 +12,7 @@ const books = booksJSON as Record<string, Book>
 export default function useAppControls( states: AppStates, setStates: SetAppStates )
 {
 	const settings = useSettings();
-	const { play, pause, stop, mute } = useMusic();
+	const { playChapterAudio, play, pause, stop, mute } = useMusic();
 
 	async function getQuestions( questionsReset: boolean )
 	{
@@ -93,11 +93,9 @@ export default function useAppControls( states: AppStates, setStates: SetAppStat
 
 		if ( states.musicIsPlaying && chapter.music )
 		{
-			play(chapter.music.url, chapNum, 2);
-			setStates.setPrevMusic(chapter.music.url);
+			playChapterAudio(chapter.music.url, chapNum, 2);
+			changeCurrTrack(chapter.music);
 		}
-		else
-			setStates.setPrevMusic(chapter.music.url ?? null);
 	}
 
 	function handleNextChapter()
@@ -157,6 +155,14 @@ export default function useAppControls( states: AppStates, setStates: SetAppStat
 			startPlay(chapNum - 1);
 
 		setStates.setCurrChap(chapNum);
+		setStates.setPrevScreens([...states.prevScreens, states.screen]);
+		setStates.setScreen(Screen.reader);
+	}
+
+	function continueReading( currTrack: MusicTrack )
+	{
+		window.scrollTo(0, 0);
+		play(currTrack.url, 2);
 		setStates.setPrevScreens([...states.prevScreens, states.screen]);
 		setStates.setScreen(Screen.reader);
 	}
@@ -224,6 +230,16 @@ export default function useAppControls( states: AppStates, setStates: SetAppStat
 		setStates.setNotepadVis(prev => !prev);
 	}
 
+	function toggleTrackSelect()
+	{
+		setStates.setTrackSelectVis(prev => !prev);
+	}
+
+	function changeCurrTrack( track: MusicTrack )
+	{
+		setStates.setCurrTrack(track);
+	}
+
 	return {
 		handleNextChapter,
 		handlePrevChapter,
@@ -235,6 +251,7 @@ export default function useAppControls( states: AppStates, setStates: SetAppStat
 		goToChapter,
 		goToQuestions,
 		goToPrevScreen,
+		playChapterAudio,
 		play,
 		pause,
 		stop,
@@ -245,5 +262,8 @@ export default function useAppControls( states: AppStates, setStates: SetAppStat
 		changeCurrBook,
 		getQuestions,
 		toggleNotepad,
+		toggleTrackSelect,
+		changeCurrTrack,
+		continueReading,
 	}
 }

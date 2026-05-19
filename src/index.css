@@ -169,3 +169,28 @@ select
 	stroke: #7b4d2e;
 	transition: fill 0.05s ease;
 }
+
+.miniRoundButton
+{
+	width: 30px;
+	height: 30px;
+	fill: #f8f3ed;
+	stroke: #986b4b;
+	transition: stroke 0.1s ease;
+	stroke-width: 1px;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	background-color: #FFF0;
+}
+
+.miniRoundButton:active .roundButtonCircle
+{
+	fill: #7b4d2e;
+	transition: fill 0.05s ease;
+}
+
+.miniRoundButton:active
+{
+	stroke: #7b4d2e;
+	transition: fill 0.05s ease;
+}

@@ -3,6 +3,18 @@ type ButtonProps =
 	onClick: () => void,
 }
 
+export function MiniPlay( { onClick } : ButtonProps )
+{
+	return (
+		<svg className="miniRoundButton" onClick={onClick} viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+			<circle className="roundButtonCircle" cx="75" cy="75" r="73"/>
+			<g transform="translate(27, 27) scale(4)">
+				<path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/>
+			</g>
+		</svg>
+	);
+}
+
 export function Play( { onClick } : ButtonProps )
 {
 	return (
@@ -55,6 +67,22 @@ export function SoundOff( { onClick } : ButtonProps )
 					<line fill='none' stroke='#ffffff' strokeWidth='2' x1="22" x2="16" y1="9" y2="15"/>
 					<line fill='none' stroke='#ffffff' strokeWidth='2' x1="16" x2="22" y1="9" y2="15"/>
 				</g>
+			</g>
+		</svg>
+	);
+}
+
+export function TrackSelect( { onClick } : ButtonProps )
+{
+	return (
+		<svg className="roundButton" style={{stroke: "#f8f3ed", strokeWidth: 2, fill: "none"}} onClick={onClick} viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+			<circle className="roundButtonCircle" cx="75" cy="75" r="73"/>
+			<g transform="translate(27, 27) scale(4)">
+				<path d="M16 5H3"/>
+				<path d="M11 12H3"/>
+				<path d="M11 19H3"/>
+				<path d="M21 16V5"/>
+				<circle cx="18" cy="16" r="3"/>
 			</g>
 		</svg>
 	);
