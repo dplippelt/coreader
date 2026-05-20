@@ -42,6 +42,7 @@
 	font-size: 1rem;
 	font-family: 'Lora', serif;
 	background-color: #f3ede4;
+	overflow-y: auto;
 }
 
 .track
@@ -49,9 +50,8 @@
 	display: flex;
 	flex-direction: row;
 	margin-bottom: 0.3rem;
-	overflow: hidden;
-	white-space: nowrap;
 	user-select: none;
+	background-color: #f3ede4;
 }
 
 .miniPlayButton
@@ -59,6 +59,36 @@
 	margin-right: 0.5rem;
 	opacity: 85%;
 	transition: opacity 0.2s ease;
+	background-color: #f3ede4;
+}
+
+.trackTextWrapper
+{
+	overflow: hidden;
+	background-color: #f3ede4;
+	min-width: 0;
+	flex: 1;
+}
+
+.trackText
+{
+	background-color: #f3ede4;
+	overflow: hidden;
+	white-space: nowrap;
+	display: inline-block;
+}
+
+.trackText:hover
+{
+	animation: scroll-left var(--scroll-duration, 8s) linear;
+}
+
+@keyframes scroll-left
+{
+	0% { transform: translateX(0%); }
+	2% { transform: translateX(0%); }
+	75% { transform: translateX(var(--scroll-distance, -100%)); }
+	100% { transform: translateX(var(--scroll-distance, -100%)); }
 }
 
 .miniPlayButton:hover
