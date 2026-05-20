@@ -1,8 +1,9 @@
 import type { AppStates, Controls } from "../App"
 import styles from "./TrackSelect.module.css"
 import { getBookMusic } from "../books/utils"
-import { MiniPlay } from "./MusicButtons"
+import { MiniPause, MiniPlay } from "./MusicButtons"
 import { useRef, type RefObject } from "react"
+import type { MusicTrack } from "../books/types"
 
 type TrackSelectProps =
 {
@@ -40,6 +41,27 @@ function Menu( { controls } : MenuProps )
 	);
 }
 
+function getMiniButton( states: AppStates, controls: Controls, track: MusicTrack )
+{
+	if ( states.currTrack.url === track.url && states.musicIsPlaying )
+		return (
+			<MiniPause onClick={() =>
+			{
+				controls.pause(0.5);
+				controls.setMusicIsPlayingTo(false);
+			}}
+			/>);
+
+	return (
+		<MiniPlay onClick={() =>
+		{
+			controls.play(track.url, 0.5);
+			controls.setMusicIsPlayingTo(true);
+			controls.changeCurrTrack(track)
+		}}
+		/>);
+}
+
 function TrackList( { states, controls, textRefs, wrapperRefs } : TrackListProps )
 {
 	const trackList = Object.values(getBookMusic(states.currBook));
@@ -71,13 +93,7 @@ function TrackList( { states, controls, textRefs, wrapperRefs } : TrackListProps
 			(
 				<div key={track.url} className={styles.track}>
 					<div className={styles.miniPlayButton}>
-						<MiniPlay onClick={() =>
-							{
-								controls.play(track.url, 0.5);
-								controls.setMusicIsPlayingTo(true);
-								controls.changeCurrTrack(track) }
-							}
-						/>
+						{ getMiniButton(states, controls, track) }
 					</div>
 					<div ref={ (el) => { if (el) wrapperRefs.current.set(track.url, el) } } className={styles.trackTextWrapper} onMouseEnter={() => handleMouseEnter(track.url)}>
 						<span ref={ (el) => { if (el) textRefs.current.set(track.url, el) } } className={styles.trackText}>{track.artist} - {track.title}</span>

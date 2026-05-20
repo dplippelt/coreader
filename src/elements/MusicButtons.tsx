@@ -15,6 +15,19 @@ export function MiniPlay( { onClick } : ButtonProps )
 	);
 }
 
+export function MiniPause( { onClick } : ButtonProps )
+{
+	return (
+		<svg className="miniRoundButton" onClick={onClick} viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+			<circle className="roundButtonCircle" cx="75" cy="75" r="73"/>
+			<g transform="translate(25, 27) scale(4)">
+				<rect x="14" y="3" width="6" height="18" rx="1"/>
+				<rect x="5" y="3" width="6" height="18" rx="1"/>
+			</g>
+		</svg>
+	);
+}
+
 export function Play( { onClick } : ButtonProps )
 {
 	return (
