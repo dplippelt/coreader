@@ -31,10 +31,10 @@ function Buttons( { states, controls } : ButtonsProps )
 
 	return (
 		<>
-			<button onClick={() => controls.prev()}>{getButtonText(states.currChap)}</button>
-			<button onClick={() => controls.goToStart()}>Start Menu</button>
-			<button onClick={() => controls.goToChapSelect()}>Chapter Select</button>
-			<button onClick={() => settings.questionsEnabled ? controls.goToQuestions() : controls.next()}>{settings.questionsEnabled ? "End Chapter" : "Next Chapter"}</button>
+			<button className='button1' onClick={() => controls.prev()}>{getButtonText(states.currChap)}</button>
+			<button className='button2' onClick={() => controls.goToStart()}>Start Menu</button>
+			<button className='button3' onClick={() => controls.goToChapSelect()}>Chapter Select</button>
+			<button className='button4' onClick={() => settings.questionsEnabled ? controls.goToQuestions() : controls.next()}>{settings.questionsEnabled ? "End Chapter" : "Next Chapter"}</button>
 		</>
 	)
 }

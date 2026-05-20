@@ -240,6 +240,16 @@ export default function useAppControls( states: AppStates, setStates: SetAppStat
 		setStates.setCurrTrack(track);
 	}
 
+	function updateDiff( diff: number )
+	{
+		setStates.setDiff(diff);
+	}
+
+	function toggleFlipped()
+	{
+		setStates.setFlipped(prev => !prev);
+	}
+
 	return {
 		handleNextChapter,
 		handlePrevChapter,
@@ -265,5 +275,7 @@ export default function useAppControls( states: AppStates, setStates: SetAppStat
 		toggleTrackSelect,
 		changeCurrTrack,
 		continueReading,
+		updateDiff,
+		toggleFlipped,
 	}
 }

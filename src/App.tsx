@@ -24,6 +24,8 @@ export type AppStates =
 	musicIsPlaying: boolean,
 	muteOn: boolean,
 	questions: Record<string, Record<string, Question[]>>,
+	diff: number,
+	flipped: boolean,
 }
 
 export type SetAppStates =
@@ -42,6 +44,8 @@ export type SetAppStates =
 	setMusicIsPlaying: React.Dispatch<React.SetStateAction<boolean>>,
 	setMuteOn: React.Dispatch<React.SetStateAction<boolean>>,
 	setQuestions: React.Dispatch<React.SetStateAction<Record<string, Record<string, Question[]>>>>,
+	setDiff: React.Dispatch<React.SetStateAction<number>>,
+	setFlipped: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 export type Controls =
@@ -70,6 +74,8 @@ export type Controls =
 	toggleTrackSelect: () => void,
 	changeCurrTrack: ( track: MusicTrack ) => void,
 	continueReading: ( currTrack: MusicTrack ) => void,
+	updateDiff: ( diff: number ) => void,
+	toggleFlipped: () => void,
 }
 
 export default function App()
@@ -90,6 +96,8 @@ export default function App()
 		currBook, setCurrBook,
 		currChap, setCurrChap,
 		questions, setQuestions,
+		diff, setDiff,
+		flipped, setFlipped,
 	} = useAppState();
 
 	const states: AppStates =
@@ -108,6 +116,8 @@ export default function App()
 		musicIsPlaying: musicIsPlaying,
 		muteOn: muteOn,
 		questions: questions,
+		diff: diff,
+		flipped: flipped,
 	}
 
 	const setStates: SetAppStates =
@@ -126,6 +136,8 @@ export default function App()
 		setMusicIsPlaying: setMusicIsPlaying,
 		setMuteOn: setMuteOn,
 		setQuestions: setQuestions,
+		setDiff: setDiff,
+		setFlipped: setFlipped,
 	}
 
 	const
@@ -154,6 +166,8 @@ export default function App()
 		toggleTrackSelect,
 		changeCurrTrack,
 		continueReading,
+		updateDiff,
+		toggleFlipped,
 	} = useAppControls(states, setStates);
 
 	const controls: Controls =
@@ -182,6 +196,8 @@ export default function App()
 		toggleTrackSelect: toggleTrackSelect,
 		changeCurrTrack: changeCurrTrack,
 		continueReading: continueReading,
+		updateDiff: updateDiff,
+		toggleFlipped: toggleFlipped,
 	}
 
 	useAppEffects(states, setStates, controls);

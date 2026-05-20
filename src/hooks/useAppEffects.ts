@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import type { AppStates, Controls, SetAppStates } from "../App"
 import { useSettings } from "../elements/SettingsContext"
+import { getRightBoundX, MUSIC_ZOOM_FLIP_BACK_THRESHOLD, MUSIC_ZOOM_THRESHOLD, Screen } from "../util/utils";
 
 export default function useAppEffects( states: AppStates, setStates: SetAppStates, controls: Controls )
 {
@@ -68,4 +69,37 @@ export default function useAppEffects( states: AppStates, setStates: SetAppState
 		localStorage.removeItem("book");
 		localStorage.removeItem("books");
 	}, []);
+
+	useEffect(() =>
+	{
+		const obs = new ResizeObserver(() =>
+		{
+			requestAnimationFrame(() =>
+			{
+				const musicPlayer = document.querySelector('.musicPlayer');
+				if ( !musicPlayer )
+					return;
+				const rightBoundX = getRightBoundX();
+				const musicPlayerX = musicPlayer!.getBoundingClientRect().left;
+				const viewportWidth = document.documentElement.clientWidth;
+				const diff = (musicPlayerX - rightBoundX) / viewportWidth * 1000;
+				console.log(diff);
+				controls.updateDiff(diff);
+			});
+		});
+
+		obs.observe(document.body);
+		return () => obs.disconnect();
+	}, []);
+
+	useEffect(() =>
+	{
+		if ( states.screen !== Screen.reader )
+			return;
+
+		if ( !states.flipped && states.diff < MUSIC_ZOOM_THRESHOLD )
+			controls.toggleFlipped(); //to true
+		else if ( states.flipped && states.diff > MUSIC_ZOOM_FLIP_BACK_THRESHOLD )
+			controls.toggleFlipped(); //to false
+	}, [states.diff]);
 }

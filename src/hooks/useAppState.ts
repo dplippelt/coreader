@@ -15,6 +15,8 @@ export default function useAppState()
 	const [error, setError] = useState<Error | null>(null);
 	const [notepadVis, setNotepadVis] = useState<boolean>(false);
 	const [trackSelectVis, setTrackSelectVis] = useState<boolean>(false);
+	const [diff, setDiff] = useState<number>(9999);
+	const [flipped, setFlipped] = useState<boolean>(false);
 
 	const [currTrack, setCurrTrack] = useState<MusicTrack>(() =>
 		{
@@ -63,5 +65,7 @@ export default function useAppState()
 				currBook, setCurrBook,
 				currChap, setCurrChap,
 				questions, setQuestions,
+				diff, setDiff,
+				flipped, setFlipped,
 			}
 }

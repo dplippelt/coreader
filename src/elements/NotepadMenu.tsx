@@ -1,4 +1,5 @@
 import type { AppStates, Controls } from "../App"
+import { MUSIC_MORE_ZOOM_THRESHOLD } from "../util/utils"
 import styles from "./NotepadMenu.module.css"
 
 type NotepadButtonProps =
@@ -9,7 +10,7 @@ type NotepadButtonProps =
 type NotepadMenuProps =
 {
 	states: AppStates,
-	controls: Controls
+	controls: Controls,
 }
 
 function NotepadButton( { onClick } : NotepadButtonProps )
@@ -29,13 +30,13 @@ function NotepadButton( { onClick } : NotepadButtonProps )
 	);
 }
 
-function notepadMenuStyle( zoomLevel: number ) : string
+function notepadMenuStyle( states: AppStates ) : string
 {
 	let style = styles.notepadButtonMenu;
 
-	if ( zoomLevel >= 1.5 )
+	if ( states.flipped )
 		style = style.concat(` ${styles.notepadButtonMenuZoomed}`);
-	if ( zoomLevel >= 2.22 )
+	if ( states.flipped && states.diff <= MUSIC_MORE_ZOOM_THRESHOLD )
 		style = style.concat(` ${styles.notepadButtonMenuZoomedMore}`);
 
 	return style;
@@ -44,7 +45,7 @@ function notepadMenuStyle( zoomLevel: number ) : string
 export default function NotepadMenu( { states, controls } : NotepadMenuProps )
 {
 	return (
-		<div className={notepadMenuStyle(states.zoomLevel)}>
+		<div className={notepadMenuStyle(states)}>
 			<NotepadButton onClick={controls.toggleNotepad}/>
 		</div>
 	);

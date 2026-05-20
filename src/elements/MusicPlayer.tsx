@@ -4,6 +4,7 @@ import type { AppStates, Controls } from "../App"
 import type { SettingsContextType } from "./SettingsContext"
 import { useSettings } from "./SettingsContext"
 import { useEffect, useRef, type Ref } from "react"
+import { MUSIC_MORE_ZOOM_THRESHOLD } from "../util/utils"
 
 type MusicPlayerProps =
 {
@@ -67,33 +68,35 @@ function buttonBehavior( type: ButtonType, states: AppStates, controls: Controls
 	}
 }
 
-function musicPlayerStyle( zoomLevel: number ) : string
+function musicPlayerStyle( states: AppStates ) : string
 {
 	let style = styles.musicPlayer;
 
-	if ( zoomLevel >= 1.5 )
+	if ( states.flipped )
 		style = style.concat(` ${styles.musicPlayerZoomed}`);
-	if ( zoomLevel >= 2.22 )
+	if ( states.flipped && states.diff <= MUSIC_MORE_ZOOM_THRESHOLD )
 		style = style.concat(` ${styles.musicPlayerZoomedMore}`);
 
 	return style;
 }
 
-function musicPlayerButtonStyle( zoomLevel: number ) : string
+function musicPlayerButtonStyle( states: AppStates ) : string
 {
 	let style = styles.musicPlayerButtons;
 
-	if ( zoomLevel >= 1.5 )
+	console.log("flipped:", states.flipped);
+
+	if ( states.flipped )
 		style = style.concat(` ${styles.musicPlayerButtonsZoomed}`);
 
 	return style;
 }
 
-function nowPlayingStyle( zoomLevel: number ) : string
+function nowPlayingStyle( states: AppStates ) : string
 {
 	let style = styles.nowPlaying;
 
-	if ( zoomLevel >= 1.5 )
+	if ( states.flipped )
 		style = style.concat(` ${styles.nowPlayingZoomed}`);
 
 	return style;
@@ -104,7 +107,7 @@ function MusicPlayerButtons( { states, controls, musicPlayerButtonRef } : MusicP
 	const settings = useSettings();
 
 	return (
-		<div className={musicPlayerButtonStyle(states.zoomLevel)} ref={musicPlayerButtonRef}>
+		<div className={`${musicPlayerButtonStyle(states)} musicPlayer`} ref={musicPlayerButtonRef}>
 			{ states.musicIsPlaying
 				? <Pause onClick={ () => buttonBehavior(ButtonType.pause, states, controls, settings) }/>
 				: <Play onClick={ () => buttonBehavior(ButtonType.play, states, controls, settings) }/>
@@ -121,7 +124,7 @@ function MusicPlayerButtons( { states, controls, musicPlayerButtonRef } : MusicP
 function NowPlaying( { states, nowPlayingRef, nowPlayingSpanRef } : NowPlayingProps )
 {
 	return (
-		<div className={nowPlayingStyle(states.zoomLevel)} ref={nowPlayingRef}>
+		<div className={`${nowPlayingStyle(states)} nowPlaying`} ref={nowPlayingRef}>
 			<span ref={nowPlayingSpanRef}>{ `${states.currTrack.artist} - ${states.currTrack.title}` }</span>
 		</div>
 	);
@@ -156,10 +159,10 @@ export default function MusicPlayer( { states, controls } : MusicPlayerProps )
 
 		obs.observe(musicPlayerButtonRef.current);
 		return () => obs.disconnect();
-	}, [])
+	}, []);
 
 	return (
-		<div className={musicPlayerStyle(states.zoomLevel)}>
+		<div className={musicPlayerStyle(states)}>
 			<MusicPlayerButtons states={states} controls={controls} musicPlayerButtonRef={musicPlayerButtonRef}/>
 			<NowPlaying states={states} nowPlayingRef={nowPlayingRef} nowPlayingSpanRef={nowPlayingSpanRef}/>
 		</div>
