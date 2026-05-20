@@ -131,7 +131,7 @@ export default function useMusic()
 		// Stop the track that was previously playing if it's not the same one we want to start playing
 		// Or resume if it is the same one.
 		if ( audioRef.current && !sameAudio )
-			stop(4);
+			stop(1);
 		else if ( audioRef.current )
 			return resume(resumeFadeInDur);
 

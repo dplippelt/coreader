@@ -43,6 +43,7 @@ function buttonBehavior( type: ButtonType, states: AppStates, controls: Controls
 			{
 				controls.play(states.currTrack.url, 0.5);
 				controls.setMusicIsPlayingTo(true);
+				controls.changeCurrTrack(states.currTrack);
 			}
 			break;
 		case ButtonType.pause:
