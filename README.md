@@ -15,7 +15,7 @@ Additionally, each chapter is accompanied by matching background music to increa
 - Chapter navigation menu
 - Reading comprehension questions (pick between static and dynamically generated questions)
 - Option to clear previously generated questions to receive a new set of questions
-- Immersive background music with music controls (music coverage is a work in progress)
+- Immersive background music with music controls, track selection, and now playing display (music coverage is a work in progress)
 - Customizable font size
 - Questions and music can be toggled on and off in the app's settings
 - Built-in notepad for taking notes while reading - supports saving and loading multiple files
@@ -68,4 +68,4 @@ Alternatively the app is hosted by Vercel and reachable at: https://coreader-mes
 
 ## Future plans
 
-In the future I plan to expand the current app by adding an option to switch between songs, explore support for user-uploaded books and music, and expand the current music coverage (only a subset of chapters currently have unique music tracks assigned).
+In the future I plan to explore support for user-uploaded books and music, and to expand the current music coverage (only a subset of chapters currently have unique music tracks assigned).
