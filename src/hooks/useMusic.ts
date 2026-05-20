@@ -88,7 +88,7 @@ export default function useMusic()
 		{
 			// cancel the even listener that pauses the audio from initPlay() in case it hasn't fired yet at this point
 			cancelInitPlay();
-			
+
 			// set the new track as the current track
 			audioRef.current = chapterAudio;
 			currentChap.current = chapNum;
@@ -108,7 +108,7 @@ export default function useMusic()
 
 		// If we are switching tracks 'initialize' the new track playing and pausing it straight away (to get around autoplay blocking)
 		if ( !sameChap || delay > 0 )
-			initPlay();
+			cancelInitPlay = initPlay();
 
 		// Abort previous pending startPlayback to avoid multiple audio tracks playing simultaneously
 		clearTimeout(startPlaybackTimeOutIDRef.current);
