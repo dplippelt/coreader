@@ -5,6 +5,7 @@
 	right: 4%;
 	opacity: 15%;
 	transition: opacity 0.2s ease;
+	background-color: #FFF0;
 }
 
 .musicPlayerButtons
@@ -68,10 +69,10 @@
 
 .musicPlayer:hover .nowPlaying span
 {
-	animation: marquee var(--scroll-duration, 8s) linear;
+	animation: scroll-left var(--scroll-duration, 8s) linear;
 }
 
-@keyframes marquee
+@keyframes scroll-left
 {
 	0% { transform: translateX(0%); }
 	10% { transform: translateX(0%); }
