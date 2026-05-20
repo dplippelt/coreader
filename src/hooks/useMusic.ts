@@ -9,7 +9,6 @@ export default function useMusic()
 	const pauseTimeOutIDRef = useRef<NodeJS.Timeout | undefined>(undefined);
 	const stopTimeOutIDRef = useRef<NodeJS.Timeout | undefined>(undefined);
 	const startPlaybackTimeOutIDRef = useRef<NodeJS.Timeout | undefined>(undefined);
-	const initPlayTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 	const fadeInIntervalRef = useRef<NodeJS.Timeout | undefined>(undefined);
 	const fadeOutIntervalRef = useRef<NodeJS.Timeout | undefined>(undefined);
 	const fadeInAudio = useRef<HTMLAudioElement | null>(null);
@@ -60,6 +59,7 @@ export default function useMusic()
 		// Fetch chapter audio and hint browser to buffer aggressively
 		const chapterAudio = new Audio(url);
 		const sameChap: boolean = currentChap.current === chapNum;
+		let cancelInitPlay = () => {};
 		chapterAudio.preload = 'auto';
 
 		// Clear pending pause() calls so the audio track does not get paused after the current one starts playing
@@ -77,12 +77,18 @@ export default function useMusic()
 
 		function initPlay()
 		{
-			chapterAudio.play();
-			initPlayTimeoutRef.current = setTimeout(() => chapterAudio.pause(), 10);
+			function onCanPlay() { chapterAudio.pause(); };
+			chapterAudio.addEventListener('canplay', onCanPlay, { once: true });
+			chapterAudio.play().catch(() => {});
+
+			return () => chapterAudio.removeEventListener('canplay', onCanPlay);
 		}
 
 		function startPlayback()
 		{
+			// cancel the even listener that pauses the audio from initPlay() in case it hasn't fired yet at this point
+			cancelInitPlay();
+			
 			// set the new track as the current track
 			audioRef.current = chapterAudio;
 			currentChap.current = chapNum;
@@ -96,9 +102,7 @@ export default function useMusic()
 			// Let the audio track loop, and start playback
 			audioRef.current!.loop = true;
 
-			clearTimeout(initPlayTimeoutRef.current);
-
-			audioRef.current!.play();
+			audioRef.current!.play().catch((e) => console.log("play failed:", e));
 			fadeOutEndTime.current = 0;
 		}
 
@@ -122,6 +126,7 @@ export default function useMusic()
 		// Fetch audio and hint browser to buffer aggressively
 		const audio = new Audio(url);
 		const sameAudio: boolean = currentUrl.current === url;
+		let cancelInitPlay = () => {};
 		audio.preload = 'auto';
 
 		// Clear pending pause() calls so the audio track does not get paused after the current one starts playing
@@ -139,12 +144,18 @@ export default function useMusic()
 
 		function initPlay()
 		{
-			audio.play();
-			initPlayTimeoutRef.current = setTimeout(() => audio.pause(), 10);
+			function onCanPlay() { audio.pause(); };
+			audio.addEventListener('canplay', onCanPlay, { once: true });
+			audio.play().catch(() => {});
+
+			return () => audio.removeEventListener('canplay', onCanPlay);
 		}
 
 		function startPlayback()
 		{
+			// cancel the even listener that pauses the audio from initPlay() in case it hasn't fired yet at this point
+			cancelInitPlay();
+
 			// set the new track as the current track
 			audioRef.current = audio;
 			currentUrl.current = url;
@@ -157,15 +168,13 @@ export default function useMusic()
 			// Let the audio track loop, and start playback
 			audioRef.current!.loop = true;
 
-			clearTimeout(initPlayTimeoutRef.current);
-
-			audioRef.current!.play();
+			audioRef.current!.play().catch((e) => console.error("play failed", e));
 			fadeOutEndTime.current = 0;
 		}
 
 		// If we are switching tracks 'initialize' the new track playing and pausing it straight away (to get around autoplay blocking)
 		if ( !sameAudio || delay > 0 )
-			initPlay();
+			cancelInitPlay = initPlay();
 
 		// Abort previous pending startPlayback to avoid multiple audio tracks playing simultaneously
 		clearTimeout(startPlaybackTimeOutIDRef.current);
